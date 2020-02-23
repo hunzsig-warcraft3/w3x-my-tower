@@ -125,7 +125,7 @@ onUnitItemsUesd = function(evtData)
         )
     elseif (itemSLK.I_TYPE == "ability") then
         local abils = game.thisOptionAbility[itemSLK.INDEX]
-        if (abils == nil or table.len(abils) <= 0) then
+        if (abils == nil) then
             hmsg.echo00(p, "技能获取错误")
             return
         end
@@ -370,7 +370,7 @@ onUnitItemsUesd = function(evtData)
             end
             heffect.toUnit("war3mapImported\\eff_s_EvilWave_Effect.mdl", game.playerTower[playerIndex])
             if (ii == "天剑切符") then
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         30,
@@ -381,7 +381,7 @@ onUnitItemsUesd = function(evtData)
                     )
                 end
             elseif (ii == "武神切符") then
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         30,
@@ -391,7 +391,7 @@ onUnitItemsUesd = function(evtData)
                     )
                 end
             elseif (ii == "变异切符") then
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         30,
@@ -401,7 +401,7 @@ onUnitItemsUesd = function(evtData)
                     )
                 end
             elseif (ii == "恶魔切符") then
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         30,
@@ -412,7 +412,7 @@ onUnitItemsUesd = function(evtData)
                     )
                 end
             elseif (ii == "恶灵切符") then
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         30,
@@ -487,7 +487,7 @@ onUnitItemsUesd = function(evtData)
                         end
                     end
                 end
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hattr.set(
                         u,
                         10,
@@ -510,7 +510,7 @@ onUnitItemsUesd = function(evtData)
                         end
                     end
                 end
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hskill.swim(
                         {
                             whichUnit = u,
@@ -526,7 +526,7 @@ onUnitItemsUesd = function(evtData)
                         table.insert(ts, game.playerTower[pi])
                     end
                 end
-                for _, u in pairs(ts) do
+                for _, u in ipairs(ts) do
                     hunit.setCurLife(u, hunit.getCurLife(u) * 0.8)
                     heffect.toUnit("war3mapImported\\eff_black_chain_flash.mdl", u, 0)
                 end

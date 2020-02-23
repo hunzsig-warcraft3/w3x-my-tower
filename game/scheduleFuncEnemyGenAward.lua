@@ -16,6 +16,7 @@ awardGenForOne = function(curWave, pi, awardMon)
         }
     )
     cj.SetUnitPathing(u, false)
+    cj.IssuePointOrderById(u, 851986, game.pathPoint[pi][2][1], game.pathPoint[pi][2][2])
     hattr.set(
         u,
         0,

@@ -164,10 +164,10 @@ for k,v in pairs(abEffectsItem) do
     iobj.goldcost = 0
     iobj.lumbercost = v.lumbercost or 0
     iobj.sellable = 1
-    iobj.cooldownID = UsedID.EffectModel
+    iobj.cooldownID = UsedID[6][2]
     iobj.stockRegen = 120
     iobj.file = "Objects\\InventoryItems\\CrystalShard\\CrystalShard.mdl"
-    iobj.abilList = UsedID.EffectModel
+    iobj.abilList = UsedID[6][2]
     iobj.perishable = 0
     iobj.powerup = 0
     iobj.stockMax = 1

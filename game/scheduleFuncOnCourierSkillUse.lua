@@ -294,7 +294,7 @@ onCourierSkillUesd = function(evtData)
                 if (tslk ~= nil and (tslk.I_TYPE == "combo" or tslk.I_TYPE == "equip")) then
                     itemQty = itemQty + hitem.getCharges(tempIt)
                     itemLv = itemLv + tslk.LEVEL
-                    itemSlkCache[tempIt] = tslk
+                    table.insert(itemSlkCache, tempIt)
                 end
             end
             tempIt = nil
@@ -313,13 +313,13 @@ onCourierSkillUesd = function(evtData)
         for cbi = downLv, itemLv, 1 do
             if (game.rule.cur == "dk") then
                 if (game.thisComboItem[cbi] ~= nil) then
-                    for _, civ in pairs(game.thisComboItem[cbi]) do
+                    for _, civ in ipairs(game.thisComboItem[cbi]) do
                         table.insert(comboIt, civ)
                     end
                 end
             else
                 if (game.thisComboItemNODK[cbi] ~= nil) then
-                    for _, civ in pairs(game.thisComboItemNODK[cbi]) do
+                    for _, civ in ipairs(game.thisComboItemNODK[cbi]) do
                         table.insert(comboIt, civ)
                     end
                 end
@@ -336,8 +336,8 @@ onCourierSkillUesd = function(evtData)
             return
         else
             hplayer.subGold(p, need)
-            for tempIt, v in pairs(itemSlkCache) do
-                hitem.del(tempIt, 0)
+            for _, v in ipairs(itemSlkCache) do
+                hitem.del(v, 0)
             end
             itemSlkCache = nil
             local randIt = table.random(comboIt)

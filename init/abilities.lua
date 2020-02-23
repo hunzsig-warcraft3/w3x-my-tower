@@ -269,20 +269,20 @@ for _, v in ipairs(abilities) do
                 iobj.Name = "[技能书·蓝]《" .. level .. "级" .. v.Name .. "》"
                 iobj.Tip = "点击学习蓝技能书：|cffffcc00《" .. level .. "级" .. v.Name .. "》|r"
                 iobj.file = "Objects\\InventoryItems\\tomeBlue\\tomeBlue.mdl"
-                iobj.abilList = UsedID.BookBlue
-                iobj.cooldownID = UsedID.BookBlue
+                iobj.abilList = UsedID[3][2]
+                iobj.cooldownID = UsedID[3][2]
             elseif (v.ABILITY_COLOR == 'yellow') then
                 iobj.Name = "[技能书·黄]《" .. level .. "级" .. v.Name .. "》"
                 iobj.Tip = "点击学习黄技能书：|cffffcc00《" .. level .. "级" .. v.Name .. "》|r"
                 iobj.file = "Objects\\InventoryItems\\tomeBrown\\tomeBrown.mdl"
-                iobj.abilList = UsedID.BookYellow
-                iobj.cooldownID = UsedID.BookYellow
+                iobj.abilList = UsedID[4][2]
+                iobj.cooldownID = UsedID[4][2]
             elseif (v.ABILITY_COLOR == 'purple') then
                 iobj.Name = "[技能书·紫]《" .. level .. "级" .. v.Name .. "》"
                 iobj.Tip = "点击学习紫技能书：|cffffcc00《" .. level .. "级" .. v.Name .. "》|r"
                 iobj.file = "Objects\\InventoryItems\\tome\\tome.mdl"
-                iobj.abilList = UsedID.BookYellow
-                iobj.cooldownID = UsedID.BookYellow
+                iobj.abilList = UsedID[5][2]
+                iobj.cooldownID = UsedID[5][2]
             end
             iobj.UberTip = "能学习到技能：|n" .. Ubertip
             iobj.Description = "技能书：" .. Ubertip

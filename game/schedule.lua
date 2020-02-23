@@ -229,19 +229,19 @@ cj.TriggerAddAction(
                 }
             }
         )
-        local TITLE_YB = "轻松百波（新手推荐）"
+        local TITLE_YB = "简单百波（新手入门）"
         local TITLE_HZ = "无尽挑战（刷木推荐）"
         local TITLE_DK = "欢乐对抗（基友推荐）"
         local TITLE_DKAI = "欢乐对抗（AI模式）"
         local btns = {
-            TITLE_YB,
-            TITLE_HZ
+            TITLE_YB
         }
         if (hplayer.qty_current <= 1) then
             table.insert(btns, TITLE_DKAI)
         else
             table.insert(btns, TITLE_DK)
         end
+        table.insert(btns, TITLE_HZ)
         -- 第一玩家选择模式
         hmsg.echo("第一个玩家正在选择（游戏模式）", 10)
         hdialog.create(
@@ -405,7 +405,13 @@ cj.TriggerAddAction(
                             local data = {}
                             hplayer.loop(
                                 function(p, pi)
-                                    data[pi] = math.floor(0.3 * hplayer.getKill(p))
+                                    table.insert(
+                                        data,
+                                        {
+                                            playerIndex = pi,
+                                            value = math.floor(0.3 * hplayer.getKill(p))
+                                        }
+                                    )
                                 end
                             )
                             return data
@@ -563,7 +569,13 @@ cj.TriggerAddAction(
                             local data = {}
                             hplayer.loop(
                                 function(p, pi)
-                                    data[pi] = math.floor(0.3 * hplayer.getKill(p))
+                                    table.insert(
+                                        data,
+                                        {
+                                            playerIndex = pi,
+                                            value = math.floor(0.3 * hplayer.getKill(p))
+                                        }
+                                    )
                                 end
                             )
                             return data
@@ -722,7 +734,13 @@ cj.TriggerAddAction(
                                     local mark = ((game.rule.dk.wave[pi] or 1) - 1) * 31
                                     mark = mark + hhero.getCurLevel(game.playerTower[pi]) - 1
                                     mark = mark + (game.rule.dk.monLimit[pi] or 0)
-                                    data[pi] = mark
+                                    table.insert(
+                                        data,
+                                        {
+                                            playerIndex = pi,
+                                            value = mark
+                                        }
+                                    )
                                 end
                             )
                             return data

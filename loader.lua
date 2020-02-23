@@ -7,6 +7,9 @@ require "game.global"
 -- 加载本地图的SLK系统
 require "game.slk"
 
+-- 加载test
+require "game.test"
+
 -- 预读 preread（为了有效您需要注意hRuntime.register.ability的初始化 abilitiesKV）
 local u = cj.CreateUnit(hplayer.player_passive, hslk_global.unit_token, 0, 0, 0)
 for id, _ in pairs(hslk_global.abilitiesKV) do

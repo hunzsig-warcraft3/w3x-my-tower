@@ -1,10 +1,10 @@
 UsedID = {
-    Tower = 0, --塔使用技能
-    Courier = 0, --信使使用技能
-    BookBlue = 0, --蓝技能书使用技能
-    BookYellow = 0, --黄技能书使用技能
-    BookPurple = 0, --紫技能书使用技能
-    EffectModel = 0, --特效使用技能
+    {"Tower",0}, --塔使用技能
+    {"Courier",0}, --信使使用技能
+    {"BookBlue",0}, --蓝技能书使用技能
+    {"BookYellow",0}, --黄技能书使用技能
+    {"BookPurple",0}, --紫技能书使用技能
+    {"EffectModel",0}, --特效使用技能
 }
 UsedIDConfig = {
     Tower = {
@@ -33,9 +33,9 @@ UsedIDConfig = {
     },
 }
 
-for k, _ in pairs(UsedID) do
-    local oobTips = "UsedID_" .. k
-    local oob = slk.ability.AIgo:new("UsedID_" .. k)
+for k, v in ipairs(UsedID) do
+    local oobTips = "UsedID_" .. v[1]
+    local oob = slk.ability.AIgo:new("UsedID_" .. v[1])
     oob.Effectsound = ""
     oob.Name = oobTips
     oob.Tip = oobTips
@@ -45,9 +45,9 @@ for k, _ in pairs(UsedID) do
     oob.Targetattach = ""
     oob.DataA1 = 0
     oob.Art = ""
-    oob.CasterArt = UsedIDConfig[k].CasterArt
-    oob.Cool = UsedIDConfig[k].Cool
-    UsedID[k] = oob:get_id()
+    oob.CasterArt = UsedIDConfig[v[1]].CasterArt
+    oob.Cool = UsedIDConfig[v[1]].Cool
+    UsedID[k][2] = oob:get_id()
 end
 
 --阶级技能

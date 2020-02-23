@@ -24,6 +24,7 @@ bossGen = function(curWave)
                 }
             )
             cj.SetUnitPathing(u, false)
+            cj.IssuePointOrderById(u, 851986, v[2][1], v[2][2])
             hattr.set(
                 u,
                 0,

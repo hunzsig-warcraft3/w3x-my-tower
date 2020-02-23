@@ -378,9 +378,9 @@ for tlv, tow in pairs(towers) do
             iobj.goldcost = math.floor(TowerMark * 0.7)
             iobj.lumbercost = 0
             iobj.sellable = 1
-            iobj.cooldownID = UsedID.Tower
+            iobj.cooldownID = UsedID[2][2]
             iobj.file = "war3mapImported\\item_Stone.mdl"
-            iobj.abilList = UsedID.Tower
+            iobj.abilList = UsedID[2][2]
             iobj.perishable = 1
             iobj.powerup = 0
             local hitem = {

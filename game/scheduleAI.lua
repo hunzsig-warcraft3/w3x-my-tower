@@ -188,6 +188,9 @@ MAYBE_AI = {
                         htime.delTimer(t)
                         return
                     end
+                    if (htime.count > 50) then
+                        hplayer.addGold(hplayer.players[playerIndex], 437)
+                    end
                     local dist =
                         math.getDistanceBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                     local deg = math.random(0, 360)
@@ -195,6 +198,7 @@ MAYBE_AI = {
                     if (dist > 1200) then
                         deg = math.getDegBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                         dis = math.random(500, 1000)
+                        hplayer.addGold(hplayer.players[playerIndex], 9235)
                     end
                     local xy =
                         math.polarProjection(
@@ -220,12 +224,14 @@ MAYBE_AI = {
                         hplayer.subGold(hplayer.players[playerIndex], 50000)
                         hhero.setCurLevel(
                             game.playerTower[playerIndex],
-                            math.floor(50000 / stone) + 7 + hhero.getCurLevel(game.playerTower[playerIndex]),
+                            math.floor(50000 / stone) + 10 + hhero.getCurLevel(game.playerTower[playerIndex]),
                             false
                         )
-                    elseif (gold >= 50000 and math.random(1, 30) == 15) then
+                    elseif (gold >= 40000 and math.random(1, 30) == 15) then
+                        hplayer.subGold(hplayer.players[playerIndex], 40000)
+                        local typei = math.random(1, 3)
                         local ts = {}
-                        if (math.random(1, 2) == 1) then
+                        if (typei == 1) then
                             hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("剑敕令!"))
                             for pi = 1, 4, 1 do
                                 if
@@ -243,7 +249,7 @@ MAYBE_AI = {
                                     end
                                 end
                             end
-                            for _, u in pairs(ts) do
+                            for _, u in ipairs(ts) do
                                 hskill.swim(
                                     {
                                         whichUnit = u,
@@ -253,7 +259,7 @@ MAYBE_AI = {
                                     }
                                 )
                             end
-                        else
+                        elseif (typei == 2) then
                             hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("斧敕令!"))
                             for pi = 1, 4, 1 do
                                 if
@@ -263,10 +269,43 @@ MAYBE_AI = {
                                     table.insert(ts, game.playerTower[pi])
                                 end
                             end
-                            for _, u in pairs(ts) do
+                            for _, u in ipairs(ts) do
                                 hunit.setCurLife(u, hunit.getCurLife(u) * 0.8)
                                 heffect.toUnit("war3mapImported\\eff_black_chain_flash.mdl", u, 0)
                             end
+                        elseif (typei == 3) then
+                            hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("锤敕令!"))
+                            local hummarDur = 10 / 0.75
+                            htime.setInterval(
+                                0.75,
+                                function(t)
+                                    hummarDur = hummarDur - 1
+                                    if (hummarDur < 0 or game.runing == false) then
+                                        htime.delTimer(t)
+                                        return
+                                    end
+                                    for pi = 1, 4, 1 do
+                                        if (hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming) then
+                                            local dmg = 0
+                                            if (playerIndex == pi) then
+                                                dmg = math.random(250, 750)
+                                            else
+                                                dmg = math.random(500, 1500)
+                                            end
+                                            hunit.subCurLife(game.playerTower[pi], dmg)
+                                            hmsg.echo(
+                                                hColor.sky(cj.GetPlayerName(hplayer.players[pi])) ..
+                                                    "被黑色悍马雷劈掉了" .. hColor.red(dmg) .. "血"
+                                            )
+                                            heffect.toUnit(
+                                                "war3mapImported\\eff_lighting_black.mdl",
+                                                game.playerTower[pi],
+                                                0
+                                            )
+                                        end
+                                    end
+                                end
+                            )
                         end
                     elseif (gold >= 30000 and math.random(1, 6) == 4) then
                         --物品叠加
@@ -302,10 +341,10 @@ MAYBE_AI = {
                         hplayer.subGold(hplayer.players[playerIndex], 10000)
                         hhero.setCurLevel(
                             game.playerTower[playerIndex],
-                            math.floor(10000 / stone) + 4 + hhero.getCurLevel(game.playerTower[playerIndex]),
+                            math.floor(10000 / stone) + 5 + hhero.getCurLevel(game.playerTower[playerIndex]),
                             false
                         )
-                    elseif (gold >= stone and math.random(1, 3) == 2) then
+                    elseif (gold >= 4 * stone and math.random(1, 3) == 2) then
                         local curWave
                         if (game.rule.cur == "yb") then
                             curWave = game.rule.yb.wave
@@ -315,7 +354,7 @@ MAYBE_AI = {
                             curWave = game.rule.dk.wave[playerIndex]
                         end
                         if (curWave ~= nil) then
-                            hplayer.subGold(hplayer.players[playerIndex], stone)
+                            hplayer.subGold(hplayer.players[playerIndex], stone / 2)
                             local targetTPow = getTowerPowLevel(curWave)
                             if (game.thisOptionTowerPowerItem[targetTPow] ~= nil) then
                                 local rand = table.random(game.thisOptionTowerPowerItem[targetTPow])
@@ -352,23 +391,23 @@ MAYBE_AI = {
                         for cbi = lvB, lvT, 1 do
                             if (tarTower == game.playerTower[playerIndex]) then
                                 if (game.thisEquipItem[cbi] ~= nil) then
-                                    for _, civ in pairs(game.thisEquipItem[cbi]) do
+                                    for _, civ in ipairs(game.thisEquipItem[cbi]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end
                                 if (game.thisComboItem[cbi] ~= nil) then
-                                    for _, civ in pairs(game.thisComboItem[cbi]) do
+                                    for _, civ in ipairs(game.thisComboItem[cbi]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end
                             else
                                 if (game.thisEquipItemNODK[cbi] ~= nil) then
-                                    for _, civ in pairs(game.thisEquipItemNODK[cbi]) do
+                                    for _, civ in ipairs(game.thisEquipItemNODK[cbi]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end
                                 if (game.thisComboItemNODK[cbi] ~= nil) then
-                                    for _, civ in pairs(game.thisComboItemNODK[cbi]) do
+                                    for _, civ in ipairs(game.thisComboItemNODK[cbi]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end
