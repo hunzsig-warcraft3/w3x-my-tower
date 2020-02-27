@@ -59,8 +59,8 @@ onTowerAttack = function(evtData)
                             odds = 100,
                             during = 0.7 * level,
                             whichUnit = u,
-                            filter = function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            filter = function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end
                         }
                     )
@@ -76,8 +76,8 @@ onTowerAttack = function(evtData)
                             whichUnit = u,
                             sourceUnit = u,
                             effect = "war3mapImported\\eff_shock_explosion.mdl",
-                            filter = function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            filter = function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end
                         }
                     )
@@ -91,8 +91,8 @@ onTowerAttack = function(evtData)
                         hgroup.createByUnit(
                         u,
                         895,
-                        function()
-                            return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                        function(filterUnit)
+                            return his.alive(filterUnit) and his.enemy(filterUnit, u)
                         end
                     )
                     hgroup.loop(
@@ -161,8 +161,8 @@ onTowerAttack = function(evtData)
                                 effect = v.Val[6],
                                 effectSingle = v.Val[7],
                                 damageType = damageType,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end
                             }
                         )
@@ -179,8 +179,8 @@ onTowerAttack = function(evtData)
                             hgroup.createByUnit(
                             u,
                             895,
-                            function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end
                         )
                         local damageType = {}
@@ -219,8 +219,8 @@ onTowerAttack = function(evtData)
                             hgroup.createByUnit(
                             u,
                             895,
-                            function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end
                         )
                         hgroup.loop(
@@ -250,8 +250,8 @@ onTowerAttack = function(evtData)
                             hgroup.createByUnit(
                             u,
                             895,
-                            function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end
                         )
                         hgroup.loop(
@@ -291,8 +291,8 @@ onTowerAttack = function(evtData)
                                 y = y,
                                 damage = val[2] or 0,
                                 sourceUnit = u,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end
                             }
                         )
@@ -305,8 +305,8 @@ onTowerAttack = function(evtData)
                         hgroup.createByUnit(
                         u,
                         895,
-                        function()
-                            return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                        function(filterUnit)
+                            return his.alive(filterUnit) and his.enemy(filterUnit, u)
                         end
                     )
                     hgroup.loop(
@@ -346,8 +346,8 @@ onTowerAttack = function(evtData)
                         hgroup.createByUnit(
                         u,
                         895,
-                        function()
-                            return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                        function(filterUnit)
+                            return his.alive(filterUnit) and his.enemy(filterUnit, u)
                         end
                     )
                     hgroup.loop(
@@ -376,8 +376,8 @@ onTowerAttack = function(evtData)
                                 range = 895,
                                 frequency = val[2],
                                 during = val[4],
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 damage = val[3],
                                 sourceUnit = u,
@@ -411,9 +411,8 @@ onTowerAttack = function(evtData)
                                             y = txy.y,
                                             speed = 10,
                                             acceleration = 1,
-                                            filter = function()
-                                                return his.alive(cj.GetFilterUnit()) and
-                                                    his.enemy(cj.GetFilterUnit(), u)
+                                            filter = function(filterUnit)
+                                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                             end,
                                             tokenArrow = val[5],
                                             tokenArrowScale = 1.80,
@@ -455,8 +454,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 10,
                                 acceleration = 1,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[4],
                                 tokenArrowScale = 1.60,
@@ -486,8 +485,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 17,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[3],
                                 tokenArrowScale = 1.10,
@@ -514,9 +513,8 @@ onTowerAttack = function(evtData)
                                             targetUnit = targetUnit,
                                             speed = 8,
                                             acceleration = 0,
-                                            filter = function()
-                                                return his.alive(cj.GetFilterUnit()) and
-                                                    his.enemy(cj.GetFilterUnit(), u)
+                                            filter = function(filterUnit)
+                                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                             end,
                                             tokenArrow = val[5],
                                             tokenArrowScale = 1.20,
@@ -561,8 +559,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 17,
                                 acceleration = -0.1,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[6],
                                 tokenArrowScale = 1.60,
@@ -595,8 +593,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 15,
                                 acceleration = 0.2,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[6],
                                 tokenArrowScale = 1.50,
@@ -638,8 +636,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 20,
                                 acceleration = -0.15,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[6],
                                 tokenArrowScale = 1.00,
@@ -681,8 +679,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 12,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[6],
                                 tokenArrowScale = 1.00,
@@ -723,8 +721,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 14,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[3],
                                 tokenArrowScale = 1.70,
@@ -755,8 +753,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 8,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[3],
                                 tokenArrowScale = 0.25,
@@ -790,8 +788,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 8,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[3],
                                 tokenArrowScale = 0.25,
@@ -825,8 +823,8 @@ onTowerAttack = function(evtData)
                                 y = txy.y,
                                 speed = 4,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[3],
                                 tokenArrowScale = 1.8,
@@ -861,8 +859,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 16,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl",
                                 tokenArrowScale = 1.50,
@@ -888,8 +886,8 @@ onTowerAttack = function(evtData)
                             targetUnit = targetUnit,
                             speed = 15,
                             acceleration = 0,
-                            filter = function()
-                                return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                            filter = function(filterUnit)
+                                return his.alive(filterUnit) and his.enemy(filterUnit, u)
                             end,
                             tokenArrow = "war3mapImported\\eff_DarknessBomb.mdl",
                             tokenArrowScale = 1.30,
@@ -914,8 +912,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 11,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.mdl",
                                 tokenArrowScale = 1.50,
@@ -952,8 +950,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 15,
                                 acceleration = 1,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[6],
                                 tokenArrowScale = 1.00,
@@ -991,8 +989,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 8,
                                 acceleration = 1.5,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "Abilities\\Spells\\Other\\TinkerRocket\\TinkerRocketMissile.mdl",
                                 tokenArrowScale = 1.60,
@@ -1019,8 +1017,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 13,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl",
                                 tokenArrowScale = 1.60,
@@ -1056,8 +1054,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = u,
                                 speed = 18,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "war3mapImported\\eff_forst_arrow.mdl",
                                 tokenArrowScale = 1.10,
@@ -1084,8 +1082,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 18,
                                 acceleration = -0.25,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = val[4],
                                 tokenArrowScale = 1.10,
@@ -1122,8 +1120,8 @@ onTowerAttack = function(evtData)
                                 targetUnit = targetUnit,
                                 speed = 17,
                                 acceleration = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 tokenArrow = "war3mapImported\\eff_FaerieFire_Impact.mdl",
                                 tokenArrowScale = 1.20,
@@ -1158,8 +1156,8 @@ onTowerAttack = function(evtData)
                                 range = 250,
                                 distance = val[2],
                                 frequency = 0,
-                                filter = function()
-                                    return his.alive(cj.GetFilterUnit()) and his.enemy(cj.GetFilterUnit(), u)
+                                filter = function(filterUnit)
+                                    return his.alive(filterUnit) and his.enemy(filterUnit, u)
                                 end,
                                 effect = "war3mapImported\\eff_slash.mdl",
                                 effectScale = 3,
