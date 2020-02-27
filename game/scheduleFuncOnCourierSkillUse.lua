@@ -25,7 +25,7 @@ onCourierSkillUesd = function(evtData)
     end
     --
     if (abilitiesSLK.Name == "拾取") then
-        hitem.pickRect(u, cj.GetUnitX(u), cj.GetUnitY(u), 2000, 2000)
+        hitem.pickRound(u, cj.GetUnitX(u), cj.GetUnitY(u), 1500)
     elseif (abilitiesSLK.Name == "火焰吐息") then
         onCourierSkillUesdTTG(game.playerTower[playerIndex], abilitiesSLK.Name)
         hattr.set(
