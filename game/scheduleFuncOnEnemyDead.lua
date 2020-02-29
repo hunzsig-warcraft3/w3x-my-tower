@@ -197,7 +197,8 @@ enemyDeadDK = function(evtData)
         local pi = hplayer.index(cj.GetOwningPlayer(u))
         local exp = 25 * game.rule.dk.wave[pi]
         local gold = 3 * game.rule.dk.wave[pi]
-        haward.forGroup(u, exp, gold, 0)
+        haward.forUnitGold(u, gold)
+        haward.forGroupExp(u, exp)
         game.rule.dk.playerQty[pi] = game.rule.dk.playerQty[pi] + 1
         if (game.rule.dk.playerQty[pi] >= game.rule.dk.perWaveQty) then
             game.rule.dk.playerQty[pi] = 0
