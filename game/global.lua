@@ -127,6 +127,7 @@ game = {
     thisEquipItemNODK = {},
     thisComboItem = {},
     thisComboItemNODK = {},
+    thisShadowCloatItems = {},
     -- 左上第一顺时针设定的
     towerPoint = {
         {-1536, 1536},

@@ -345,7 +345,7 @@ for ilv = 1, 9 do
             pawnable = 1,
             droppable = 1,
             lv = 12 + clv,
-            PASSIVE = "被攻击时有10%几率隐身3秒",
+            PASSIVE = "被攻击时有10%几率隐身2秒",
             ATTR = {
                 avoid = "+" .. (8.5 * ilv)
             },

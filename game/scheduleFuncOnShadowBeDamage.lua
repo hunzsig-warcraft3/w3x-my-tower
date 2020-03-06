@@ -21,6 +21,17 @@ towerShadowBeDamage = function(evtData)
     local sourceUnit = evtData.sourceUnit
     local playerIndex = hunit.getUserData(u)
     local shadow = game.playerTower[playerIndex]
+    local hasShadowCloatItem = false
+    for _, itid in ipairs(game.thisShadowCloatItems) do
+        if (his.ownItem(u, itid)) then
+            hasShadowCloatItem = true
+            break
+        end
+    end
+    if (hasShadowCloatItem == true and math.random(1, 10) == 4) then
+        towerShadowTtg(u, "影子风衣")
+        hskill.invisible(u, 2)
+    end
     for ABILITY_ID, v in pairs(hslk_global.abilitiesKV) do
         if (hskill.has(shadow, ABILITY_ID)) then
             local Name = v.Name

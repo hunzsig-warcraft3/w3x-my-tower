@@ -585,7 +585,7 @@ cj.TriggerAddAction(
                     game.rule.cur = "dk"
                     if (btnIdx == TITLE_DKAI) then
                         game.rule.dk.ai = true
-                        hmsg.echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局[AI不开挂]|r")
+                        hmsg.echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
                     else
                         hmsg.echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
                     end

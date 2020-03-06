@@ -219,6 +219,9 @@ for i = 1, itemQty, 1 do
         if (jv.ODK ~= true) then
             table.insert(game.thisComboItemNODK[jv.LEVEL], jv)
         end
+        if (string.strpos(jv.Name, "影子风衣") ~= -1) then
+            table.insert(game.thisShadowCloatItems, jv.ITEM_ID)
+        end
     elseif (jv.I_TYPE == "equip") then
         if (game.thisEquipItem[jv.LEVEL] == nil) then
             game.thisEquipItem[jv.LEVEL] = {}

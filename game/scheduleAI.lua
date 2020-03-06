@@ -5,14 +5,15 @@ MAYBE_AI = {
             local itId = hitem.getId(it)
             local itemSLK = hslk_global.itemsKV[itId]
             hitem.del(it, 0)
-            if (type == "book") then --学书
+            if (type == "book") then
+                --学书
                 local sites = {}
                 if (itemSLK.ABILITY_COLOR == "yellow") then
-                    sites = {"S", "D"}
+                    sites = { "S", "D" }
                 elseif (itemSLK.ABILITY_COLOR == "blue") then
-                    sites = {"X", "C", "V"}
+                    sites = { "X", "C", "V" }
                 elseif (itemSLK.ABILITY_COLOR == "purple") then
-                    sites = {"F"}
+                    sites = { "F" }
                 end
                 local emptySite = nil
                 for k, v in ipairs(sites) do
@@ -182,17 +183,16 @@ MAYBE_AI = {
             )
             --到处乱走
             htime.setInterval(
-                math.random(6, 13),
+                math.random(7, 14),
                 function(t)
                     if (hplayer.getStatus(hplayer.players[playerIndex]) ~= hplayer.player_status.gaming) then
                         htime.delTimer(t)
                         return
                     end
-                    if (htime.count > 50) then
-                        hplayer.addGold(hplayer.players[playerIndex], 437)
+                    if (htime.count > 60) then
+                        hplayer.addGold(hplayer.players[playerIndex], 400 + htime.count)
                     end
-                    local dist =
-                        math.getDistanceBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
+                    local dist = math.getDistanceBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                     local deg = math.random(0, 360)
                     local dis = math.random(100, 300)
                     if (dist > 1200) then
@@ -200,8 +200,7 @@ MAYBE_AI = {
                         dis = math.random(500, 1000)
                         hplayer.addGold(hplayer.players[playerIndex], 9235)
                     end
-                    local xy =
-                        math.polarProjection(
+                    local xy = math.polarProjection(
                         cj.GetUnitX(game.playerCourier[playerIndex]),
                         cj.GetUnitY(game.playerCourier[playerIndex]),
                         dis,
@@ -227,17 +226,17 @@ MAYBE_AI = {
                             math.floor(50000 / stone) + 10 + hhero.getCurLevel(game.playerTower[playerIndex]),
                             false
                         )
-                    elseif (gold >= 40000 and math.random(1, 30) == 15) then
-                        hplayer.subGold(hplayer.players[playerIndex], 40000)
+                    elseif (gold >= 30000 and math.random(1, 20) == 12) then
+                        hplayer.subGold(hplayer.players[playerIndex], 30000)
                         local typei = math.random(1, 3)
                         local ts = {}
                         if (typei == 1) then
                             hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("剑敕令!"))
                             for pi = 1, 4, 1 do
                                 if
-                                    (playerIndex ~= pi and
-                                        hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming)
-                                 then
+                                (playerIndex ~= pi and
+                                    hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming)
+                                then
                                     table.insert(ts, game.playerTower[pi])
                                     for i = 1, 4, 1 do
                                         if (his.alive(game.playerTowerLink[pi][i].unit) == true) then
@@ -263,9 +262,9 @@ MAYBE_AI = {
                             hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("斧敕令!"))
                             for pi = 1, 4, 1 do
                                 if
-                                    (playerIndex ~= pi and
-                                        hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming)
-                                 then
+                                (playerIndex ~= pi and
+                                    hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming)
+                                then
                                     table.insert(ts, game.playerTower[pi])
                                 end
                             end
@@ -341,7 +340,7 @@ MAYBE_AI = {
                         hplayer.subGold(hplayer.players[playerIndex], 10000)
                         hhero.setCurLevel(
                             game.playerTower[playerIndex],
-                            math.floor(10000 / stone) + 5 + hhero.getCurLevel(game.playerTower[playerIndex]),
+                            math.floor(10000 / stone) + 10 + hhero.getCurLevel(game.playerTower[playerIndex]),
                             false
                         )
                     elseif (gold >= 4 * stone and math.random(1, 3) == 2) then
@@ -358,8 +357,7 @@ MAYBE_AI = {
                             local targetTPow = getTowerPowLevel(curWave)
                             if (game.thisOptionTowerPowerItem[targetTPow] ~= nil) then
                                 local rand = table.random(game.thisOptionTowerPowerItem[targetTPow])
-                                local it =
-                                    hitem.create(
+                                local it = hitem.create(
                                     {
                                         itemId = rand.ITEM_ID,
                                         x = cj.GetUnitX(game.playerCourier[playerIndex]),
@@ -386,7 +384,7 @@ MAYBE_AI = {
                             return
                         end
                         local lvT = math.floor(gold / 2000)
-                        local lvB = 3
+                        local lvB = 4
                         local comboIt = {}
                         for cbi = lvB, lvT, 1 do
                             if (tarTower == game.playerTower[playerIndex]) then
