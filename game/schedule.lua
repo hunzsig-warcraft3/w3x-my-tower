@@ -66,9 +66,9 @@ htime.setInterval(
                         cj.SetUnitPosition(game.playerTowerLink[pi][i].unit, x, y)
                     end
                     if
-                        (game.playerTowerLink[pi] == nil or game.playerTowerLink[pi][i] == nil or
-                            his.alive(game.playerTowerLink[pi][i].unit) == false)
-                     then
+                    (game.playerTowerLink[pi] == nil or game.playerTowerLink[pi][i] == nil or
+                        his.alive(game.playerTowerLink[pi][i].unit) == false)
+                    then
                         createMyTowerLink(pi, i)
                     end
                 end
@@ -195,9 +195,9 @@ cj.TriggerAddAction(
             function()
                 for i = 1, hplayer.qty_max, 1 do
                     if
-                        (his.playing(hplayer.players[i]) == true and his.playerSite(hplayer.players[i]) == true and
-                            hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
-                     then
+                    (his.playing(hplayer.players[i]) == true and his.playerSite(hplayer.players[i]) == true and
+                        hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
+                    then
                         hplayer.defeat(hplayer.players[i], "网络不稳定")
                         htime.setTimeout(
                             5.00,
@@ -257,8 +257,7 @@ cj.TriggerAddAction(
                     hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“大精灵”的生命，坚持100波胜利|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
                     -- 大精灵
-                    local bigElf =
-                        hunit.create(
+                    local bigElf = hunit.create(
                         {
                             whichPlayer = game.ALLY_PLAYER,
                             unitId = game.thisUnits["大精灵"].UNIT_ID,
@@ -330,10 +329,10 @@ cj.TriggerAddAction(
                                                                 bigElf,
                                                                 "-" ..
                                                                     huntDmg ..
-                                                                        " " ..
-                                                                            game.bigElfTips[
-                                                                                cj.GetRandomInt(1, #game.bigElfTips)
-                                                                            ],
+                                                                    " " ..
+                                                                    game.bigElfTips[
+                                                                    cj  .GetRandomInt(1, #game.bigElfTips)
+                                                                    ],
                                                                 10.00,
                                                                 "ff0000",
                                                                 1,
@@ -397,8 +396,7 @@ cj.TriggerAddAction(
                         function(bl)
                             local bigElfLife = "GG"
                             if (his.alive(bigElf)) then
-                                bigElfLife =
-                                    hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
+                                bigElfLife = hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
                                     "/" .. math.floor(hunit.getMaxLife(bigElf))
                             end
                             hleaderBoard.setTitle(bl, "百波战力榜[" .. game.rule.yb.wave .. "波][精灵 " .. bigElfLife .. "]")
@@ -421,8 +419,7 @@ cj.TriggerAddAction(
                     game.rule.cur = "hz"
                     hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“光辉城主”的生命，玩到死机为止！|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
-                    local bigElf =
-                        hunit.create(
+                    local bigElf = hunit.create(
                         {
                             whichPlayer = game.ALLY_PLAYER,
                             unitId = game.thisUnits["光辉城主"].UNIT_ID,
@@ -494,10 +491,10 @@ cj.TriggerAddAction(
                                                                 bigElf,
                                                                 "-" ..
                                                                     game.rule.hz.wave ..
-                                                                        " " ..
-                                                                            game.bigElfTips[
-                                                                                cj.GetRandomInt(1, #game.bigElfTips)
-                                                                            ],
+                                                                    " " ..
+                                                                    game.bigElfTips[
+                                                                    cj  .GetRandomInt(1, #game.bigElfTips)
+                                                                    ],
                                                                 10.00,
                                                                 "ff0000",
                                                                 1,
@@ -561,8 +558,7 @@ cj.TriggerAddAction(
                         function(bl)
                             local bigElfLife = "GG"
                             if (his.alive(bigElf)) then
-                                bigElfLife =
-                                    hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
+                                bigElfLife = hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
                                     "/" .. math.floor(hunit.getMaxLife(bigElf))
                             end
                             hleaderBoard.setTitle(bl, "无尽战力榜[" .. game.rule.hz.wave .. "波][城主 " .. bigElfLife .. "]")
@@ -632,38 +628,37 @@ cj.TriggerAddAction(
                                                         )
                                                     end
                                                     if
-                                                        (hplayer.getStatus(hplayer.players[k]) ==
-                                                            hplayer.player_status.gaming)
-                                                     then
-                                                        local hunt =
-                                                            15 * game.rule.dk.wave[playerIndex] +
+                                                    (hplayer.getStatus(hplayer.players[k]) ==
+                                                        hplayer.player_status.gaming)
+                                                    then
+                                                        local hunt = 15 * game.rule.dk.wave[playerIndex] +
                                                             2 * hhero.getCurLevel(game.playerTower[playerIndex])
                                                         if (hunt >= hunit.getCurLife(game.playerTower[k])) then
                                                             hunit.kill(game.playerTower[k], 0)
                                                             hmsg.echo(
                                                                 hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
                                                                     "被" ..
-                                                                        hColor.sky(
-                                                                            cj.GetPlayerName(
-                                                                                hplayer.players[playerIndex]
-                                                                            )
-                                                                        ) ..
-                                                                            "的" ..
-                                                                                hColor.yellow(slk.Name) .. "进攻，直接战败了~"
+                                                                    hColor.sky(
+                                                                        cj.GetPlayerName(
+                                                                            hplayer.players[playerIndex]
+                                                                        )
+                                                                    ) ..
+                                                                    "的" ..
+                                                                    hColor.yellow(slk.Name) .. "进攻，直接战败了~"
                                                             )
                                                         else
                                                             hunit.subCurLife(game.playerTower[k], hunt)
                                                             hmsg.echo(
                                                                 hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
                                                                     "被" ..
-                                                                        hColor.sky(
-                                                                            cj.GetPlayerName(
-                                                                                hplayer.players[playerIndex]
-                                                                            )
-                                                                        ) ..
-                                                                            "的" ..
-                                                                                hColor.yellow(slk.Name) ..
-                                                                                    "进攻，扣了" .. hColor.red(hunt) .. "血"
+                                                                    hColor.sky(
+                                                                        cj.GetPlayerName(
+                                                                            hplayer.players[playerIndex]
+                                                                        )
+                                                                    ) ..
+                                                                    "的" ..
+                                                                    hColor.yellow(slk.Name) ..
+                                                                    "进攻，扣了" .. hColor.red(hunt) .. "血"
                                                             )
                                                             heffect.toUnit(
                                                                 "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
@@ -723,8 +718,7 @@ cj.TriggerAddAction(
                         end
                     end
                     enemyGenDK(10)
-                    local bldk =
-                        hleaderBoard.create(
+                    local bldk = hleaderBoard.create(
                         "dk",
                         1,
                         function(bl)
@@ -795,9 +789,9 @@ cj.TriggerAddAction(
                             elseif (hdzapi.hasMallItem(hplayer.players[k], "TZGHOST") == true) then
                                 flag = true
                             elseif
-                                (hdzapi.hasMallItem(hplayer.players[k], "TZSWORD") == true or
-                                    hdzapi.mapLv(hplayer.players[k]) >= 10)
-                             then
+                            (hdzapi.hasMallItem(hplayer.players[k], "TZSWORD") == true or
+                                hdzapi.mapLv(hplayer.players[k]) >= 10)
+                            then
                                 flag = true
                             end
                             if (flag == true) then
@@ -832,25 +826,24 @@ cj.TriggerAddAction(
                         --开始当然是title了
                         local data = {}
                         local titData = {
-                            {value = "大佬", icon = "ReplaceableTextures\\CommandButtons\\BTNRiderlessHorse.blp"},
-                            {value = "称号", icon = "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention.blp"},
-                            {value = "状态", icon = "ReplaceableTextures\\CommandButtons\\BTNWellSpring.blp"},
-                            {value = "兵塔", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanBarracks.blp"},
-                            {value = "等级", icon = "ReplaceableTextures\\CommandButtons\\BTNAltarOfKings.blp"},
-                            {value = "攻击", icon = "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp"},
+                            { value = "大佬", icon = "ReplaceableTextures\\CommandButtons\\BTNRiderlessHorse.blp" },
+                            { value = "称号", icon = "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention.blp" },
+                            { value = "状态", icon = "ReplaceableTextures\\CommandButtons\\BTNWellSpring.blp" },
+                            { value = "兵塔", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanBarracks.blp" },
+                            { value = "等级", icon = "ReplaceableTextures\\CommandButtons\\BTNAltarOfKings.blp" },
+                            { value = "攻击", icon = "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" },
                             {
                                 value = "攻速",
                                 icon = "ReplaceableTextures\\CommandButtons\\BTNImprovedUnholyStrength.blp"
                             },
-                            {value = "命中", icon = "ReplaceableTextures\\CommandButtons\\BTNSteelRanged.blp"},
-                            {value = "增幅", icon = "ReplaceableTextures\\CommandButtons\\BTNControlMagic.blp"}
+                            { value = "命中", icon = "ReplaceableTextures\\CommandButtons\\BTNSteelRanged.blp" },
+                            { value = "增幅", icon = "ReplaceableTextures\\CommandButtons\\BTNControlMagic.blp" }
                         }
                         if (game.rule.cur == "dk") then
-                            titData =
-                                table.merge(
+                            titData = table.merge(
                                 titData,
                                 {
-                                    {value = "护甲", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"},
+                                    { value = "护甲", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp" },
                                     {
                                         value = "减伤",
                                         icon = "ReplaceableTextures\\CommandButtons\\BTNStoneArchitecture.blp"
@@ -863,16 +856,15 @@ cj.TriggerAddAction(
                                         value = "反伤",
                                         icon = "ReplaceableTextures\\CommandButtons\\BTNDefend.blp"
                                     },
-                                    {value = "回避", icon = "ReplaceableTextures\\CommandButtons\\BTNEnchantedCrows.blp"}
+                                    { value = "回避", icon = "ReplaceableTextures\\CommandButtons\\BTNEnchantedCrows.blp" }
                                 }
                             )
                         end
                         if (game.rule.dk.ai == true) then
-                            titData =
-                                table.merge(
+                            titData = table.merge(
                                 titData,
                                 {
-                                    {value = "黄金", icon = "ReplaceableTextures\\CommandButtons\\BTNChestOfGold.blp"}
+                                    { value = "黄金", icon = "ReplaceableTextures\\CommandButtons\\BTNChestOfGold.blp" }
                                 }
                             )
                         end
@@ -893,23 +885,22 @@ cj.TriggerAddAction(
                                     tower = game.playerTower[pi]
                                     avatar = hunit.getAvatar(tower)
                                     name = hunit.getName(tower)
-                                    attack =
-                                        math.floor(hattr.get(tower, "attack_white") + hattr.get(tower, "attack_green"))
+                                    attack = math.floor(hattr.get(tower, "attack_white") + hattr.get(tower, "attack_green"))
                                     attack_speed = math.round(hattr.get(tower, "attack_speed")) .. "%"
                                     damage_extent = math.round(hattr.get(tower, "damage_extent")) .. "%"
                                     aim = math.round(hattr.get(tower, "aim")) .. "%"
                                     tlv = "Lv." .. hhero.getCurLevel(tower)
                                 end
                                 local tempData = {
-                                    {value = cj.GetPlayerName(p), icon = nil},
-                                    {value = hplayer.getPrestige(p), icon = nil},
-                                    {value = hplayer.getStatus(p), icon = nil},
-                                    {value = name, icon = avatar},
-                                    {value = tlv, icon = nil},
-                                    {value = attack, icon = nil},
-                                    {value = attack_speed, icon = nil},
-                                    {value = aim, icon = nil},
-                                    {value = damage_extent, icon = nil}
+                                    { value = cj.GetPlayerName(p), icon = nil },
+                                    { value = hplayer.getPrestige(p), icon = nil },
+                                    { value = hplayer.getStatus(p), icon = nil },
+                                    { value = name, icon = avatar },
+                                    { value = tlv, icon = nil },
+                                    { value = attack, icon = nil },
+                                    { value = attack_speed, icon = nil },
+                                    { value = aim, icon = nil },
+                                    { value = damage_extent, icon = nil }
                                 }
                                 if (game.rule.cur == "dk") then
                                     local defend = "-"
@@ -924,24 +915,22 @@ cj.TriggerAddAction(
                                         damage_rebound = math.round(hattr.get(tower, "damage_rebound")) .. "%"
                                         avoid = math.round(hattr.get(tower, "avoid")) .. "%"
                                     end
-                                    tempData =
-                                        table.merge(
+                                    tempData = table.merge(
                                         tempData,
                                         {
-                                            {value = defend, icon = nil},
-                                            {value = toughness, icon = nil},
-                                            {value = resistance, icon = nil},
-                                            {value = damage_rebound, icon = nil},
-                                            {value = avoid, icon = nil}
+                                            { value = defend, icon = nil },
+                                            { value = toughness, icon = nil },
+                                            { value = resistance, icon = nil },
+                                            { value = damage_rebound, icon = nil },
+                                            { value = avoid, icon = nil }
                                         }
                                     )
                                 end
                                 if (game.rule.dk.ai == true) then
-                                    tempData =
-                                        table.merge(
+                                    tempData = table.merge(
                                         tempData,
                                         {
-                                            {value = math.floor(hplayer.getGold(p)), icon = nil}
+                                            { value = math.floor(hplayer.getGold(p)), icon = nil }
                                         }
                                     )
                                 end

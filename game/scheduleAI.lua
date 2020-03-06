@@ -183,14 +183,14 @@ MAYBE_AI = {
             )
             --到处乱走
             htime.setInterval(
-                math.random(7, 14),
+                math.random(15, 25),
                 function(t)
                     if (hplayer.getStatus(hplayer.players[playerIndex]) ~= hplayer.player_status.gaming) then
                         htime.delTimer(t)
                         return
                     end
                     if (htime.count > 60) then
-                        hplayer.addGold(hplayer.players[playerIndex], 400 + htime.count)
+                        hplayer.addGold(hplayer.players[playerIndex], 2 * htime.count)
                     end
                     local dist = math.getDistanceBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                     local deg = math.random(0, 360)
@@ -198,7 +198,7 @@ MAYBE_AI = {
                     if (dist > 1200) then
                         deg = math.getDegBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                         dis = math.random(500, 1000)
-                        hplayer.addGold(hplayer.players[playerIndex], 9235)
+                        hplayer.addGold(hplayer.players[playerIndex], 10 * htime.count)
                     end
                     local xy = math.polarProjection(
                         cj.GetUnitX(game.playerCourier[playerIndex]),

@@ -22,8 +22,8 @@ towerShadowBeDamage = function(evtData)
     local playerIndex = hunit.getUserData(u)
     local shadow = game.playerTower[playerIndex]
     local hasShadowCloatItem = false
-    for _, itid in ipairs(game.thisShadowCloatItems) do
-        if (his.ownItem(u, itid)) then
+    for _, sctId in ipairs(game.thisShadowCloatItems) do
+        if (his.ownItem(shadow, sctId) == true) then
             hasShadowCloatItem = true
             break
         end
@@ -116,7 +116,7 @@ towerShadowBeDamage = function(evtData)
                 if (Name == "回光返照" or Name == "自然之力") then
                     if (hunit.getCurLifePercent(u) < 75) then
                         towerShadowTtg(u, Name)
-                        hattr.set(u, val[2], {life_back = val[1]})
+                        hattr.set(u, val[2], { life_back = val[1] })
                     end
                 end
                 if (Name == "逃命" or Name == "着草" or Name == "加速") then
