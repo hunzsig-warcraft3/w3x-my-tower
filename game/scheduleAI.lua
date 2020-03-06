@@ -189,8 +189,8 @@ MAYBE_AI = {
                         htime.delTimer(t)
                         return
                     end
-                    if (htime.count > 60) then
-                        hplayer.addGold(hplayer.players[playerIndex], 2 * htime.count)
+                    if (htime.count > 120) then
+                        hplayer.addGold(hplayer.players[playerIndex], 3 * htime.count)
                     end
                     local dist = math.getDistanceBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                     local deg = math.random(0, 360)
@@ -198,7 +198,7 @@ MAYBE_AI = {
                     if (dist > 1200) then
                         deg = math.getDegBetweenUnit(game.playerCourier[playerIndex], game.playerTower[playerIndex])
                         dis = math.random(500, 1000)
-                        hplayer.addGold(hplayer.players[playerIndex], 10 * htime.count)
+                        hplayer.addGold(hplayer.players[playerIndex], 12 * htime.count)
                     end
                     local xy = math.polarProjection(
                         cj.GetUnitX(game.playerCourier[playerIndex]),
@@ -211,7 +211,7 @@ MAYBE_AI = {
             )
             --技能
             htime.setInterval(
-                math.random(4, 7),
+                3,
                 function(t)
                     if (hplayer.getStatus(hplayer.players[playerIndex]) ~= hplayer.player_status.gaming) then
                         htime.delTimer(t)
@@ -226,7 +226,7 @@ MAYBE_AI = {
                             math.floor(50000 / stone) + 10 + hhero.getCurLevel(game.playerTower[playerIndex]),
                             false
                         )
-                    elseif (gold >= 30000 and math.random(1, 20) == 12) then
+                    elseif (gold >= 30000 and math.random(1, 10) == 6) then
                         hplayer.subGold(hplayer.players[playerIndex], 30000)
                         local typei = math.random(1, 3)
                         local ts = {}
@@ -287,9 +287,9 @@ MAYBE_AI = {
                                         if (hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming) then
                                             local dmg = 0
                                             if (playerIndex == pi) then
-                                                dmg = math.random(250, 750)
+                                                dmg = math.random(50, 38 * htime.min)
                                             else
-                                                dmg = math.random(500, 1500)
+                                                dmg = math.random(100, 76 * htime.min)
                                             end
                                             hunit.subCurLife(game.playerTower[pi], dmg)
                                             hmsg.echo(
@@ -306,7 +306,7 @@ MAYBE_AI = {
                                 end
                             )
                         end
-                    elseif (gold >= 30000 and math.random(1, 6) == 4) then
+                    elseif (gold >= 10000 and math.random(1, 6) == 4) then
                         --物品叠加
                         local tarTower
                         if (hitem.getEmptySlot(game.playerTower[playerIndex]) <= 5) then
@@ -393,8 +393,8 @@ MAYBE_AI = {
                                         table.insert(comboIt, civ)
                                     end
                                 end
-                                if (game.thisComboItem[cbi] ~= nil) then
-                                    for _, civ in ipairs(game.thisComboItem[cbi]) do
+                                if (game.thisComboItem[cbi + 3] ~= nil) then
+                                    for _, civ in ipairs(game.thisComboItem[cbi + 3]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end
@@ -404,8 +404,8 @@ MAYBE_AI = {
                                         table.insert(comboIt, civ)
                                     end
                                 end
-                                if (game.thisComboItemNODK[cbi] ~= nil) then
-                                    for _, civ in ipairs(game.thisComboItemNODK[cbi]) do
+                                if (game.thisComboItemNODK[cbi + 3] ~= nil) then
+                                    for _, civ in ipairs(game.thisComboItemNODK[cbi + 3]) do
                                         table.insert(comboIt, civ)
                                     end
                                 end

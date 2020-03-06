@@ -87,10 +87,9 @@ onUnitItemsUesd = function(evtData)
                 }
             )
         end
-        local title =
-            "兵塔石：" ..
+        local title = "兵塔石：" ..
             game.towers[itemSLK.INDEX].MARK ..
-                "分" .. game.towers[itemSLK.INDEX].TOWER_POWER .. "阶" .. game.towers[itemSLK.INDEX].Name
+            "分" .. game.towers[itemSLK.INDEX].TOWER_POWER .. "阶" .. game.towers[itemSLK.INDEX].Name
         hdialog.create(
             p,
             {
@@ -131,11 +130,11 @@ onUnitItemsUesd = function(evtData)
         end
         local sites = {}
         if (itemSLK.ABILITY_COLOR == "yellow") then
-            sites = {"S", "D"}
+            sites = { "S", "D" }
         elseif (itemSLK.ABILITY_COLOR == "blue") then
-            sites = {"X", "C", "V"}
+            sites = { "X", "C", "V" }
         elseif (itemSLK.ABILITY_COLOR == "purple") then
-            sites = {"F"}
+            sites = { "F" }
         end
         local playerIndex = hplayer.index(p)
         local btns = {}
@@ -158,9 +157,9 @@ onUnitItemsUesd = function(evtData)
                     label = hColor.yellow(
                         "[" ..
                             v ..
-                                "]-[" ..
-                                    game.towersAbilities[playerIndex][v].Name ..
-                                        "][" .. game.towersAbilities[playerIndex][v].ABILITY_LEVEL .. "级]"
+                            "]-[" ..
+                            game.towersAbilities[playerIndex][v].Name ..
+                            "][" .. game.towersAbilities[playerIndex][v].ABILITY_LEVEL .. "级]"
                     )
                 }
             end
@@ -188,8 +187,8 @@ onUnitItemsUesd = function(evtData)
                         p,
                         "你选择了[" ..
                             hColor.yellow(btnIdx) ..
-                                "]位置，来学习[" ..
-                                    hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
+                            "]位置，来学习[" ..
+                            hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
                     )
                     delTowerSkillByBook(
                         game.playerTower[playerIndex],
@@ -212,7 +211,7 @@ onUnitItemsUesd = function(evtData)
                 p,
                 "兵塔自动挑选了[" ..
                     hColor.yellow(btnIdx) ..
-                        "]位置，学习了[" .. hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
+                    "]位置，学习了[" .. hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
             )
             delTowerSkillByBook(game.playerTower[playerIndex], btnIdx, game.towersAbilities[playerIndex][btnIdx])
             addTowerSkillByBook(game.playerTower[playerIndex], btnIdx, abils[btnIdx])
@@ -279,9 +278,9 @@ onUnitItemsUesd = function(evtData)
                 table.insert(tz, "邪鬼怨灵套装")
             end
             if
-                (hdzapi.hasMallItem(hplayer.players[playerIndex], "TZSWORD") == true or
-                    hdzapi.mapLv(hplayer.players[playerIndex]) >= 10)
-             then
+            (hdzapi.hasMallItem(hplayer.players[playerIndex], "TZSWORD") == true or
+                hdzapi.mapLv(hplayer.players[playerIndex]) >= 10)
+            then
                 table.insert(tz, "出云剑仙套装")
             end
             if (#tz <= 0) then
@@ -362,7 +361,7 @@ onUnitItemsUesd = function(evtData)
             heffect.toUnit("war3mapImported\\eff_holy_light2.mdl", game.playerTower[playerIndex])
             hunit.setCurLifePercent(game.playerTower[playerIndex], 100)
         elseif (ii == "天剑切符" or ii == "武神切符" or ii == "变异切符" or ii == "恶魔切符" or ii == "恶灵切符") then
-            local ts = {game.playerTower[playerIndex]}
+            local ts = { game.playerTower[playerIndex] }
             for i = 1, 4, 1 do
                 if (game.playerTowerLink[playerIndex][i] ~= nil) then
                     table.insert(ts, game.playerTowerLink[playerIndex][i].unit)
@@ -459,9 +458,9 @@ onUnitItemsUesd = function(evtData)
                             if (hplayer.getStatus(hplayer.players[pi]) == hplayer.player_status.gaming) then
                                 local dmg = 0
                                 if (playerIndex == pi) then
-                                    dmg = math.random(250, 750)
+                                    dmg = math.random(50, 38 * htime.min)
                                 else
-                                    dmg = math.random(500, 1500)
+                                    dmg = math.random(100, 76 * htime.min)
                                 end
                                 hunit.subCurLife(game.playerTower[pi], dmg)
                                 hmsg.echo(
@@ -479,9 +478,9 @@ onUnitItemsUesd = function(evtData)
                         table.insert(ts, game.playerTower[pi])
                         for i = 1, 4, 1 do
                             if
-                                (game.playerTowerLink[pi][i] ~= nil and
-                                    his.locust(game.playerTowerLink[pi][i].unit) == false)
-                             then
+                            (game.playerTowerLink[pi][i] ~= nil and
+                                his.locust(game.playerTowerLink[pi][i].unit) == false)
+                            then
                                 table.insert(ts, game.playerTowerLink[pi][i].unit)
                             end
                         end
