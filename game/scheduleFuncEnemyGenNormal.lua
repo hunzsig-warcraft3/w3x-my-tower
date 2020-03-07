@@ -80,8 +80,7 @@ enemyGenYB = function(waiting)
                     end
                     for k, v in pairs(game.pathPoint) do
                         if (his.playing(hplayer.players[k])) then
-                            local u =
-                                henemy.create(
+                            local u = henemy.create(
                                 {
                                     unitId = game.rule.yb.mon,
                                     qty = 1,
@@ -133,11 +132,17 @@ enemyGenHZ = function(waiting)
                             bossGen(game.rule.hz.wave)
                             nextWaitTime = 18
                             game.rule.hz.monLife = game.rule.hz.monLife + game.rule.hz.monLifeInc + hplayer.qty_current
+                            if (game.rule.hz.fresh > 0.25) then
+                                game.rule.hz.fresh = game.rule.hz.fresh - 0.1
+                            end
                         end
                         if (game.rule.hz.wave > 3 and math.fmod((game.rule.hz.wave - 3), 10) == 0) then
                             awardGen(game.rule.hz.wave)
                             nextWaitTime = 18
                             game.rule.hz.monLife = game.rule.hz.monLife + math.floor(0.20 * game.rule.hz.wave)
+                            if (game.rule.hz.fresh > 0.25) then
+                                game.rule.hz.fresh = game.rule.hz.fresh - 0.05
+                            end
                         end
                         htime.delTimer(t2)
                         local gold = game.rule.hz.wave * 100
@@ -166,8 +171,7 @@ enemyGenHZ = function(waiting)
                     end
                     for k, v in pairs(game.pathPoint) do
                         if (his.playing(hplayer.players[k])) then
-                            local u =
-                                henemy.create(
+                            local u = henemy.create(
                                 {
                                     unitId = game.rule.hz.mon,
                                     qty = 1,
@@ -221,8 +225,7 @@ enemyGenDK = function(waiting)
                         if (hplayer.getStatus(hplayer.players[k]) == hplayer.player_status.gaming) then
                             if (game.rule.dk.monLimit[k] < game.rule.dk.perWaveQty) then
                                 game.rule.dk.monLimit[k] = game.rule.dk.monLimit[k] + 1
-                                local u =
-                                    henemy.create(
+                                local u = henemy.create(
                                     {
                                         unitId = game.rule.dk.mon[k],
                                         qty = 1,
