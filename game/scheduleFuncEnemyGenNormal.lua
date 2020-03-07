@@ -133,16 +133,12 @@ enemyGenHZ = function(waiting)
                             nextWaitTime = 18
                             game.rule.hz.monLife = game.rule.hz.monLife + game.rule.hz.monLifeInc + hplayer.qty_current
                             if (game.rule.hz.fresh > 0.25) then
-                                game.rule.hz.fresh = game.rule.hz.fresh - 0.1
+                                game.rule.hz.fresh = game.rule.hz.fresh - 0.06
                             end
                         end
                         if (game.rule.hz.wave > 3 and math.fmod((game.rule.hz.wave - 3), 10) == 0) then
                             awardGen(game.rule.hz.wave)
                             nextWaitTime = 18
-                            game.rule.hz.monLife = game.rule.hz.monLife + math.floor(0.20 * game.rule.hz.wave)
-                            if (game.rule.hz.fresh > 0.25) then
-                                game.rule.hz.fresh = game.rule.hz.fresh - 0.05
-                            end
                         end
                         htime.delTimer(t2)
                         local gold = game.rule.hz.wave * 100

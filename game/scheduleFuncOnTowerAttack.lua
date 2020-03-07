@@ -87,8 +87,7 @@ onTowerAttack = function(evtData)
                     local x = cj.GetUnitX(u)
                     local y = cj.GetUnitY(u)
                     heffect.toXY("war3mapImported\\eff_FrostNova.mdl", x, y, 0)
-                    local g =
-                        hgroup.createByUnit(
+                    local g = hgroup.createByUnit(
                         u,
                         895,
                         function(filterUnit)
@@ -103,7 +102,7 @@ onTowerAttack = function(evtData)
                                 7.5,
                                 {
                                     move = "-" .. 45 * level,
-                                    life_back = "-" .. 100 * level
+                                    life_back = "-" .. 150 * level
                                 }
                             )
                             heffect.toUnit("war3mapImported\\eff_frost_burst.mdl", eu, 0)
@@ -119,7 +118,7 @@ onTowerAttack = function(evtData)
                 end
                 --
                 if (name == "偷窃" or name == "炼金" or name == "盗墓") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         haward.forUnitGold(u, val[2])
@@ -127,7 +126,7 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (his.alive(targetUnit) and (name == "必死宣言" or name == "羊蹄子" or name == "同葬" or name == "引路人")) then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         heffect.bindUnit("Abilities\\Spells\\Items\\AIso\\AIsoTarget.mdl", targetUnit, "origin", 1)
@@ -135,12 +134,12 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "烈焰风暴" or name == "帝释天") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local damageType = {CONST_DAMAGE_TYPE.magic}
+                        local damageType = { CONST_DAMAGE_TYPE.magic }
                         if (name == "烈焰风暴") then
-                            damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.fire}
+                            damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.fire }
                         elseif (name == "帝释天") then
                             damageType = {
                                 CONST_DAMAGE_TYPE.magic,
@@ -169,14 +168,13 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "雷霆一击" or name == "缠绕" or name == "霜冻新星") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         local x = cj.GetUnitX(u)
                         local y = cj.GetUnitY(u)
                         heffect.toXY(val[6], x, y, 0)
-                        local g =
-                            hgroup.createByUnit(
+                        local g = hgroup.createByUnit(
                             u,
                             895,
                             function(filterUnit)
@@ -185,14 +183,14 @@ onTowerAttack = function(evtData)
                         )
                         local damageType = {}
                         if (name == "雷霆一击") then
-                            damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.thunder}
+                            damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.thunder }
                         elseif (name == "缠绕") then
-                            damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.wood}
+                            damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.wood }
                         end
                         hgroup.loop(
                             g,
                             function(eu)
-                                hattr.set(eu, val[4], {[val[5]] = "-" .. val[3]})
+                                hattr.set(eu, val[4], { [val[5]] = "-" .. val[3] })
                                 heffect.bindUnit(val[7], eu, "origin", val[4])
                                 hskill.damage(
                                     {
@@ -209,14 +207,13 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "石化凝视") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         local x = cj.GetUnitX(u)
                         local y = cj.GetUnitY(u)
                         heffect.toXY("war3mapImported\\eff_DarkLightningNova.mdl", x, y, 0)
-                        local g =
-                            hgroup.createByUnit(
+                        local g = hgroup.createByUnit(
                             u,
                             895,
                             function(filterUnit)
@@ -240,14 +237,13 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "闻风丧胆") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         local x = cj.GetUnitX(u)
                         local y = cj.GetUnitY(u)
                         heffect.toXY("Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl", x, y, 0)
-                        local g =
-                            hgroup.createByUnit(
+                        local g = hgroup.createByUnit(
                             u,
                             895,
                             function(filterUnit)
@@ -276,7 +272,7 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "震撼" or name == "龙魂斩" or name == "鱼人碎击" or name == "怒火碎击") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         local x = cj.GetUnitX(u)
@@ -300,9 +296,8 @@ onTowerAttack = function(evtData)
                 end
                 if (name == "灼烧大地") then
                     onTowerAttackTtg(u, name)
-                    local val = v.Val or {0}
-                    local g =
-                        hgroup.createByUnit(
+                    local val = v.Val or { 0 }
+                    local g = hgroup.createByUnit(
                         u,
                         895,
                         function(filterUnit)
@@ -318,7 +313,7 @@ onTowerAttack = function(evtData)
                                     targetUnit = eu,
                                     damage = val[1],
                                     damageKind = CONST_DAMAGE_KIND.skill,
-                                    damageType = {CONST_DAMAGE_TYPE.fire}
+                                    damageType = { CONST_DAMAGE_TYPE.fire }
                                 }
                             )
                         end,
@@ -327,23 +322,22 @@ onTowerAttack = function(evtData)
                 end
                 if (name == "猎手幻刀" or name == "觉醒幻刀" or name == "究极幻刀" or name == "冥冥斩击") then
                     onTowerAttackTtg(u, name)
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     local cut1 = "war3mapImported\\eff_x_round_dance.mdl"
                     local cut2 = "war3mapImported\\eff_Culling_Slash_Silver.mdl"
-                    local damageType = {CONST_DAMAGE_TYPE.physical}
+                    local damageType = { CONST_DAMAGE_TYPE.physical }
                     if (name == "觉醒幻刀") then
                         cut1 = "war3mapImported\\eff_light_speed_cutting.mdl"
                     elseif (name == "究极幻刀") then
                         cut1 = "war3mapImported\\eff_light_speed_cutting_green.mdl"
-                        damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.dark}
+                        damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.dark }
                     elseif (name == "冥冥斩击") then
                         cut1 = "war3mapImported\\eff_round_dance2.mdl"
                         cut2 = "Objects\\Spawnmodels\\Critters\\Albatross\\CritterBloodAlbatross.mdl"
-                        damageType = {CONST_DAMAGE_TYPE.absolute}
+                        damageType = { CONST_DAMAGE_TYPE.absolute }
                     end
                     heffect.toUnit(cut1, u, 1)
-                    local g =
-                        hgroup.createByUnit(
+                    local g = hgroup.createByUnit(
                         u,
                         895,
                         function(filterUnit)
@@ -368,7 +362,7 @@ onTowerAttack = function(evtData)
                     )
                 end
                 if (name == "剑刃风暴" and his.get(u, "isWhirlwind") == false) then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.whirlwind(
@@ -383,17 +377,16 @@ onTowerAttack = function(evtData)
                                 sourceUnit = u,
                                 animation = "spin",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical}
+                                damageType = { CONST_DAMAGE_TYPE.physical }
                             }
                         )
                     end
                 end
                 if (name == "震荡波" or name == "狼拳连打") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1000,
@@ -420,7 +413,7 @@ onTowerAttack = function(evtData)
                                             damageMovement = val[3],
                                             damageMovementRange = 125,
                                             damageKind = CONST_DAMAGE_KIND.skill,
-                                            damageType = {CONST_DAMAGE_TYPE.physical},
+                                            damageType = { CONST_DAMAGE_TYPE.physical },
                                             extraInfluence = function(eu)
                                                 hskill.swim(
                                                     {
@@ -437,11 +430,10 @@ onTowerAttack = function(evtData)
                         end
                     end
                 elseif (name == "大海浪涛") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1200,
@@ -463,16 +455,15 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[3],
                                 damageMovementRange = 225,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.water}
+                                damageType = { CONST_DAMAGE_TYPE.water }
                             }
                         )
                     end
                 elseif (name == "毁灭之剑") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1300,
@@ -494,12 +485,12 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[2],
                                 damageMovementRange = 320,
                                 damageKind = CONST_DAMAGE_KIND.special,
-                                damageType = {CONST_DAMAGE_TYPE.absolute, CONST_DAMAGE_TYPE.dark}
+                                damageType = { CONST_DAMAGE_TYPE.absolute, CONST_DAMAGE_TYPE.dark }
                             }
                         )
                     end
                 elseif (name == "乘风破浪") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         for q = 1, val[2], 1 do
@@ -523,7 +514,7 @@ onTowerAttack = function(evtData)
                                             damageMovementRange = 250,
                                             effectEnd = "war3mapImported\\eff_Shiva's_Wrath.mdl",
                                             damageKind = CONST_DAMAGE_KIND.skill,
-                                            damageType = {CONST_DAMAGE_TYPE.physical},
+                                            damageType = { CONST_DAMAGE_TYPE.physical },
                                             extraInfluence = function(eu)
                                                 hskill.swim(
                                                     {
@@ -540,11 +531,10 @@ onTowerAttack = function(evtData)
                         end
                     end
                 elseif (name == "交叉战斧") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             900,
@@ -568,17 +558,16 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[3],
                                 damageMovementRange = 100,
                                 damageKind = CONST_DAMAGE_KIND.special,
-                                damageType = {CONST_DAMAGE_TYPE.physical},
+                                damageType = { CONST_DAMAGE_TYPE.physical },
                                 damageEffect = "Objects\\Spawnmodels\\Critters\\Albatross\\CritterBloodAlbatross.mdl"
                             }
                         )
                     end
                 elseif (name == "九道镖") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             800,
@@ -602,7 +591,7 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[3],
                                 damageMovementRange = 75,
                                 damageKind = CONST_DAMAGE_KIND.special,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.poison},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.poison },
                                 damageEffect = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl",
                                 extraInfluence = function(eu)
                                     hattr.set(
@@ -617,11 +606,10 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "剑气" or name == "弹刃之剑") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1200,
@@ -645,7 +633,7 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[3],
                                 damageMovementRange = 75,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical},
+                                damageType = { CONST_DAMAGE_TYPE.physical },
                                 damageEffect = "war3mapImported\\eff_speed_slash2.mdl",
                                 extraInfluence = function(eu)
                                     hattr.set(
@@ -660,11 +648,10 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "神剑七闪") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1200,
@@ -689,7 +676,7 @@ onTowerAttack = function(evtData)
                                 damageMovementRange = 100,
                                 damageMovementRepeat = true,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire },
                                 damageEffect = "war3mapImported\\eff_shooting.mdl",
                                 extraInfluence = function(eu)
                                     hattr.set(
@@ -704,11 +691,10 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "冥王极限斩") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1500,
@@ -730,17 +716,16 @@ onTowerAttack = function(evtData)
                                 damageMovement = val[2],
                                 damageMovementRange = 150,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.poison},
+                                damageType = { CONST_DAMAGE_TYPE.poison },
                                 damageEffect = "war3mapImported\\eff_Pillar_of_Flame_Green.mdl"
                             }
                         )
                     end
                 elseif (name == "陨石星P") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1200,
@@ -765,17 +750,16 @@ onTowerAttack = function(evtData)
                                 damageEnd = val[2] * 2,
                                 damageEndRange = 350,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire },
                                 damageEffect = "war3mapImported\\eff_flame_flash2.mdl"
                             }
                         )
                     end
                 elseif (name == "陨石星M") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1200,
@@ -800,17 +784,16 @@ onTowerAttack = function(evtData)
                                 damageEnd = val[2] * 2,
                                 damageEndRange = 350,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.fire},
+                                damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.fire },
                                 damageEffect = "war3mapImported\\eff_flame_flash2.mdl"
                             }
                         )
                     end
                 elseif (name == "虚空漩涡") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
-                        local txy =
-                            math.polarProjection(
+                        local txy = math.polarProjection(
                             cj.GetUnitX(u),
                             cj.GetUnitY(u),
                             1100,
@@ -835,7 +818,7 @@ onTowerAttack = function(evtData)
                                 damageEnd = 0,
                                 damageEndRange = 0,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.absolute, CONST_DAMAGE_TYPE.dark},
+                                damageType = { CONST_DAMAGE_TYPE.absolute, CONST_DAMAGE_TYPE.dark },
                                 damageEffect = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl",
                                 extraInfluence = function(eu)
                                     hattr.set(
@@ -850,7 +833,7 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "爆骨火弹" or name == "炎杀鬼球") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leap(
@@ -872,13 +855,13 @@ onTowerAttack = function(evtData)
                                 damageEndRange = val[2],
                                 effectEnd = "war3mapImported\\eff_FireStomp.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire },
                                 damageEffect = "Abilities\\Spells\\Other\\Incinerate\\FireLordDeathExplode.mdl"
                             }
                         )
                     end
                 elseif (name == "地狱火球") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     onTowerAttackTtg(u, name)
                     hskill.leap(
                         {
@@ -899,11 +882,11 @@ onTowerAttack = function(evtData)
                             damageEndRange = 0,
                             effectEnd = "war3mapImported\\eff_ShadowAssault.mdl",
                             damageKind = CONST_DAMAGE_KIND.skill,
-                            damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.dark}
+                            damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.dark }
                         }
                     )
                 elseif (name == "炫力炸弹") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leap(
@@ -925,7 +908,7 @@ onTowerAttack = function(evtData)
                                 damageEndRange = val[2],
                                 effectEnd = "war3mapImported\\eff_BombBlast.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.poison},
+                                damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.poison },
                                 damageEffect = "war3mapImported\\eff_brilliant_sparkle.mdl",
                                 extraInfluence = function(eu)
                                     hskill.swim(
@@ -940,7 +923,7 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "恐惧蝠群") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leapRange(
@@ -963,7 +946,7 @@ onTowerAttack = function(evtData)
                                 damageEndRange = 0,
                                 effectEnd = "war3mapImported\\eff_Call_of_Dread_Green.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.dark},
+                                damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.dark },
                                 extraInfluence = function(eu)
                                     hattr.set(
                                         eu,
@@ -978,7 +961,7 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "导弹降日") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         heffect.toUnit("war3mapImported\\eff_RocketRainBirth.mdl", u, 0)
@@ -1002,12 +985,12 @@ onTowerAttack = function(evtData)
                                 damageEndRange = 150,
                                 effectEnd = "war3mapImported\\eff_ExplosionBig.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire}
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.fire }
                             }
                         )
                     end
                 elseif (name == "滚滚石锤") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leapRange(
@@ -1030,7 +1013,7 @@ onTowerAttack = function(evtData)
                                 damageEndRange = 0,
                                 effectEnd = "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.soil},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.soil },
                                 extraInfluence = function(eu)
                                     hskill.swim(
                                         {
@@ -1044,7 +1027,7 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "破冰碎片") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leapRange(
@@ -1067,12 +1050,12 @@ onTowerAttack = function(evtData)
                                 damageEndRange = 0,
                                 effectEnd = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.ice}
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.ice }
                             }
                         )
                     end
                 elseif (name == "黑网擒拿" or name == "忍法擒拿") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leapRange(
@@ -1094,7 +1077,7 @@ onTowerAttack = function(evtData)
                                 damageEnd = val[2],
                                 damageEndRange = 0,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.dark},
+                                damageType = { CONST_DAMAGE_TYPE.physical, CONST_DAMAGE_TYPE.dark },
                                 extraInfluence = function(eu)
                                     heffect.bindUnit(val[5], eu, "origin", val[3])
                                     hattr.set(
@@ -1109,7 +1092,7 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "幻彩星落") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.leapReflex(
@@ -1133,12 +1116,12 @@ onTowerAttack = function(evtData)
                                 damageEndRange = 0,
                                 effectEnd = "Abilities\\Spells\\NightElf\\Starfall\\StarfallTarget.mdl",
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.light}
+                                damageType = { CONST_DAMAGE_TYPE.magic, CONST_DAMAGE_TYPE.light }
                             }
                         )
                     end
                 elseif (name == "金箍棒") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hskill.rectangleStrike(
@@ -1163,7 +1146,7 @@ onTowerAttack = function(evtData)
                                 effectScale = 3,
                                 effectOffset = -750,
                                 damageKind = CONST_DAMAGE_KIND.skill,
-                                damageType = {CONST_DAMAGE_TYPE.physical},
+                                damageType = { CONST_DAMAGE_TYPE.physical },
                                 damageEffect = "war3mapImported\\eff_red_swing.mdl",
                                 oneHitOnly = true, --是否每个敌人只打击一次（可选,默认true）
                                 extraInfluence = function(eu)
@@ -1179,15 +1162,14 @@ onTowerAttack = function(evtData)
                         )
                     end
                 elseif (name == "蛇棒" or name == "骷髅兵" or name == "炎魔" or name == "灰熊") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         local summon = game.towersSummon[val[2]]
                         if (summon == nil) then
                             return
                         end
-                        local su =
-                            hunit.create(
+                        local su = hunit.create(
                             {
                                 whichPlayer = cj.GetOwningPlayer(u),
                                 unitId = summon.UNIT_ID,
@@ -1208,7 +1190,7 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "地狱战吼" or name == "邪鬼战吼" or name == "大梵天") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         heffect.toUnit(val[4], u, 0)
@@ -1233,7 +1215,7 @@ onTowerAttack = function(evtData)
                         end
                     end
                 elseif (name == "熊咆") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         heffect.toUnit(val[5], u, 0)
@@ -1275,7 +1257,7 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "固化时空") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hunit.setAnimateSpeed(targetUnit, 0, val[2])
@@ -1289,7 +1271,7 @@ onTowerAttack = function(evtData)
                     end
                 end
                 if (name == "血性") then
-                    local val = v.Val or {0}
+                    local val = v.Val or { 0 }
                     if (math.random(1, 100) <= val[1]) then
                         onTowerAttackTtg(u, name)
                         hattr.set(
