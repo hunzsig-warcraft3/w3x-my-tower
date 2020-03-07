@@ -230,8 +230,8 @@ cj.TriggerAddAction(
             }
         )
         local TITLE_YB = "体验百波（轻松简单）"
-        local TITLE_HZ = "无尽地狱（崩溃为止）"
-        local TITLE_DK = "欢乐对抗（勾心斗角）"
+        local TITLE_HZ = "无尽地狱（疯狂高速）"
+        local TITLE_DK = "欢乐对抗（PVP）"
         local TITLE_DKAI = "欢乐对抗（AI模式）"
         local btns = {
             TITLE_YB

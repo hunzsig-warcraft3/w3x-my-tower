@@ -1,7 +1,7 @@
 require "game.scheduleFuncOnBossBeDamage"
 require "game.scheduleFuncOnBossDead"
 -- 出兵(boss)
-bossGenLife = 500
+bossGenLife = 300
 bossGen = function(curWave)
     local boss = game.thisEnemysBoss[cj.GetRandomInt(1, game.thisEnemysBossLen)].UNIT_ID
     local move = 120
@@ -67,6 +67,6 @@ bossGen = function(curWave)
     if (game.rule.cur == "yb") then
         bossGenLife = bossGenLife + 200
     elseif (game.rule.cur == "hz") then
-        bossGenLife = bossGenLife + 280 + curWave * 4
+        bossGenLife = bossGenLife + 300 + curWave * 4
     end
 end

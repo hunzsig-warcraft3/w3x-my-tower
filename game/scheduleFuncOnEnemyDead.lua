@@ -145,7 +145,7 @@ enemyDeadAward = function(triggerUnit, killer)
         if (enemyDeadTowerDrop[playerIndex] == nil) then
             enemyDeadTowerDrop[playerIndex] = 2
         end
-        if (enemyDeadTowerDrop[playerIndex] < 6 or cj.GetRandomInt(1, enemyDeadTowerDrop[playerIndex]) == 1) then
+        if (enemyDeadTowerDrop[playerIndex] < 10 or cj.GetRandomInt(1, enemyDeadTowerDrop[playerIndex]) == 1) then
             -- 掉落兵塔
             local targetTPow = getTowerPowLevel(curWave)
             if (game.thisOptionTowerPowerItem[targetTPow] ~= nil) then
