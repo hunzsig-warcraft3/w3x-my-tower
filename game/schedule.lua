@@ -229,9 +229,9 @@ cj.TriggerAddAction(
                 }
             }
         )
-        local TITLE_YB = "简单百波（新手入门）"
-        local TITLE_HZ = "无尽挑战（刷木推荐）"
-        local TITLE_DK = "欢乐对抗（基友推荐）"
+        local TITLE_YB = "体验百波（轻松简单）"
+        local TITLE_HZ = "无尽地狱（崩溃为止）"
+        local TITLE_DK = "欢乐对抗（勾心斗角）"
         local TITLE_DKAI = "欢乐对抗（AI模式）"
         local btns = {
             TITLE_YB

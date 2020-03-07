@@ -117,13 +117,13 @@ abilitiesYellow = {
         Name = "战熊咆哮",
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNBattleRoar.blp",
         Ubertip = "+{val#1}%几率击出额外{val#2}%伤害的物理暴击",
-        Val = { 8.5, 16 }
+        Val = { 8.5, 22 }
     },
     {
         Name = "魔导灵眼",
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNMagicalSentry.blp",
         Ubertip = "+{val#1}%几率击出额外{val#2}%伤害的魔法暴击",
-        Val = { 10, 18 }
+        Val = { 10, 25 }
     },
     {
         Name = "瞄准",

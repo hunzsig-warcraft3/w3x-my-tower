@@ -63,7 +63,7 @@ TOWER_ABLI_SPX = {
         Buttonpos2 = 2,
         Missileart = "Abilities\\Weapons\\NagaArrowMissile\\NagaArrowMissile.mdl",
         TYPE = "multiattack",
-        Val = {3}
+        Val = { 3 }
     },
     {
         Name = "冰矢",
@@ -73,7 +73,7 @@ TOWER_ABLI_SPX = {
         Buttonpos2 = 2,
         Missileart = "war3mapImported\\eff_freezingsplinter.mdl",
         TYPE = "multiattack",
-        Val = {4}
+        Val = { 4 }
     },
     {
         Name = "复命",
@@ -81,7 +81,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ankh.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {30, 500},
+        Val = { 30, 500 },
         ODK = true
     },
     {
@@ -90,7 +90,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_MarkOfFire.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {35, 1000},
+        Val = { 35, 1000 },
         ODK = true
     },
     {
@@ -99,7 +99,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Rogue_BladeTwisting.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {575}
+        Val = { 575 }
     },
     {
         Name = "月神强击",
@@ -107,7 +107,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNTrueShot.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1355}
+        Val = { 1355 }
     },
     {
         Name = "魔力之源",
@@ -115,7 +115,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ManaRecharge.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {760}
+        Val = { 760 }
     },
     {
         Name = "屠龙刀",
@@ -123,7 +123,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Weapon_Halberd19.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1350}
+        Val = { 1350 }
     },
     {
         Name = "利爪",
@@ -131,7 +131,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ImprovedUnholyStrength.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {2333}
+        Val = { 2333 }
     },
     {
         Name = "治疗",
@@ -139,7 +139,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Heal.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {0.25}
+        Val = { 0.25 }
     },
     {
         Name = "精灵守护",
@@ -147,7 +147,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Misc_Bag_SatchelofCenarius.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {0.5}
+        Val = { 0.5 }
     },
     {
         Name = "远古身躯",
@@ -155,7 +155,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_FireDragonElemental.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {300}
+        Val = { 300 }
     },
     {
         Name = "重拳出击",
@@ -163,7 +163,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_AdvancedUnholyStrength.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {600}
+        Val = { 600 }
     },
     {
         Name = "骑士精神",
@@ -171,7 +171,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_GreaterBlessingofKings.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {620}
+        Val = { 620 }
     },
     {
         Name = "威武体魄",
@@ -179,7 +179,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_Vindication.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {660}
+        Val = { 660 }
     },
     {
         Name = "牛头人",
@@ -187,7 +187,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_BullRush.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {999}
+        Val = { 999 }
     },
     {
         Name = "落难领袖",
@@ -195,7 +195,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_DivineIllumination.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {900}
+        Val = { 900 }
     },
     {
         Name = "汇聚",
@@ -203,7 +203,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_SpellWarding.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1550}
+        Val = { 1550 }
     },
     {
         Name = "浪涛之力",
@@ -211,7 +211,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Frost_ArcticWinds_dark.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1480}
+        Val = { 1480 }
     },
     {
         Name = "蛇皮",
@@ -219,7 +219,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_FireDragonElemental.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {120}
+        Val = { 120 }
     },
     {
         Name = "修仙之体",
@@ -227,7 +227,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Druid_LunarGuidance.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {580}
+        Val = { 580 }
     },
     {
         Name = "恶魔之躯",
@@ -235,7 +235,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Rogue_SinisterCalling.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {666}
+        Val = { 666 }
     },
     {
         Name = "魔爪",
@@ -243,7 +243,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ImmolationOff.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1333}
+        Val = { 1333 }
     },
     {
         Name = "聚气",
@@ -251,7 +251,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_LayOnHands.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1220}
+        Val = { 1220 }
     },
     {
         Name = "海浪之形",
@@ -259,7 +259,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Frost_ArcticWinds_dark.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1340}
+        Val = { 1340 }
     },
     {
         Name = "冥想",
@@ -267,7 +267,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Arcane_MindMastery.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {130}
+        Val = { 130 }
     },
     {
         Name = "大智慧",
@@ -275,7 +275,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_AbsorbMagic.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {2500}
+        Val = { 2500 }
     },
     {
         Name = "三千年智慧",
@@ -283,7 +283,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Shadow_ImprovedVampiricEmbrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {3000}
+        Val = { 3000 }
     },
     {
         Name = "机械之心",
@@ -291,7 +291,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Tempered_gear.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {333, 333, 333}
+        Val = { 333, 333, 333 }
     },
     {
         Name = "古代帝王",
@@ -299,7 +299,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Green_ghost_shield.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {888, 888, 888}
+        Val = { 888, 888, 888 }
     },
     {
         Name = "恶魔巫术",
@@ -307,7 +307,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Druid_ForceofNature.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {7.7}
+        Val = { 7.7 }
     },
     {
         Name = "剃骨之刃",
@@ -315,7 +315,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Rogue_Disembowel.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {14.5}
+        Val = { 14.5 }
     },
     {
         Name = "巾帼",
@@ -323,7 +323,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_Absolution.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {30}
+        Val = { 30 }
     },
     {
         Name = "剑圣",
@@ -331,7 +331,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Warrior_WeaponMastery.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {35}
+        Val = { 35 }
     },
     {
         Name = "气定神闲",
@@ -339,7 +339,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Hunter_ZenArchery.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {55}
+        Val = { 55 }
     },
     {
         Name = "风风拳",
@@ -347,7 +347,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Purple_Shadow_Scratch.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {48}
+        Val = { 48 }
     },
     {
         Name = "牙牙拳",
@@ -355,7 +355,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Regeneration.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {38}
+        Val = { 38 }
     },
     {
         Name = "电激穴道",
@@ -363,7 +363,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Electrostatic_field2.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {33}
+        Val = { 33 }
     },
     {
         Name = "六刃智慧",
@@ -371,7 +371,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Gold_Six_Blades.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {66, 66}
+        Val = { 66, 66 }
     },
     {
         Name = "小牛粉碎",
@@ -379,7 +379,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNSmash.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {500, 10}
+        Val = { 500, 10 }
     },
     {
         Name = "分裂大刀",
@@ -387,7 +387,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNCleavingAttack.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {500, 13}
+        Val = { 500, 13 }
     },
     {
         Name = "分裂狂刀",
@@ -395,7 +395,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNCleavingAttack.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {600, 16}
+        Val = { 600, 16 }
     },
     {
         Name = "猫头鹰怒视",
@@ -403,7 +403,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNScout.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {40}
+        Val = { 40 }
     },
     {
         Name = "捕猎者",
@@ -411,7 +411,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Druid_PredatoryInstincts.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {75}
+        Val = { 75 }
     },
     {
         Name = "激灵一箭",
@@ -419,7 +419,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Hunter_ThrilloftheHunt.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {60, 775}
+        Val = { 60, 775 }
     },
     {
         Name = "鸦仇",
@@ -427,7 +427,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Hunter_SilentHunter.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {70, 25}
+        Val = { 70, 25 }
     },
     {
         Name = "熊掌战意",
@@ -435,7 +435,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Regeneration.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {15, 20}
+        Val = { 15, 20 }
     },
     {
         Name = "马索格爆锤",
@@ -443,7 +443,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Hammer_to_the_past.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {9, 65}
+        Val = { 9, 65 }
     },
     {
         Name = "致命剑术",
@@ -451,7 +451,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNCriticalStrike.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {25, 50}
+        Val = { 25, 50 }
     },
     {
         Name = "恩赐解脱",
@@ -459,7 +459,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_BlessedResillience.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {3, 155}
+        Val = { 3, 155 }
     },
     {
         Name = "爆头",
@@ -467,7 +467,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_HumanMissileUpTwo.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {40, 40}
+        Val = { 40, 40 }
     },
     {
         Name = "刺客信条",
@@ -475,7 +475,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_EyeforanEye.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {35, 75}
+        Val = { 35, 75 }
     },
     {
         Name = "醉拳",
@@ -483,7 +483,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNDrunkenDodge.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {50, 65}
+        Val = { 50, 65 }
     },
     {
         Name = "短棘戟",
@@ -491,7 +491,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_GhoulFrenzy.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {75, 35}
+        Val = { 75, 35 }
     },
     {
         Name = "长棘戟",
@@ -499,7 +499,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_GhoulFrenzy.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {5, 135}
+        Val = { 5, 135 }
     },
     {
         Name = "法术研究",
@@ -507,7 +507,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_WitchDoctorAdept.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {17, 10}
+        Val = { 17, 10 }
     },
     {
         Name = "图腾祭奠",
@@ -515,7 +515,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Druid_ForceofNature.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {20, 30}
+        Val = { 20, 30 }
     },
     {
         Name = "火之元素",
@@ -531,7 +531,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Fire_Burnout.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100, 495, 3, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl"}
+        Val = { 100, 495, 3, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl" }
     },
     {
         Name = "火焰之剑",
@@ -539,7 +539,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_SealOfValor.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100, 445, 4, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl"}
+        Val = { 100, 445, 4, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl" }
     },
     {
         Name = "焰烬",
@@ -547,7 +547,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Fire_Burnout.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {100, 715, 5, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl"}
+        Val = { 100, 715, 5, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl" }
     },
     {
         Name = "野生龙种",
@@ -619,7 +619,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Frost_ArcticWinds_dark.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {600, 18}
+        Val = { 600, 18 }
     },
     {
         Name = "山岭之灵",
@@ -651,7 +651,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Weapon_Shortblade_53.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {6, 3}
+        Val = { 6, 3 }
     },
     {
         Name = "黑夜之箭",
@@ -659,7 +659,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Weapon_Shortblade_53.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {7, 4}
+        Val = { 7, 4 }
     },
     {
         Name = "黑狱之箭",
@@ -667,7 +667,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Weapon_Shortblade_53.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {8, 5}
+        Val = { 8, 5 }
     },
     {
         Name = "噬日",
@@ -675,7 +675,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNGenericSpellImmunity.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30}
+        Val = { 30 }
     },
     {
         Name = "深渊之刃",
@@ -683,7 +683,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNCleavingAttack.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {550, 20}
+        Val = { 550, 20 }
     },
     {
         Name = "透彻寒骨",
@@ -691,7 +691,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_DarkRitual.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {5, 5.5}
+        Val = { 5, 5.5 }
     },
     {
         Name = "冰焰结晶",
@@ -699,7 +699,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Elemental_Crystal_Water.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {7, 6}
+        Val = { 7, 6 }
     },
     {
         Name = "冰魂",
@@ -715,7 +715,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNFreezingBreath.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30, 3.8}
+        Val = { 30, 3.8 }
     },
     {
         Name = "十月冰封",
@@ -723,7 +723,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNFreezingBreath.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {100, 20, 3}
+        Val = { 100, 20, 3 }
     },
     {
         Name = "金属元素",
@@ -747,7 +747,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Undercurrent_white_light.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1313}
+        Val = { 1313 }
     },
     {
         Name = "电离之子",
@@ -755,7 +755,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ion_overload.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {20}
+        Val = { 20 }
     },
     {
         Name = "霹雳化身",
@@ -763,7 +763,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_lighting_overload.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25}
+        Val = { 25 }
     },
     {
         Name = "冥王之剑",
@@ -803,7 +803,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Elemental_Mote_Water01.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {3}
+        Val = { 3 }
     },
     {
         Name = "深海之心",
@@ -811,7 +811,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Elemental_Primal_Water.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {13.3}
+        Val = { 13.3 }
     },
     {
         Name = "大地种子",
@@ -819,7 +819,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Forest_seed.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {6}
+        Val = { 6 }
     },
     {
         Name = "暗夜之魂",
@@ -827,7 +827,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_ElunesGrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {6.5}
+        Val = { 6.5 }
     },
     {
         Name = "暗神之魂",
@@ -835,7 +835,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_ElunesGrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {11}
+        Val = { 11 }
     },
     {
         Name = "神启",
@@ -843,7 +843,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_DivineIllumination.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {20}
+        Val = { 20 }
     },
     {
         Name = "偷窃",
@@ -851,7 +851,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_BlindingHeal.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 35}
+        Val = { 25, 35 }
     },
     {
         Name = "炼金",
@@ -859,7 +859,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNRegenerate.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 40}
+        Val = { 25, 40 }
     },
     {
         Name = "盗墓",
@@ -867,7 +867,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Jewelry_Necklace_36.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30, 36}
+        Val = { 30, 36 }
     },
     {
         Name = "净化",
@@ -875,7 +875,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Purge.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30, 35, 3, "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"}
+        Val = { 30, 35, 3, "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl" }
     },
     {
         Name = "灵魂净化",
@@ -883,7 +883,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Purge.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30, 55, 4, "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"}
+        Val = { 30, 55, 4, "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl" }
     },
     {
         Name = "蛊毒",
@@ -891,7 +891,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNPoisonSting.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {50, 100, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"}
+        Val = { 50, 100, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl" }
     },
     {
         Name = "蛛毒",
@@ -899,7 +899,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Creature_Poison_06.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100, 175, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"}
+        Val = { 100, 175, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl" }
     },
     {
         Name = "腐尸毒",
@@ -907,7 +907,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNPlagueCloud.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {60, 260, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"}
+        Val = { 60, 260, 4, "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl" }
     },
     {
         Name = "奇美拉毒液",
@@ -915,7 +915,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNCorrosiveBreath.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {75, 450, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl"}
+        Val = { 75, 450, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl" }
     },
     {
         Name = "蛙毒",
@@ -923,7 +923,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Forg.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {80, 900, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl"}
+        Val = { 80, 900, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl" }
     },
     {
         Name = "外界毒虫",
@@ -931,7 +931,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_PoisonElemental.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100, 1500, 4, "war3mapImported\\eff_HydraCorrosiveGroundEffectV054.mdl"}
+        Val = { 100, 1500, 4, "war3mapImported\\eff_HydraCorrosiveGroundEffectV054.mdl" }
     },
     {
         Name = "剧毒虾皮细胞",
@@ -939,7 +939,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Gizmo_FelIronBomb.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {100, 1700, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl"}
+        Val = { 100, 1700, 3, "Abilities\\Spells\\NightElf\\CorrosiveBreath\\ChimaeraAcidTargetArt.mdl" }
     },
     {
         Name = "燃油烧弹",
@@ -947,7 +947,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNLiquidFire.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {75, 155, 3, "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"}
+        Val = { 75, 155, 3, "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl" }
     },
     {
         Name = "三昧真火",
@@ -955,7 +955,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_SummerFest_FireSpirit.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {75, 999, 10, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl"}
+        Val = { 75, 999, 10, "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl" }
     },
     {
         Name = "撕咬",
@@ -963,7 +963,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Druid_PrimalTenacity.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {80, 2775, 2, "Objects\\Spawnmodels\\Human\\HumanBlood\\BloodElfSpellThiefBlood.mdl"}
+        Val = { 80, 2775, 2, "Objects\\Spawnmodels\\Human\\HumanBlood\\BloodElfSpellThiefBlood.mdl" }
     },
     {
         Name = "无声的死亡旋律",
@@ -971,7 +971,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_CorpseExplode.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100, 2500, 3, "Objects\\Spawnmodels\\Human\\HumanBlood\\BloodElfSpellThiefBlood.mdl"}
+        Val = { 100, 2500, 3, "Objects\\Spawnmodels\\Human\\HumanBlood\\BloodElfSpellThiefBlood.mdl" }
     },
     {
         Name = "鬼歌",
@@ -979,7 +979,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_ConeOfSilence.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {50, 5, 10, "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl"}
+        Val = { 50, 5, 10, "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl" }
     },
     {
         Name = "震荡光弹",
@@ -987,7 +987,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Arcane_MassDispel.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {30, 0, 2, "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl"}
+        Val = { 30, 0, 2, "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl" }
     },
     {
         Name = "暴力倾向",
@@ -995,7 +995,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Frost_IceFloes.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {55, 0, 0.75}
+        Val = { 55, 0, 0.75 }
     },
     {
         Name = "魅惑",
@@ -1003,7 +1003,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Hunter_MasterTactitian.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {16, 0, 3.5, "Abilities\\Spells\\NightElf\\Barkskin\\BarkSkinTarget.mdl"}
+        Val = { 16, 0, 3.5, "Abilities\\Spells\\NightElf\\Barkskin\\BarkSkinTarget.mdl" }
     },
     {
         Name = "沉痛打击",
@@ -1011,7 +1011,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_Vindication.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {26, 0, 3.5, "Abilities\\Spells\\Orc\\StasisTrap\\StasisTotemTarget.mdl"}
+        Val = { 26, 0, 3.5, "Abilities\\Spells\\Orc\\StasisTrap\\StasisTotemTarget.mdl" }
     },
     {
         Name = "旋风",
@@ -1019,7 +1019,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Cyclone.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {19, 300, 0.2, "Abilities\\Spells\\Other\\Tornado\\TornadoElementalSmall.mdl"}
+        Val = { 19, 300, 0.2, "Abilities\\Spells\\Other\\Tornado\\TornadoElementalSmall.mdl" }
     },
     {
         Name = "撸战棍",
@@ -1027,7 +1027,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_GrabTree.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {35, 600, 2.2, "war3mapImported\\eff_DustWindCirclefaster.mdl"}
+        Val = { 35, 600, 2.2, "war3mapImported\\eff_DustWindCirclefaster.mdl" }
     },
     {
         Name = "恍惚灯路",
@@ -1035,7 +1035,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Stimulate_lightning.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {35, 1250, 2.5, "war3mapImported\\eff_LifeAura.mdl"}
+        Val = { 35, 1250, 2.5, "war3mapImported\\eff_LifeAura.mdl" }
     },
     {
         Name = "晴天霹雳",
@@ -1043,7 +1043,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Stimulate_lightning.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {35, 2500, 0.5, "war3mapImported\\eff_empty_thunder.mdl"}
+        Val = { 35, 2500, 0.5, "war3mapImported\\eff_empty_thunder.mdl" }
     },
     {
         Name = "深情一吻",
@@ -1051,7 +1051,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Dizzy.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {35, 3500, 2.5, "war3mapImported\\eff_green_oil.mdl"}
+        Val = { 35, 3500, 2.5, "war3mapImported\\eff_green_oil.mdl" }
     },
     {
         Name = "固化时空",
@@ -1059,7 +1059,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Time_crack.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {30, 5}
+        Val = { 30, 5 }
     },
     {
         Name = "诡异闪电",
@@ -1067,7 +1067,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ChainLightning_red.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 350}
+        Val = { 25, 350 }
     },
     {
         Name = "狂异闪电",
@@ -1075,7 +1075,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ChainLightning_red.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 500}
+        Val = { 25, 500 }
     },
     {
         Name = "狂徒闪电",
@@ -1083,7 +1083,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ChainLightning_red.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {33, 2050}
+        Val = { 33, 2050 }
     },
     {
         Name = "痛苦链",
@@ -1091,7 +1091,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_CorpseExplode.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {20, 2500}
+        Val = { 20, 2500 }
     },
     {
         Name = "神灭斩",
@@ -1099,7 +1099,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Glyph.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {25, 4500}
+        Val = { 25, 4500 }
     },
     {
         Name = "风暴之锤",
@@ -1107,7 +1107,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNStormHammer.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {23, 2, 485}
+        Val = { 23, 2, 485 }
     },
     {
         Name = "离火之锤",
@@ -1115,7 +1115,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Stimulate_lightning.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 3, 765}
+        Val = { 25, 3, 765 }
     },
     {
         Name = "闪电雷霆",
@@ -1123,7 +1123,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ChainLightning.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {40, 3, 2025}
+        Val = { 40, 3, 2025 }
     },
     {
         Name = "闪电连链",
@@ -1131,7 +1131,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ChainLightning.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {45, 4, 3566}
+        Val = { 45, 4, 3566 }
     },
     {
         Name = "誓神劈愿",
@@ -1139,7 +1139,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Electrostatic_field2.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {50, 1, 4775}
+        Val = { 50, 1, 4775 }
     },
     {
         Name = "狂战士之血",
@@ -1147,7 +1147,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Berserker_Blood.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {20, 50, 4.5, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 20, 50, 4.5, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "鬼枪术",
@@ -1155,7 +1155,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_DwarvenLongRifle.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {27, 45, 5.5, "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl"}
+        Val = { 27, 45, 5.5, "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl" }
     },
     {
         Name = "追魂狩猎",
@@ -1163,7 +1163,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_FlamingArrows.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {25, 105, 10, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 25, 105, 10, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "狂魂狩猎",
@@ -1171,7 +1171,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_FlamingArrows.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {30, 210, 12, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 30, 210, 12, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "狂魂骑猎",
@@ -1179,7 +1179,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_FlamingArrows.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {35, 420, 14, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 35, 420, 14, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "噬魂",
@@ -1187,7 +1187,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Hunter_MasterTactitian.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {40, 500, 10, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 40, 500, 10, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "血性",
@@ -1195,7 +1195,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_LifeDrain.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {40, 50, 30, 3.0, "war3mapImported\\eff_flame_burning.mdl"}
+        Val = { 40, 50, 30, 3.0, "war3mapImported\\eff_flame_burning.mdl" }
     },
     {
         Name = "烈焰风暴",
@@ -1221,10 +1221,10 @@ TOWER_ABLI_SPX = {
         Buttonpos2 = 2,
         Val = {
             20,
-            400,
+            420,
             0.12,
-            1200,
-            13,
+            2000,
+            15,
             "war3mapImported\\eff_weather_laser.mdl",
             "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeDamageTarget.mdl"
         }
@@ -1237,7 +1237,7 @@ TOWER_ABLI_SPX = {
         Buttonpos2 = 2,
         Val = {
             25,
-            2200,
+            2300,
             200,
             2,
             "move",
@@ -1359,7 +1359,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ImmolationOn.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1500}
+        Val = { 1500 }
     },
     {
         Name = "猎手幻刀",
@@ -1367,7 +1367,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ThrowingKnife_06.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1700}
+        Val = { 1700 }
     },
     {
         Name = "觉醒幻刀",
@@ -1375,7 +1375,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ThrowingKnife_06.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {3300}
+        Val = { 3300 }
     },
     {
         Name = "究极幻刀",
@@ -1383,7 +1383,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_ThrowingKnife_06.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {4900}
+        Val = { 4900 }
     },
     {
         Name = "冥冥斩击",
@@ -1391,7 +1391,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_UV_radiation.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {6666}
+        Val = { 6666 }
     },
     {
         Name = "剑刃风暴",
@@ -1861,7 +1861,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_Haunting.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {3}
+        Val = { 3 }
     },
     {
         Name = "同葬",
@@ -1869,7 +1869,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Creature_Cursed_05.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {3.5}
+        Val = { 3.5 }
     },
     {
         Name = "引路人",
@@ -1877,7 +1877,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_Stoicism.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {4}
+        Val = { 4 }
     },
     {
         Name = "羊蹄子",
@@ -1885,7 +1885,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Mount_Dreadsteed.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {4.2}
+        Val = { 4.2 }
     },
     {
         Name = "必死宣言",
@@ -1893,7 +1893,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_SymbolOfHope.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {5}
+        Val = { 5 }
     },
     {
         Name = "皮糙",
@@ -1901,7 +1901,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNDrum.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {1000},
+        Val = { 1000 },
         ODK = true
     },
     {
@@ -1910,7 +1910,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNDrum.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {2200},
+        Val = { 2200 },
         ODK = true
     },
     {
@@ -1919,7 +1919,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_AvengersShield.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {13000},
+        Val = { 13000 },
         ODK = true
     },
     {
@@ -1928,7 +1928,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Nature_HealingTouch.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {50000},
+        Val = { 50000 },
         ODK = true
     },
     {
@@ -1937,7 +1937,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNThickFur.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {20},
+        Val = { 20 },
         ODK = true
     },
     {
@@ -1946,7 +1946,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Invulnerable.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {44},
+        Val = { 44 },
         ODK = true
     },
     {
@@ -1955,7 +1955,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_GreaterBlessingofWisdom.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {75},
+        Val = { 75 },
         ODK = true
     },
     {
@@ -1964,7 +1964,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_AvengersShield.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {70},
+        Val = { 70 },
         ODK = true
     },
     {
@@ -1973,7 +1973,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Rogue_NervesOfSteel.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {150},
+        Val = { 150 },
         ODK = true
     },
     {
@@ -1982,7 +1982,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Elemental_Crystal_Shadow.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {290},
+        Val = { 290 },
         ODK = true
     },
     {
@@ -1991,7 +1991,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_Power.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {200, 60},
+        Val = { 200, 60 },
         ODK = true
     },
     {
@@ -2000,7 +2000,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_DivineHymn.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {22},
+        Val = { 22 },
         ODK = true
     },
     {
@@ -2009,7 +2009,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Elemental_Crystal_Shadow.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {45},
+        Val = { 45 },
         ODK = true
     },
     {
@@ -2018,7 +2018,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Helmet_69.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {101},
+        Val = { 101 },
         ODK = true
     },
     {
@@ -2027,7 +2027,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Rogue_DeadenedNerves.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {275},
+        Val = { 275 },
         ODK = true
     },
     {
@@ -2036,7 +2036,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Ability_Druid_NaturalPerfection.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1300},
+        Val = { 1300 },
         ODK = true
     },
     {
@@ -2045,7 +2045,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_ChillTouch.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {2550},
+        Val = { 2550 },
         ODK = true
     },
     {
@@ -2054,7 +2054,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNThornShield.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {2.1},
+        Val = { 2.1 },
         ODK = true
     },
     {
@@ -2063,7 +2063,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_Riki.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {23},
+        Val = { 23 },
         ODK = true
     },
     {
@@ -2072,7 +2072,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shame.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {33},
+        Val = { 33 },
         ODK = true
     },
     {
@@ -2081,7 +2081,7 @@ TOWER_ABLI_SPX = {
         Art = "ReplaceableTextures\\PassiveButtons\\PASBTNEvasion.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {37},
+        Val = { 37 },
         ODK = true
     },
     {
@@ -2090,7 +2090,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Inextricable.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {40},
+        Val = { 40 },
         ODK = true
     },
     {
@@ -2099,7 +2099,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Nature_NatureBlessing.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {45},
+        Val = { 45 },
         ODK = true
     },
     {
@@ -2108,7 +2108,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Undercurrent_white_light.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {58},
+        Val = { 58 },
         ODK = true
     },
     {
@@ -2117,7 +2117,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Frost_FrozenCore.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {50},
+        Val = { 50 },
         ODK = true
     },
     {
@@ -2126,7 +2126,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_UpgradeRegenerationAura.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {90},
+        Val = { 90 },
         ODK = true
     },
     {
@@ -2135,7 +2135,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Arcane_Arcane04.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {65},
+        Val = { 65 },
         ODK = true
     },
     {
@@ -2144,7 +2144,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Rogue_DeadenedNerves.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {100},
+        Val = { 100 },
         ODK = true
     },
     {
@@ -2153,7 +2153,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Arcane_TeleportMoonglade.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {33},
+        Val = { 33 },
         ODK = true
     },
     {
@@ -2162,7 +2162,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Shadow_ImprovedVampiricEmbrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {25, 10, 2.5},
+        Val = { 25, 10, 2.5 },
         ODK = true
     },
     {
@@ -2171,7 +2171,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Arcane_PrismaticCloak.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 1,
-        Val = {100},
+        Val = { 100 },
         ODK = true
     },
     {
@@ -2180,7 +2180,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Spell_Holy_UnyieldingFaith.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {20, 2.5},
+        Val = { 20, 2.5 },
         ODK = true
     },
     {
@@ -2189,7 +2189,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_ShadowEmbrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {35, 65, 2.5},
+        Val = { 35, 65, 2.5 },
         ODK = true
     },
     {
@@ -2198,7 +2198,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Shadow_ShadowEmbrace.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {40, 70, 3.0},
+        Val = { 40, 70, 3.0 },
         ODK = true
     },
     {
@@ -2207,7 +2207,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Mace_40.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {40, 85, 3.0},
+        Val = { 40, 85, 3.0 },
         ODK = true
     },
     {
@@ -2216,7 +2216,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Helmet_73.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {1000},
+        Val = { 1000 },
         ODK = true
     },
     {
@@ -2225,7 +2225,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Holy_SummonChampion.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {20, 30},
+        Val = { 20, 30 },
         ODK = true
     },
     {
@@ -2234,7 +2234,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Nature_HealingTouch.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {30, 50},
+        Val = { 30, 50 },
         ODK = true
     },
     {
@@ -2243,7 +2243,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Inextricable.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {20, 3.5},
+        Val = { 20, 3.5 },
         ODK = true
     },
     {
@@ -2252,7 +2252,7 @@ TOWER_ABLI_SPX = {
         Art = "war3mapImported\\icon_pas_Time_crack.blp",
         Buttonpos1 = 0,
         Buttonpos2 = 2,
-        Val = {25, 4.0},
+        Val = { 25, 4.0 },
         ODK = true
     }
 }
