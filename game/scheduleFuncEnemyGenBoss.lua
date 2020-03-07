@@ -37,7 +37,7 @@ bossGen = function(curWave)
                     avoid = "=" .. curWave * 0.18,
                     knocking_oppose = "=" .. curWave * 0.3,
                     violence_oppose = "=" .. curWave * 0.3,
-                    swim_oppose = "=" .. curWave * 0.2,
+                    swim_oppose = "=" .. curWave * 0.1,
                     fetter_oppose = "=" .. curWave * 0.2,
                     lightning_chain_oppose = "=" .. curWave * 0.1,
                     natural_fire_oppose = "=" .. curWave * 0.06,
