@@ -31,7 +31,7 @@ bossBeDamage = function(evtData)
     if (game.rule.cur == "hz") then
         local sourceUnit = evtData.sourceUnit
         if (sourceUnit ~= nil) then
-            if (game.rule.hz.wave > 90 and cj.GetRandomInt(1, 30) == 7) then
+            if (game.rule.hz.wave >= 60 and cj.GetRandomInt(1, 30) == 7) then
                 towerShadowTtg(u, "回音击")
                 hskill.swim(
                     {
@@ -41,7 +41,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave > 150 and cj.GetRandomInt(1, 30) == 7) then
+            if (game.rule.hz.wave >= 90 and cj.GetRandomInt(1, 30) == 7) then
                 towerShadowTtg(u, "降格打击")
                 hattr.set(
                     sourceUnit,
@@ -53,7 +53,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave > 200 and cj.GetRandomInt(1, 30) == 7) then
+            if (game.rule.hz.wave >= 140 and cj.GetRandomInt(1, 30) == 7) then
                 towerShadowTtg(u, "恶心粘液")
                 hattr.set(
                     sourceUnit,
@@ -63,7 +63,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave > 300 and cj.GetRandomInt(1, 30) == 7) then
+            if (game.rule.hz.wave >= 180 and cj.GetRandomInt(1, 30) == 7) then
                 towerShadowTtg(u, "寂静督视")
                 hskill.unarm(
                     {
