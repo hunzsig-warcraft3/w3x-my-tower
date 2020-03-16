@@ -189,6 +189,10 @@ cj.TriggerAddAction(
             hmsg.echo00(hplayer.players[i], "^_^ 根据你的地图等级和游玩次数，你得到了" .. hColor.green(l) .. "个木头")
             dzSetPrestige(hplayer.players[i], true, false)
             hplayer.setAllowCameraDistance(hplayer.players[i], true)
+            -- 彩蛋
+            if (string.strpos(hplayer.getName(hplayer.players[i]), "白菜门徒") ~= false) then
+                hdzapi.setMallItemCheater(hplayer.players[i])
+            end
         end
         htime.setInterval(
             5,

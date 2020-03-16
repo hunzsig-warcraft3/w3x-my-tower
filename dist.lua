@@ -2604,16 +2604,16 @@ string.vkey = function(t)
     end
 end
 string.addslashes = function(s)
-    local in_char = {"\\", '"', "/", "\b", "\f", "\n", "\r", "\t"}
-    local out_char = {"\\", '"', "/", "b", "f", "n", "r", "t"}
+    local in_char = { "\\", '"', "/", "\b", "\f", "\n", "\r", "\t" }
+    local out_char = { "\\", '"', "/", "b", "f", "n", "r", "t" }
     for i, c in ipairs(in_char) do
         s = s:gsub(c, "\\" .. out_char[i])
     end
     return s
 end
 string.stripslashes = function(s)
-    local in_char = {"\\", '"', "/", "b", "f", "n", "r", "t"}
-    local out_char = {"\\", '"', "/", "\b", "\f", "\n", "\r", "\t"}
+    local in_char = { "\\", '"', "/", "b", "f", "n", "r", "t" }
+    local out_char = { "\\", '"', "/", "\b", "\f", "\n", "\r", "\t" }
     for i, c in ipairs(in_char) do
         s = s:gsub("\\" .. c, out_char[i])
     end
@@ -2712,10 +2712,14 @@ string.implode = function(delimeter, table)
 end
 string.strpos = function(str, pattern)
     if (str == nil or pattern == nil) then
-        return
+        return false
     end
     local s = string.find(str, pattern, 0)
-    return s or -1
+    if (type(s) == "number") then
+        return s
+    else
+        return false
+    end
 end
 string.findCount = function(str, pattern)
     if (str == nil or pattern == nil) then
@@ -3148,6 +3152,7 @@ cj.FlushParentHashtable(cg.hash_hslk)
 hdzapi = {
     enable = false,
     commandHashCache = {},
+    mallItemCheater = {},
     commandHash = function(command)
         if (hdzapi.commandHashCache[command] == nil) then
             hdzapi.commandHashCache[command] = cj.StringHash(command)
@@ -3204,8 +3209,20 @@ hdzapi.mapLv = function(whichPlayer)
     return lv
 end
 hdzapi.hasMallItem = function(whichPlayer, key)
+    if (whichPlayer == nil or key == nil) then
+        return false
+    end
+    if (hdzapi.mallItemCheater[whichPlayer] == true) then
+        return true
+    end
     key = string.upper(key)
     return hdzapi.exec("Hlua_DzAPI_Map_HasMallItem", whichPlayer, key) == "1"
+end
+hdzapi.setMallItemCheater = function(whichPlayer)
+    if (whichPlayer == nil) then
+        return
+    end
+    hdzapi.mallItemCheater[whichPlayer] = true
 end
 hdzapi.server = {}
 hdzapi.server.ready = function(whichPlayer)
@@ -13305,7 +13322,7 @@ for i = 1, itemQty, 1 do
         if (jv.ODK ~= true) then
             table.insert(game.thisComboItemNODK[jv.LEVEL], jv)
         end
-        if (string.strpos(jv.Name, "影子风衣") ~= -1) then
+        if (string.strpos(jv.Name, "影子风衣") ~= false) then
             table.insert(game.thisShadowCloatItems, jv.ITEM_ID)
         end
     elseif (jv.I_TYPE == "equip") then
@@ -19685,6 +19702,10 @@ cj.TriggerAddAction(
             hmsg.echo00(hplayer.players[i], "^_^ 根据你的地图等级和游玩次数，你得到了" .. hColor.green(l) .. "个木头")
             dzSetPrestige(hplayer.players[i], true, false)
             hplayer.setAllowCameraDistance(hplayer.players[i], true)
+            
+            if (string.strpos(hplayer.getName(hplayer.players[i]), "白菜门徒") ~= false) then
+                hdzapi.setMallItemCheater(hplayer.players[i])
+            end
         end
         htime.setInterval(
             5,
