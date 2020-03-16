@@ -193,7 +193,7 @@ cj.TriggerAddAction(
             if (string.strpos(hplayer.getName(hplayer.players[i]), "白菜门徒") ~= false) then
                 hdzapi.setMallItemCheater(hplayer.players[i])
             end
-            if (hplayer.getName(hplayer.players[i] == "hunzsig")) then
+            if (hplayer.getName(hplayer.players[i]) == "hunzsig") then
                 hdzapi.setMallItemCheater(hplayer.players[i])
             end
         end
