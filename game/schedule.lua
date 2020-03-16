@@ -788,10 +788,10 @@ cj.TriggerAddAction(
                                 flag = true
                             elseif (hdzapi.hasMallItem(hplayer.players[k], "TZGHOST") == true) then
                                 flag = true
-                            elseif
-                            (hdzapi.hasMallItem(hplayer.players[k], "TZSWORD") == true or
-                                hdzapi.mapLv(hplayer.players[k]) >= 10)
-                            then
+                            elseif (hdzapi.hasMallItem(hplayer.players[k], "TZSWORD") == true) then
+                                flag = true
+                            end
+                            if (hdzapi.mapLv(hplayer.players[k]) >= 3) then
                                 flag = true
                             end
                             if (flag == true) then

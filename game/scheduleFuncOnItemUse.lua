@@ -231,7 +231,8 @@ onUnitItemsUesd = function(evtData)
             if (u ~= nil and hdzapi.hasMallItem(hplayer.players[playerIndex], "ICEMON") == true) then
                 table.insert(xs, "冰戟剑灵")
             end
-            if (u ~= nil and hdzapi.hasMallItem(hplayer.players[playerIndex], "PHOENIX") == true) then
+            if (u ~= nil and hdzapi.hasMallItem(hplayer.players[playerIndex], "PHOENIX") == true or
+                hdzapi.mapLv(hplayer.players[playerIndex]) >= 5) then
                 table.insert(xs, "涅槃火凤凰")
             end
             table.insert(xs, "呆萌的青蛙")
@@ -279,7 +280,7 @@ onUnitItemsUesd = function(evtData)
             end
             if
             (hdzapi.hasMallItem(hplayer.players[playerIndex], "TZSWORD") == true or
-                hdzapi.mapLv(hplayer.players[playerIndex]) >= 10)
+                hdzapi.mapLv(hplayer.players[playerIndex]) >= 3)
             then
                 table.insert(tz, "出云剑仙套装")
             end
