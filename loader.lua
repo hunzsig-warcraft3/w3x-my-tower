@@ -45,13 +45,6 @@ cj.SetPlayerColor(hplayer.players[4], CONST_PLAYER_COLOR.GREEN)
 -- 写点任务提醒玩家
 hquest.create(
     {
-        title = "群1040851943",
-        content = "有什么建议或者bug都可以来群反馈！",
-        icon = "ReplaceableTextures\\CommandButtons\\BTNPenguin.blp"
-    }
-)
-hquest.create(
-    {
         title = "我塔非凡极速入门",
         content = {
             " - 打怪捡石头，换塔学技能书",
@@ -108,7 +101,8 @@ hquest.create(
 -- 商店
 THIS_SHOPS = {}
 for spi, sp in ipairs(game.shopsConfig) do
-    THIS_SHOPS[spi] = hunit.create(
+    THIS_SHOPS[spi] =
+        hunit.create(
         {
             register = false,
             whichPlayer = game.ALLY_PLAYER,
