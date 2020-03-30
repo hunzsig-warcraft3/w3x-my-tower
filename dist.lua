@@ -4745,7 +4745,7 @@ hevent = {
                 }
             )
         end),
-        ickup = cj.Condition(function()
+        pickup = cj.Condition(function()
             local it = cj.GetManipulatedItem()
             local itId = string.id2char(cj.GetItemTypeId(it))
             if (hslk_global.itemsKV[itId] == nil) then
