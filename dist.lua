@@ -2312,7 +2312,8 @@ hRuntime = {
     camera = {},
     event = {
         register = {},
-        trigger = {}
+        trigger = {},
+        pool = {},
     },
     textTag = {},
     rect = {},
@@ -2377,6 +2378,30 @@ hRuntime.clear = function(handle)
     if (hRuntime.event.trigger[handle] ~= nil) then
         hRuntime.event.trigger[handle] = nil
     end
+    if (hRuntime.event.pool[handle] ~= nil) then
+        for _, p in ipairs(hRuntime.event.pool[handle]) do
+            local key = p.key
+            local poolIndex = p.poolIndex
+            hevent.POOL[key][poolIndex].stock = hevent.POOL[key][poolIndex].stock - 1
+            
+            if (hevent.POOL[key][poolIndex].stock == 0
+                and hevent.POOL[key][poolIndex].count > 0.5 * hevent.POOL_RED_LINE) then
+                cj.DisableTrigger(hevent.POOL[key][poolIndex].trigger)
+                cj.DestroyTrigger(hevent.POOL[key][poolIndex].trigger)
+                hevent.POOL[key][poolIndex] = -1
+            end
+            local e = 0
+            for _, v in ipairs(hevent.POOL[key]) do
+                if (v == -1) then
+                    e = e + 1
+                end
+            end
+            if (e == #hevent.POOL[key]) then
+                hevent.POOL[key] = {}
+            end
+        end
+        hRuntime.event.pool[handle] = nil
+    end
     if (hRuntime.textTag[handle] ~= nil) then
         hRuntime.textTag[handle] = nil
     end
@@ -2418,7 +2443,6 @@ hRuntime.clear = function(handle)
     end
 end
 for i = 1, bj_MAX_PLAYER_SLOTS, 1 do
-    local p = cj.Player(i - 1)
     
     hRuntime.is[i] = {}
     hRuntime.is[i].isComputer = true
@@ -2891,66 +2915,86 @@ end
 hColor.purple = function(str)
     return hColor.mixed(str, "ff59ff")
 end
-local txt = ""
-txt = txt .. "h-lua完全独立，不依赖任何游戏平台（如YDWE、JAPI、DzApi * 支持使用）"
-txt = txt .. "|n包含多样丰富的属性系统，可以轻松做出平时难以甚至不能做出的地图效果"
-txt = txt .. "|n内置多达几十种以上的自定义事件，轻松实现神奇的主动和被动效果"
-txt = txt .. "|n自带物品合成，免去自行编写的困惑。丰富的自定义技能模板"
-txt = txt .. "|n镜头、单位组、过滤器、背景音乐、天气等也应有尽有"
-txt = txt .. "|n想要了解更多，官方QQ群：325338043 官网教程：hlua.book.hunzsig.org"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "h-lua",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
-txt = ""
-txt = txt .. "-apm 查看你的APM数值"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "查看你的APM数值",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
-txt = ""
-txt = txt .. "+[number] 增加视距|n-[number] 减少视距"
-txt = txt .. "|n * 视距自动设置上下限，请放心设置"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "调整你的视距",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
-txt = ""
-txt = txt .. "-eff 开关特效"
-txt = txt .. "|n这个命令只有在单人时有效，可关闭大部分的特效"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "开关特效[单人]",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
-txt = ""
-txt = txt .. "当地图可以自主选择英雄时："
-txt = txt .. "-random 随机选择"
-txt = txt .. "|n-repick 重新选择"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "选择英雄指令",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
-txt = ""
-txt = txt .. "-apc 设定是否自动转换黄金为木头"
-txt = txt .. "|n获得黄金超过100万时，自动按照比率转换多余的部分为木头"
-txt = txt .. "|n如果超过时没有开启，会寄存下来，待开启再转换(上限1000万)"
-txt = txt .. "|n转换需要额外超过限度才生效"
-bj.CreateQuestBJ(
-    bj_QUESTTYPE_OPT_DISCOVERED,
-    "设定自动转金为木",
-    txt,
-    "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
-)
+hf9 = function(allow)
+    local txt = ""
+    txt = txt .. "h-lua完全独立，不依赖任何游戏平台（如YDWE、JAPI、DzApi * 支持使用）"
+    txt = txt .. "|n包含多样丰富的属性系统，可以轻松做出平时难以甚至不能做出的地图效果"
+    txt = txt .. "|n内置多达几十种以上的自定义事件，轻松实现神奇的主动和被动效果"
+    txt = txt .. "|n自带物品合成，免去自行编写的困惑。丰富的自定义技能模板"
+    txt = txt .. "|n镜头、单位组、过滤器、背景音乐、天气等也应有尽有"
+    txt = txt .. "|n想要了解更多，官方QQ群：325338043 官网教程：hlua.book.hunzsig.org"
+    bj.CreateQuestBJ(
+        bj_QUESTTYPE_OPT_DISCOVERED,
+        "h-lua",
+        txt,
+        "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+    )
+    if (#allow < 1) then
+        return
+    end
+    
+    if (table.includes('apm', allow)) then
+        txt = ""
+        txt = txt .. "-apm 查看你的APM数值"
+        bj.CreateQuestBJ(
+            bj_QUESTTYPE_OPT_DISCOVERED,
+            "查看你的APM数值",
+            txt,
+            "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+        )
+    end
+    
+    if (table.includes('sight', allow)) then
+        txt = ""
+        txt = txt .. "+[number] 增加视距|n-[number] 减少视距"
+        txt = txt .. "|n * 视距自动设置上下限，请放心设置"
+        bj.CreateQuestBJ(
+            bj_QUESTTYPE_OPT_DISCOVERED,
+            "调整你的视距",
+            txt,
+            "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+        )
+    end
+    
+    if (table.includes('eff', allow)) then
+        txt = ""
+        txt = txt .. "-eff 开关特效"
+        txt = txt .. "|n这个命令只有在单人时有效，可关闭大部分的特效"
+        bj.CreateQuestBJ(
+            bj_QUESTTYPE_OPT_DISCOVERED,
+            "开关特效[单人]",
+            txt,
+            "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+        )
+    end
+    
+    if (table.includes('hero', allow)) then
+        txt = ""
+        txt = txt .. "当地图可以自主选择英雄时："
+        txt = txt .. "-random 随机选择"
+        txt = txt .. "|n-repick 重新选择"
+        bj.CreateQuestBJ(
+            bj_QUESTTYPE_OPT_DISCOVERED,
+            "选择英雄指令",
+            txt,
+            "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+        )
+    end
+    
+    if (table.includes('apc', allow)) then
+        txt = ""
+        txt = txt .. "-apc 设定是否自动转换黄金为木头"
+        txt = txt .. "|n获得黄金超过100万时，自动按照比率转换多余的部分为木头"
+        txt = txt .. "|n如果超过时没有开启，会寄存下来，待开启再转换(上限1000万)"
+        txt = txt .. "|n转换需要额外超过限度才生效"
+        bj.CreateQuestBJ(
+            bj_QUESTTYPE_OPT_DISCOVERED,
+            "设定自动转金为木",
+            txt,
+            "ReplaceableTextures\\CommandButtons\\BTNTomeOfRetraining.blp"
+        )
+    end
+end
 local HSK = {
     COMMON = 99,
     PLAYER_MAP_LEVEL_AWARD_MAX = 100,
@@ -3416,7 +3460,7 @@ htime.timerInKernel = function(time, yourFunc, isInterval)
             true,
             function()
                 for k, v in ipairs(htime.kernel[space]) do
-                    if (v.enable == true) then
+                    if (v.running == true) then
                         v.remain = v.remain - space
                         if (v.remain <= 0) then
                             v.yourFunc(string.implode("_", { space, k }))
@@ -3424,7 +3468,7 @@ htime.timerInKernel = function(time, yourFunc, isInterval)
                                 v.remain = v.set
                             else
                                 
-                                v.enable = false
+                                v.running = false
                             end
                         end
                     end
@@ -3434,7 +3478,7 @@ htime.timerInKernel = function(time, yourFunc, isInterval)
     end
     local kernelClock = -1
     for k, v in ipairs(htime.kernel[space]) do
-        if (v.enable == false) then
+        if (v.running == false) then
             kernelClock = k
             break
         end
@@ -3443,7 +3487,7 @@ htime.timerInKernel = function(time, yourFunc, isInterval)
         table.insert(
             htime.kernel[space],
             {
-                enable = true,
+                running = true,
                 isInterval = isInterval,
                 set = time,
                 remain = time,
@@ -3453,7 +3497,7 @@ htime.timerInKernel = function(time, yourFunc, isInterval)
         kernelClock = #htime.kernel
     else
         htime.kernel[space][kernelClock] = {
-            enable = true,
+            running = true,
             isInterval = isInterval,
             set = time,
             remain = time,
@@ -3512,7 +3556,7 @@ htime.delTimer = function(t)
     elseif (type(t) == "string") then
         local k = htime.kernelInfo(t)
         if (htime.kernel[k[1]] ~= nil and htime.kernel[k[1]][k[2]] ~= nil) then
-            htime.kernel[k[1]][k[2]].enable = false
+            htime.kernel[k[1]][k[2]].running = false
         end
     end
 end
@@ -4646,7 +4690,219 @@ hcamera.setModel = function(bean)
         end
     end
 end
-hevent = {}
+hevent = {
+    POOL = {},
+    POOL_RED_LINE = 30000,
+    POOL_ACTIONS = {
+        damaged = cj.Condition(function()
+            local sourceUnit = cj.GetEventDamageSource()
+            local targetUnit = cj.GetTriggerUnit()
+            local damage = cj.GetEventDamage()
+            local oldLife = hunit.getCurLife(targetUnit)
+            if (damage > 0.125) then
+                hattr.set(targetUnit, 0, { life = "+" .. damage })
+                htime.setTimeout(
+                    0,
+                    function(t)
+                        htime.delTimer(t)
+                        hattr.set(targetUnit, 0, { life = "-" .. damage })
+                        hunit.setCurLife(targetUnit, oldLife)
+                        hskill.damage(
+                            {
+                                sourceUnit = sourceUnit,
+                                targetUnit = targetUnit,
+                                damage = damage,
+                                damageKind = "attack"
+                            }
+                        )
+                    end
+                )
+            end
+        end),
+        death = cj.Condition(function()
+            local u = cj.GetTriggerUnit()
+            local killer = hevent.getLastDamageUnit(u)
+            if (killer ~= nil) then
+                hplayer.addKill(cj.GetOwningPlayer(killer), 1)
+            end
+            
+            hevent.triggerEvent(
+                u,
+                CONST_EVENT.dead,
+                {
+                    triggerUnit = u,
+                    killer = killer
+                }
+            )
+            
+            hevent.triggerEvent(
+                killer,
+                CONST_EVENT.kill,
+                {
+                    triggerUnit = killer,
+                    killer = killer,
+                    targetUnit = u
+                }
+            )
+        end),
+        ickup = cj.Condition(function()
+            local it = cj.GetManipulatedItem()
+            local itId = string.id2char(cj.GetItemTypeId(it))
+            if (hslk_global.itemsKV[itId] == nil) then
+                
+                return
+            end
+            if (hRuntime.item[it] ~= nil and hRuntime.item[it].positionType == hitem.POSITION_TYPE.UNIT) then
+                
+                return
+            end
+            local u = cj.GetTriggerUnit()
+            local charges = cj.GetItemCharges(it)
+            local shadowItId = hitem.getShadowId(itId)
+            if (shadowItId == nil) then
+                if (hitem.getIsPowerUp(itId) == true) then
+                    
+                    local call = hitem.getTriggerCall(itId)
+                    if (call ~= nil and type(call) == "function") then
+                        call(u, it, itId, charges)
+                    end
+                    
+                    hevent.triggerEvent(
+                        u,
+                        CONST_EVENT.itemUsed,
+                        {
+                            triggerUnit = u,
+                            triggerItem = it
+                        }
+                    )
+                else
+                    
+                    hitem.del(it, 0)
+                    hitem.create(
+                        {
+                            itemId = itId,
+                            whichUnit = u,
+                            charges = charges,
+                            during = 0
+                        }
+                    )
+                end
+            else
+                
+                
+                hitem.del(it, 0)
+                
+                hitem.create(
+                    {
+                        itemId = shadowItId,
+                        whichUnit = u,
+                        charges = charges,
+                        during = 0
+                    }
+                )
+            end
+        end),
+        drop = cj.Condition(function()
+            local u = cj.GetTriggerUnit()
+            local it = cj.GetManipulatedItem()
+            local itId = string.id2char(cj.GetItemTypeId(it))
+            local faceId = hitem.getFaceId(itId)
+            local orderId = cj.OrderId("dropitem")
+            local charges = cj.GetItemCharges(it)
+            if (cj.GetUnitCurrentOrder(u) == orderId) then
+                if (hRuntime.item[it] ~= nil) then
+                    if (faceId ~= nil) then
+                        htime.setTimeout(
+                            0,
+                            function(t)
+                                htime.delTimer(t)
+                                local x = cj.GetItemX(it)
+                                local y = cj.GetItemX(it)
+                                hitem.del(it, 0)
+                                
+                                hitem.create(
+                                    {
+                                        itemId = faceId,
+                                        x = x,
+                                        y = y,
+                                        charges = charges,
+                                        during = 0
+                                    }
+                                )
+                            end
+                        )
+                    else
+                        hitem.setPositionType(it, hitem.POSITION_TYPE.COORDINATE)
+                    end
+                end
+                hitem.subAttribute(u, itId, charges)
+            end
+        end),
+        pawn = cj.Condition(function()
+            
+            local u = cj.GetTriggerUnit()
+            local it = cj.GetSoldItem()
+            local goldcost = hitem.getGoldCost(it)
+            local lumbercost = hitem.getLumberCost(it)
+            hRuntime.clear(it)
+            if (goldcost ~= 0 or lumbercost ~= 0) then
+                local p = cj.GetOwningPlayer(u)
+                local sellRatio = hplayer.getSellRatio(u)
+                if (sellRatio ~= 50) then
+                    if (sellRatio < 0) then
+                        sellRatio = 0
+                    elseif (sellRatio > 1000) then
+                        sellRatio = 1000
+                    end
+                    local tempRatio = sellRatio - 50.0
+                    local tempGold = math.floor(goldcost * tempRatio * 0.01)
+                    local tempLumber = math.floor(lumbercost * tempRatio * 0.01)
+                    if (goldcost ~= 0 and tempGold ~= 0) then
+                        hplayer.addGold(p, tempGold)
+                    end
+                    if (lumbercost ~= 0 and tempLumber ~= 0) then
+                        hplayer.addLumber(p, tempLumber)
+                    end
+                end
+            end
+        end),
+        use = cj.Condition(function()
+            local u = cj.GetTriggerUnit()
+            local it = cj.GetManipulatedItem()
+            local itId = cj.GetItemTypeId(it)
+            local perishable = hitem.getIsPerishable(itId)
+            
+            if (perishable == false) then
+                hitem.setCharges(it, hitem.getCharges(it) + 1)
+            end
+            
+            local call = hitem.getTriggerCall(itId)
+            if (call ~= nil and type(call) == "function") then
+                call(u, it, itId, charges)
+            end
+            
+            hevent.triggerEvent(
+                u,
+                CONST_EVENT.itemUsed,
+                {
+                    triggerUnit = u,
+                    triggerItem = it
+                }
+            )
+            
+            if (perishable == true and hitem.getCharges(it) <= 0) then
+                hitem.del(it)
+            end
+        end),
+        separate = cj.Condition(function()
+            local u = cj.GetTriggerUnit()
+            local it = cj.GetManipulatedItem()
+            if (it ~= nil and cj.GetSpellAbilityId() == hitem.DEFAULT_SKILL_ITEM_SEPARATE) then
+                print_err("拆分物品尚未完成")
+            end
+        end),
+    },
+}
 hevent.set = function(handle, key, value)
     if (handle == nil) then
         print_stack()
@@ -4666,6 +4922,32 @@ hevent.get = function(handle, key)
         hRuntime.event[handle] = {}
     end
     return hRuntime.event[handle][key]
+end
+hevent.pool = function(u, key, action, cjEvent)
+    if (hevent.POOL[key] == nil) then
+        hevent.POOL[key] = {}
+    end
+    local poolIndex = #hevent.POOL[key]
+    if (poolIndex <= 0 or hevent.POOL[key][poolIndex].count >= hevent.POOL_RED_LINE) then
+        local tgr = cj.CreateTrigger()
+        table.insert(hevent.POOL[key], {
+            stock = 0,
+            count = 0,
+            trigger = tgr
+        })
+        cj.TriggerAddCondition(tgr, action)
+        poolIndex = #hevent.POOL[key]
+    end
+    if (hRuntime.event.pool[u] == nil) then
+        hRuntime.event.pool[u] = {}
+    end
+    table.insert(hRuntime.event.pool[u], {
+        key = key,
+        poolIndex = poolIndex,
+    })
+    hevent.POOL[key][poolIndex].count = hevent.POOL[key][poolIndex].count + 1
+    hevent.POOL[key][poolIndex].stock = hevent.POOL[key][poolIndex].stock + 1
+    cj.TriggerRegisterUnitEvent(hevent.POOL[key][poolIndex].trigger, u, cjEvent)
 end
 hevent.setLastDamageUnit = function(whichUnit, lastUnit)
     if (whichUnit == nil and lastUnit == nil) then
@@ -6618,78 +6900,13 @@ end
 haward.forPlayerLumber = function(lumber)
     haward.forPlayer(0, lumber)
 end
-hunit = {
-    TRIGGER_DAMAGED = nil,
-    TRIGGER_DEATH = nil
-}
+hunit = {}
 hunit.init = function()
-    
-    hunit.TRIGGER_DAMAGED = cj.CreateTrigger()
-    hunit.TRIGGER_DEATH = cj.CreateTrigger()
-    
-    cj.TriggerAddAction(
-        hunit.TRIGGER_DAMAGED,
-        function()
-            local sourceUnit = cj.GetEventDamageSource()
-            local targetUnit = cj.GetTriggerUnit()
-            local damage = cj.GetEventDamage()
-            local oldLife = hunit.getCurLife(targetUnit)
-            if (damage > 0.125) then
-                hattr.set(targetUnit, 0, {life = "+" .. damage})
-                htime.setTimeout(
-                    0,
-                    function(t)
-                        htime.delTimer(t)
-                        hattr.set(targetUnit, 0, {life = "-" .. damage})
-                        hunit.setCurLife(targetUnit, oldLife)
-                        hskill.damage(
-                            {
-                                sourceUnit = sourceUnit,
-                                targetUnit = targetUnit,
-                                damage = damage,
-                                damageKind = "attack"
-                            }
-                        )
-                    end
-                )
-            end
-        end
-    )
-    
-    cj.TriggerAddAction(
-        hunit.TRIGGER_DEATH,
-        function()
-            local u = cj.GetTriggerUnit()
-            local killer = hevent.getLastDamageUnit(u)
-            if (killer ~= nil) then
-                hplayer.addKill(cj.GetOwningPlayer(killer), 1)
-            end
-            
-            hevent.triggerEvent(
-                u,
-                CONST_EVENT.dead,
-                {
-                    triggerUnit = u,
-                    killer = killer
-                }
-            )
-            
-            hevent.triggerEvent(
-                killer,
-                CONST_EVENT.kill,
-                {
-                    triggerUnit = killer,
-                    killer = killer,
-                    targetUnit = u
-                }
-            )
-        end
-    )
     
     local period = 0.50
     htime.setInterval(
         period,
-        function(t)
+        function()
             for k, u in ipairs(hRuntime.attributeGroup.life_back) do
                 if (his.deleted(u) == true) then
                     table.remove(hRuntime.attributeGroup.life_back, k)
@@ -6713,12 +6930,12 @@ hunit.init = function()
     
     htime.setInterval(
         1.5,
-        function(t)
+        function()
             for k, u in ipairs(hRuntime.attributeGroup.punish) do
                 if (his.deleted(u) == true) then
                     table.remove(hRuntime.attributeGroup.punish, k)
                 elseif (his.alive(u) == true and his.damaging(u) == false) then
-                    hattr.set(u, 0, {punish_current = "+" .. (hattr.get(u, "punish") * 0.015)})
+                    hattr.set(u, 0, { punish_current = "+" .. (hattr.get(u, "punish") * 0.015) })
                 end
             end
         end
@@ -6795,6 +7012,9 @@ hunit.getFacing = function(u)
 end
 hunit.isOpenPunish = function(u)
     if (u == nil or hRuntime.unit[u]) then
+        return false
+    end
+    if (type(hRuntime.unit[u].isOpenPunish) ~= 'boolean') then
         return false
     end
     return hRuntime.unit[u].isOpenPunish
@@ -6880,7 +7100,7 @@ hunit.create = function(bean)
     if (bean.qty > 1) then
         g = cj.CreateGroup()
     end
-    for i = 1, bean.qty, 1 do
+    for _ = 1, bean.qty, 1 do
         if (bean.x ~= nil and bean.y ~= nil) then
             u = cj.CreateUnit(bean.whichPlayer, bean.unitId, bean.x, bean.y, facing)
         elseif (bean.loc ~= nil) then
@@ -6906,14 +7126,6 @@ hunit.create = function(bean)
         if (bean.opacity ~= nil and bean.opacity <= 1 and bean.opacity >= 0) then
             bean.opacity = math.round(bean.opacity)
             cj.SetUnitVertexColor(u, 255, 255, 255, 255 * bean.opacity)
-        end
-        
-        if (bean.life ~= nil and bean.life > 0) then
-            hunit.setPeriod(u, bean.life)
-        end
-        
-        if (bean.during ~= nil and bean.during >= 0) then
-            hunit.del(u, bean.during)
         end
         if (bean.attackX ~= nil and bean.attackY ~= nil) then
             cj.IssuePointOrder(u, "attack", bean.attackX, bean.attackY)
@@ -6955,35 +7167,41 @@ hunit.create = function(bean)
             end
         end
         
-        hRuntime.unit[u] = {
-            id = bean.unitId,
-            whichPlayer = bean.whichPlayer,
-            x = x,
-            y = y,
-            life = bean.life,
-            during = bean.during,
-            isOpenPunish = bean.isOpenPunish,
-            isShadow = bean.isShadow
-        }
-        
         if (type(bean.register) ~= "boolean") then
             bean.register = true
         end
         if (bean.register == true) then
             
-            cj.TriggerRegisterUnitEvent(hunit.TRIGGER_DAMAGED, u, EVENT_UNIT_DAMAGED)
-            cj.TriggerRegisterUnitEvent(hunit.TRIGGER_DEATH, u, EVENT_UNIT_DEATH)
+            hRuntime.unit[u] = {
+                id = bean.unitId,
+                whichPlayer = bean.whichPlayer,
+                x = x,
+                y = y,
+                life = bean.life,
+                during = bean.during,
+                isOpenPunish = bean.isOpenPunish,
+                isShadow = bean.isShadow
+            }
             
-            hattr.init(u)
+            hevent.pool(u, 'damaged', hevent.POOL_ACTIONS.damaged, EVENT_UNIT_DAMAGED)
+            
+            hevent.pool(u, 'death', hevent.POOL_ACTIONS.death, EVENT_UNIT_DEATH)
             
             if (his.hasSlot(u)) then
-                hitem.registerAll(u)
+                hitem.register(u)
             elseif (bean.isOpenSlot == true) then
                 hskill.add(u, hitem.DEFAULT_SKILL_ITEM_SLOT, 0)
-                hitem.registerAll(u)
+                hitem.register(u)
             end
-            
-            hRuntime.unit[u].init = 1
+        end
+        
+        if (bean.life ~= nil and bean.life > 0) then
+            hunit.setPeriod(u, bean.life)
+            hunit.del(u, bean.life + 1)
+        end
+        
+        if (bean.during ~= nil and bean.during >= 0) then
+            hunit.del(u, bean.during)
         end
     end
     if (g ~= nil) then
@@ -7169,7 +7387,7 @@ end
 henemy = {
     players = {}, 
     numbers = {}, 
-    numberLimit = 100000, 
+    numberLimit = 100, 
     name = "敌军",
     color = cj.ConvertPlayerColor(12),
     shareSight = false,
@@ -7196,35 +7414,47 @@ henemy.isShareSight = function()
     return false
 end
 henemy.setPlayer = function(whichPlayer)
+    if (table.includes(whichPlayer, henemy.players)) then
+        return
+    end
     table.insert(henemy.players, whichPlayer)
-    if (henemy.numbers[whichPlayer] == nil) then
-        henemy.numbers[whichPlayer] = 0
+    local index = hplayer.index(whichPlayer)
+    if (henemy.numbers[#henemy.players] == nil) then
+        henemy.numbers[#henemy.players] = 0
     end
     cj.SetPlayerName(whichPlayer, henemy.name)
     cj.SetPlayerColor(whichPlayer, henemy.getColor())
 end
+henemy.setPlayers = function(playerArray)
+    if (#playerArray < 1) then
+        return
+    end
+    for _, whichPlayer in ipairs(playerArray) do
+        henemy.setPlayer(whichPlayer)
+    end
+end
 henemy.getPlayer = function(createQty)
-    local len = #henemy.players
     local p
     if (createQty == nil) then
         createQty = 1
     else
         createQty = math.floor(createQty)
     end
-    for i = 1, len, 1 do
-        if (p == nil) then
-            p = henemy.players[i]
-        elseif (henemy.numbers[henemy.players[i]] < henemy.numbers[p]) then
-            p = henemy.players[i]
+    local tagI = 0
+    for i = 1, #henemy.players, 1 do
+        if (tagI == 0) then
+            tagI = i
+        elseif (henemy.numbers[i] < henemy.numbers[tagI]) then
+            tagI = i
         end
     end
-    henemy.numbers[p] = henemy.numbers[p] + createQty
-    if (henemy.numbers[p] > henemy.numberLimit) then
-        for i = 1, len, 1 do
-            henemy.numbers[henemy.players[i]] = 0
+    henemy.numbers[tagI] = henemy.numbers[tagI] + createQty
+    if (henemy.numbers[tagI] > henemy.numberLimit) then
+        for i = 1, #henemy.players, 1 do
+            henemy.numbers[i] = 0
         end
     end
-    return p
+    return henemy.players[tagI]
 end
 henemy.create = function(bean)
     bean.whichPlayer = henemy.getPlayer(bean.qty or 1)
@@ -11849,14 +12079,13 @@ hattr.reRegister = function(whichUnit)
     )
 end
 hitem = {
-    PRIVATE_TRIGGER = {},
+    DEFAULT_SKILL_ITEM_SLOT = string.char2id("AInv"), 
+    DEFAULT_SKILL_ITEM_SEPARATE = hslk_global.skill_item_separate, 
     POSITION_TYPE = {
         
         COORDINATE = "coordinate", 
         UNIT = "unit" 
     },
-    DEFAULT_SKILL_ITEM_SLOT = string.char2id("AInv"), 
-    DEFAULT_SKILL_ITEM_SEPARATE = hslk_global.skill_item_separate 
 }
 hitem.del = function(it, during)
     during = during or 0
@@ -12087,6 +12316,8 @@ hitem.setAllowSeparate = function(whichUnit)
     cj.UnitAddAbility(whichUnit, hitem.DEFAULT_SKILL_ITEM_SEPARATE)
     cj.UnitMakeAbilityPermanent(whichUnit, true, hitem.DEFAULT_SKILL_ITEM_SEPARATE)
     cj.SetUnitAbilityLevel(whichUnit, hitem.DEFAULT_SKILL_ITEM_SEPARATE, 1)
+    
+    hevent.pool(whichUnit, 'separate', hevent.POOL_ACTIONS.separate, EVENT_UNIT_SPELL_EFFECT)
 end
 hitem.caleAttribute = function(isAdd, whichUnit, itId, charges)
     if (isAdd == nil) then
@@ -12152,17 +12383,17 @@ hitem.caleAttribute = function(isAdd, whichUnit, itId, charges)
             }
         end
         if
-            (table.includes(
-                k,
-                {
-                    "gold_ratio",
-                    "lumber_ratio",
-                    "exp_ratio",
-                    "sell_ratio"
-                }
-            ))
-         then
-            table.insert(diffPlayer, {k, tonumber(tempDiff)})
+        (table.includes(
+            k,
+            {
+                "gold_ratio",
+                "lumber_ratio",
+                "exp_ratio",
+                "sell_ratio"
+            }
+        ))
+        then
+            table.insert(diffPlayer, { k, tonumber(tempDiff) })
         else
             diff[k] = tempDiff
         end
@@ -12300,7 +12531,7 @@ hitem.detector = function(whichUnit, it)
     else
         
         if (false) then
-        
+            
         end
     end
     if (isFullSlot) then
@@ -12467,20 +12698,19 @@ hitem.drop = function(origin)
         end
     end
 end
-hitem.registerAll = function(whichUnit)
-    if (hRuntime.unit[whichUnit] == nil) then
-        hRuntime.unit[whichUnit] = {}
-    end
-    if (hRuntime.unit[whichUnit].itemInit == nil) then
-        hRuntime.unit[whichUnit].itemInit = true
-    else
+hitem.register = function(u)
+    if (hRuntime.unit[u] == nil) then
+        
         return
     end
-    cj.TriggerRegisterUnitEvent(hitem.PRIVATE_TRIGGER.pickup, whichUnit, EVENT_UNIT_PICKUP_ITEM)
-    cj.TriggerRegisterUnitEvent(hitem.PRIVATE_TRIGGER.drop, whichUnit, EVENT_UNIT_DROP_ITEM)
-    cj.TriggerRegisterUnitEvent(hitem.PRIVATE_TRIGGER.pawn, whichUnit, EVENT_UNIT_PAWN_ITEM)
-    cj.TriggerRegisterUnitEvent(hitem.PRIVATE_TRIGGER.separate, whichUnit, EVENT_UNIT_SPELL_EFFECT)
-    cj.TriggerRegisterUnitEvent(hitem.PRIVATE_TRIGGER.use, whichUnit, EVENT_UNIT_USE_ITEM)
+    
+    hevent.pool(u, 'pickup', hevent.POOL_ACTIONS.pickup, EVENT_UNIT_PICKUP_ITEM)
+    
+    hevent.pool(u, 'drop', hevent.POOL_ACTIONS.drop, EVENT_UNIT_DROP_ITEM)
+    
+    hevent.pool(u, 'pawn', hevent.POOL_ACTIONS.pawn, EVENT_UNIT_PAWN_ITEM)
+    
+    hevent.pool(u, 'use', hevent.POOL_ACTIONS.use, EVENT_UNIT_USE_ITEM)
 end
 hitem.clearUnitCache = function(whichUnit)
     if (hRuntime.unit[whichUnit] ~= nil) then
@@ -12491,191 +12721,6 @@ hitem.clearUnitCache = function(whichUnit)
             end
         end
     end
-end
-hitem.init = function()
-    hitem.PRIVATE_TRIGGER = {
-        pickup = cj.CreateTrigger(),
-        drop = cj.CreateTrigger(),
-        pawn = cj.CreateTrigger(),
-        separate = cj.CreateTrigger(),
-        use = cj.CreateTrigger()
-    }
-    
-    cj.TriggerAddAction(
-        hitem.PRIVATE_TRIGGER.pickup,
-        function()
-            local it = cj.GetManipulatedItem()
-            local itId = string.id2char(cj.GetItemTypeId(it))
-            if (hslk_global.itemsKV[itId] == nil) then
-                
-                return
-            end
-            if (hRuntime.item[it] ~= nil and hRuntime.item[it].positionType == hitem.POSITION_TYPE.UNIT) then
-                
-                return
-            end
-            local u = cj.GetTriggerUnit()
-            local charges = cj.GetItemCharges(it)
-            local shadowItId = hitem.getShadowId(itId)
-            if (shadowItId == nil) then
-                if (hitem.getIsPowerUp(itId) == true) then
-                    
-                    local call = hitem.getTriggerCall(itId)
-                    if (call ~= nil and type(call) == "function") then
-                        call(u, it, itId, charges)
-                    end
-                    
-                    hevent.triggerEvent(
-                        u,
-                        CONST_EVENT.itemUsed,
-                        {
-                            triggerUnit = u,
-                            triggerItem = it
-                        }
-                    )
-                else
-                    
-                    hitem.del(it, 0)
-                    hitem.create(
-                        {
-                            itemId = itId,
-                            whichUnit = u,
-                            charges = charges,
-                            during = 0
-                        }
-                    )
-                end
-            else
-                
-                
-                hitem.del(it, 0)
-                
-                hitem.create(
-                    {
-                        itemId = shadowItId,
-                        whichUnit = u,
-                        charges = charges,
-                        during = 0
-                    }
-                )
-            end
-        end
-    )
-    
-    cj.TriggerAddAction(
-        hitem.PRIVATE_TRIGGER.drop,
-        function()
-            local u = cj.GetTriggerUnit()
-            local it = cj.GetManipulatedItem()
-            local itId = string.id2char(cj.GetItemTypeId(it))
-            local faceId = hitem.getFaceId(itId)
-            local orderId = cj.OrderId("dropitem")
-            local charges = cj.GetItemCharges(it)
-            if (cj.GetUnitCurrentOrder(u) == orderId) then
-                if (hRuntime.item[it] ~= nil) then
-                    if (faceId ~= nil) then
-                        htime.setTimeout(
-                            0,
-                            function(t)
-                                htime.delTimer(t)
-                                local x = cj.GetItemX(it)
-                                local y = cj.GetItemX(it)
-                                hitem.del(it, 0)
-                                
-                                hitem.create(
-                                    {
-                                        itemId = faceId,
-                                        x = x,
-                                        y = y,
-                                        charges = charges,
-                                        during = 0
-                                    }
-                                )
-                            end
-                        )
-                    else
-                        hitem.setPositionType(it, hitem.POSITION_TYPE.COORDINATE)
-                    end
-                end
-                hitem.subAttribute(u, itId, charges)
-            end
-        end
-    )
-    
-    
-    cj.TriggerAddAction(
-        hitem.PRIVATE_TRIGGER.pawn,
-        function()
-            local u = cj.GetTriggerUnit()
-            local it = cj.GetSoldItem()
-            local goldcost = hitem.getGoldCost(it)
-            local lumbercost = hitem.getLumberCost(it)
-            hRuntime.clear(it)
-            if (goldcost ~= 0 or lumbercost ~= 0) then
-                local p = cj.GetOwningPlayer(u)
-                local sellRatio = hplayer.getSellRatio(u)
-                if (sellRatio ~= 50) then
-                    if (sellRatio < 0) then
-                        sellRatio = 0
-                    elseif (sellRatio > 1000) then
-                        sellRatio = 1000
-                    end
-                    local tempRatio = sellRatio - 50.0
-                    local tempGold = math.floor(goldcost * tempRatio * 0.01)
-                    local tempLumber = math.floor(lumbercost * tempRatio * 0.01)
-                    if (goldcost ~= 0 and tempGold ~= 0) then
-                        hplayer.addGold(p, tempGold)
-                    end
-                    if (lumbercost ~= 0 and tempLumber ~= 0) then
-                        hplayer.addLumber(p, tempLumber)
-                    end
-                end
-            end
-        end
-    )
-    
-    cj.TriggerAddAction(
-        hitem.PRIVATE_TRIGGER.use,
-        function()
-            local u = cj.GetTriggerUnit()
-            local it = cj.GetManipulatedItem()
-            local itId = cj.GetItemTypeId(it)
-            local perishable = hitem.getIsPerishable(itId)
-            
-            if (perishable == false) then
-                hitem.setCharges(it, hitem.getCharges(it) + 1)
-            end
-            
-            local call = hitem.getTriggerCall(itId)
-            if (call ~= nil and type(call) == "function") then
-                call(u, it, itId, charges)
-            end
-            
-            hevent.triggerEvent(
-                u,
-                CONST_EVENT.itemUsed,
-                {
-                    triggerUnit = u,
-                    triggerItem = it
-                }
-            )
-            
-            if (perishable == true and hitem.getCharges(it) <= 0) then
-                hitem.del(it)
-            end
-        end
-    )
-    
-    cj.TriggerAddAction(
-        hitem.PRIVATE_TRIGGER.separate,
-        function()
-            local u = cj.GetTriggerUnit()
-            local it = cj.GetManipulatedItem()
-            if (it ~= nil and cj.GetSpellAbilityId() == hitem.DEFAULT_SKILL_ITEM_SEPARATE) then
-                print_err("拆分物品尚未完成")
-            end
-        end
-    )
 end
 hdialog = {
     trigger = nil
@@ -12958,11 +13003,9 @@ local u = cj.CreateUnit(hplayer.player_passive, hslk_global.unit_token, 0, 0, 0)
 hattr.regAllAbility(u)
 hunit.del(u)
 hplayer.init()
-hitem.init()
 hunit.init()
-if (cg.HLUA_DZAPI_FLAG == true) then
-    hdzapi.init()
-end
+hdzapi.init()
+hf9({ 'apm', 'sight', 'eff' })
 game = {
     ALLY_PLAYER = nil,
     TRIGGER_DE_POINT = nil,
@@ -13420,8 +13463,7 @@ hquest.create(
 )
 THIS_SHOPS = {}
 for spi, sp in ipairs(game.shopsConfig) do
-    THIS_SHOPS[spi] =
-        hunit.create(
+    THIS_SHOPS[spi] = hunit.create(
         {
             register = false,
             whichPlayer = game.ALLY_PLAYER,
