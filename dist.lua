@@ -2467,15 +2467,14 @@ math.random = function(n, m)
     if (n == m) then
         return n
     end
-    local fn = string.find(tostring(n), '.', 0)
-    local fm = string.find(tostring(m), '.', 0)
-    print("random", n, m, fn, fm)
+    local fn = string.find(tostring(n), "[.]", 0)
+    local fm = string.find(tostring(m), "[.]", 0)
     if (type(fn) ~= "number" and type(fm) ~= "number") then
         func = cj.GetRandomInt
         n = math.floor(n)
         m = math.floor(m)
     end
-    if (m > n) then
+    if (m < n) then
         return func(m, n)
     end
     return func(n, m)
@@ -19636,9 +19635,9 @@ htime.setInterval(
                         local y = game.towerPoint[pi][2] + game.towerLinkOffset[i][2]
                         cj.SetUnitPosition(game.playerTowerLink[pi][i].unit, x, y)
                     end
-                    if
-                    (game.playerTowerLink[pi] == nil or game.playerTowerLink[pi][i] == nil or
-                        his.alive(game.playerTowerLink[pi][i].unit) == false)
+                    if (game.playerTowerLink[pi] == nil
+                        or game.playerTowerLink[pi][i] == nil
+                        or his.alive(game.playerTowerLink[pi][i].unit) == false)
                     then
                         createMyTowerLink(pi, i)
                     end
@@ -19764,9 +19763,9 @@ cj.TriggerAddAction(
             5,
             function()
                 for i = 1, hplayer.qty_max, 1 do
-                    if
-                    (his.playing(hplayer.players[i]) == true and his.playerSite(hplayer.players[i]) == true and
-                        hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
+                    if (his.playing(hplayer.players[i]) == true
+                        and his.playerSite(hplayer.players[i]) == true
+                        and hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
                     then
                         hplayer.defeat(hplayer.players[i], "网络不稳定")
                         htime.setTimeout(
