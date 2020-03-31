@@ -3,7 +3,7 @@ require "game.scheduleFuncOnAwardBeDamage"
 -- 出兵(award)
 awardGenForOne = function(curWave, pi, awardMon)
     if (awardMon == nil) then
-        awardMon = game.thisEnemysAward[cj.GetRandomInt(1, game.thisEnemysAwardLen)]
+        awardMon = game.thisEnemysAward[math.random(1, game.thisEnemysAwardLen)]
     end
     local u =
         henemy.create(
@@ -66,7 +66,7 @@ awardGenForOne = function(curWave, pi, awardMon)
     end
 end
 awardGen = function(curWave)
-    local awardMon = game.thisEnemysAward[cj.GetRandomInt(1, game.thisEnemysAwardLen)]
+    local awardMon = game.thisEnemysAward[math.random(1, game.thisEnemysAwardLen)]
     for k, v in pairs(game.pathPoint) do
         if (hplayer.getStatus(hplayer.players[k]) == hplayer.player_status.gaming) then
             awardGenForOne(curWave, k, awardMon)

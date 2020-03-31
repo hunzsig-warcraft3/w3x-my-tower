@@ -2458,97 +2458,121 @@ for i = 1, bj_MAX_PLAYER_SLOTS, 1 do
     hRuntime.camera[i].model = "normal" 
     hRuntime.camera[i].isShocking = false
 end
-table.len = function(table)
-    local len = 0
-    for _, _ in pairs(table) do
-        len = len + 1
+math.random = function(n, m)
+    local func = cj.GetRandomReal
+    if (n == nil or m == nil) then
+        
+        return math.floor((func(0.000, 1.000) * 100) + 0.5) * 0.01
     end
-    return len
+    if (n == m) then
+        return n
+    end
+    local fn = string.find(tostring(n), '.', 0)
+    local fm = string.find(tostring(m), '.', 0)
+    print("random", n, m, fn, fm)
+    if (type(fn) ~= "number" and type(fm) ~= "number") then
+        func = cj.GetRandomInt
+        n = math.floor(n)
+        m = math.floor(m)
+    end
+    if (m > n) then
+        return func(m, n)
+    end
+    return func(n, m)
 end
-table.random = function(arr)
-    local val
-    if (#arr > 0) then
-        val = arr[math.random(1, #arr)]
+math.polarProjection = function(x, y, dist, angle)
+    return {
+        x = x + dist * math.cos(angle * bj_DEGTORAD),
+        y = y + dist * math.sin(angle * bj_DEGTORAD)
+    }
+end
+math.round = function(decimal)
+    return math.floor((decimal * 100) + 0.5) * 0.01
+end
+math.numberFormat = function(value)
+    local txt = ""
+    if (value > 10000 * 10000 * 10000 * 10000) then
+        txt = string.format("%.2f", value / 10000 * 10000 * 10000 * 10000) .. "亿亿"
+    elseif (value > 10000 * 10000 * 10000) then
+        txt = string.format("%.2f", value / 10000 * 10000 * 10000) .. "万亿"
+    elseif (value > 10000 * 10000) then
+        txt = string.format("%.2f", value / 10000 * 10000) .. "亿"
+    elseif (value > 10000) then
+        txt = string.format("%.2f", value / 10000) .. "万"
+    elseif (value > 1000) then
+        txt = string.format("%.2f", value / 1000) .. "千"
     else
-        print_err()
+        txt = string.format("%.2f", value)
     end
-    return val
+    return txt
 end
-table.clone = function(org)
-    local function copy(org1, res)
-        for _, v in ipairs(org1) do
-            if type(v) ~= "table" then
-                table.insert(res, v)
-            else
-                local rl = #res + 1
-                res[rl] = {}
-                copy(v, res[rl])
-            end
-        end
-    end
-    local res = {}
-    copy(org, res)
-    return res
+math.getDegBetweenXY = function(x1, y1, x2, y2)
+    return bj_RADTODEG * cj.Atan2(y2 - y1, x2 - x1)
 end
-table.merge = function(table1, table2)
-    local tempTable
-    if (table1 ~= nil) then
-        tempTable = table1
-    else
-        tempTable = {}
+math.getDegBetweenLoc = function(l1, l2)
+    if (l1 == nil or l2 == nil) then
+        return 0
     end
-    if (table2 == nil) then
-        return tempTable
-    end
-    for _, v in ipairs(table2) do
-        table.insert(tempTable, v)
-    end
-    return tempTable
+    return math.getDegBetweenXY(cj.GetLocationX(l1), cj.GetLocationY(l1), cj.GetLocationX(l2), cj.GetLocationY(l2))
 end
-table.includes = function(val, arr)
-    local isin = false
-    if (val == nil or #arr <= 0) then
-        return isin
+math.getDegBetweenUnit = function(u1, u2)
+    if (u1 == nil or u2 == nil) then
+        return 0
     end
-    for _, v in ipairs(arr) do
-        if (v == val) then
-            isin = true
-            break
-        end
-    end
-    return isin
+    return math.getDegBetweenXY(cj.GetUnitX(u1), cj.GetUnitY(u1), cj.GetUnitX(u2), cj.GetUnitY(u2))
 end
-table.delete = function(val, arr, qty)
-    qty = qty or -1
-    local q = 0
-    for k, v in ipairs(arr) do
-        if (v == val) then
-            q = q + 1
-            table.remove(arr, k)
-            k = k - 1
-            if (qty ~= -1 and q >= qty) then
-                break
-            end
-        end
-    end
+math.getDistanceBetweenXY = function(x1, y1, x2, y2)
+    local dx = x2 - x1
+    local dy = y2 - y1
+    return cj.SquareRoot(dx * dx + dy * dy)
 end
-table.obj2arr = function(obj, keyMap)
-    if (keyMap == nil or type(keyMap) ~= "table" or #keyMap <= 0) then
-        return {}
+math.getDistanceBetweenLoc = function(l1, l2)
+    return math.getDistanceBetweenXY(cj.GetLocationX(l1), cj.GetLocationY(l1), cj.GetLocationX(l2), cj.GetLocationY(l2))
+end
+math.getDistanceBetweenUnit = function(u1, u2)
+    return math.getDistanceBetweenXY(cj.GetUnitX(u1), cj.GetUnitY(u1), cj.GetUnitX(u2), cj.GetUnitY(u2))
+end
+math.getMaxDistanceInRect = function(w, h, deg)
+    w = w or 0
+    h = h or 0
+    if (w <= 0 or h <= 0) then
+        return
     end
-    local arr = {}
-    for _, a in ipairs(keyMap) do
-        if (obj[a] ~= nil) then
-            table.insert(
-                arr,
-                {
-                    key = a,
-                    value = obj[a]
-                }
-            )
-        end
+    local distance = 0
+    local lockDegA = (180 * cj.Atan(h / w)) / bj_PI
+    local lockDegB = 90 - lockDegA
+    if (deg == 0 or deg == 180 or deg == -180) then
+        
+        distance = w
+    elseif (deg == 90 or deg == -90) then
+        
+        distance = h
+    elseif (deg > 0 and deg <= lockDegA) then
+        
+        distance = w / 2 / math.cos(deg * bj_DEGTORAD)
+    elseif (deg > lockDegA and deg < 90) then
+        
+        distance = h / 2 / math.cos(90 - deg * bj_DEGTORAD)
+    elseif (deg > 90 and deg <= 90 + lockDegB) then
+        
+        distance = h / 2 / math.cos((deg - 90) * bj_DEGTORAD)
+    elseif (deg > 90 + lockDegB and deg < 180) then
+        
+        distance = w / 2 / math.cos((180 - deg) * bj_DEGTORAD)
+    elseif (deg < 0 and deg >= -lockDegA) then
+        
+        distance = w / 2 / math.cos(deg * bj_DEGTORAD)
+    elseif (deg < lockDegA and deg > -90) then
+        
+        distance = h / 2 / math.cos((90 + deg) * bj_DEGTORAD)
+    elseif (deg < -90 and deg >= -90 - lockDegB) then
+        
+        distance = h / 2 / math.cos((-deg - 90) * bj_DEGTORAD)
+    elseif (deg < -90 - lockDegB and deg > -180) then
+        
+        distance = w / 2 / math.cos((180 + deg) * bj_DEGTORAD)
     end
-    return arr
+    return distance
 end
 string.char2id = function(idChar)
     if (idChar == nil or type(idChar) ~= "string") then
@@ -2764,99 +2788,97 @@ string.findCount = function(str, pattern)
     end
     return qty
 end
-math.polarProjection = function(x, y, dist, angle)
-    return {
-        x = x + dist * math.cos(angle * bj_DEGTORAD),
-        y = y + dist * math.sin(angle * bj_DEGTORAD)
-    }
+table.len = function(table)
+    local len = 0
+    for _, _ in pairs(table) do
+        len = len + 1
+    end
+    return len
 end
-math.round = function(decimal)
-    return math.floor((decimal * 100) + 0.5) * 0.01
-end
-math.numberFormat = function(value)
-    local txt = ""
-    if (value > 10000 * 10000 * 10000 * 10000) then
-        txt = string.format("%.2f", value / 10000 * 10000 * 10000 * 10000) .. "亿亿"
-    elseif (value > 10000 * 10000 * 10000) then
-        txt = string.format("%.2f", value / 10000 * 10000 * 10000) .. "万亿"
-    elseif (value > 10000 * 10000) then
-        txt = string.format("%.2f", value / 10000 * 10000) .. "亿"
-    elseif (value > 10000) then
-        txt = string.format("%.2f", value / 10000) .. "万"
-    elseif (value > 1000) then
-        txt = string.format("%.2f", value / 1000) .. "千"
+table.random = function(arr)
+    local val
+    if (#arr > 0) then
+        val = arr[math.random(1, #arr)]
     else
-        txt = string.format("%.2f", value)
+        print_err()
     end
-    return txt
+    return val
 end
-math.getDegBetweenXY = function(x1, y1, x2, y2)
-    return bj_RADTODEG * cj.Atan2(y2 - y1, x2 - x1)
-end
-math.getDegBetweenLoc = function(l1, l2)
-    if (l1 == nil or l2 == nil) then
-        return 0
+table.clone = function(org)
+    local function copy(org1, res)
+        for _, v in ipairs(org1) do
+            if type(v) ~= "table" then
+                table.insert(res, v)
+            else
+                local rl = #res + 1
+                res[rl] = {}
+                copy(v, res[rl])
+            end
+        end
     end
-    return math.getDegBetweenXY(cj.GetLocationX(l1), cj.GetLocationY(l1), cj.GetLocationX(l2), cj.GetLocationY(l2))
+    local res = {}
+    copy(org, res)
+    return res
 end
-math.getDegBetweenUnit = function(u1, u2)
-    if (u1 == nil or u2 == nil) then
-        return 0
+table.merge = function(table1, table2)
+    local tempTable
+    if (table1 ~= nil) then
+        tempTable = table1
+    else
+        tempTable = {}
     end
-    return math.getDegBetweenXY(cj.GetUnitX(u1), cj.GetUnitY(u1), cj.GetUnitX(u2), cj.GetUnitY(u2))
-end
-math.getDistanceBetweenXY = function(x1, y1, x2, y2)
-    local dx = x2 - x1
-    local dy = y2 - y1
-    return cj.SquareRoot(dx * dx + dy * dy)
-end
-math.getDistanceBetweenLoc = function(l1, l2)
-    return math.getDistanceBetweenXY(cj.GetLocationX(l1), cj.GetLocationY(l1), cj.GetLocationX(l2), cj.GetLocationY(l2))
-end
-math.getDistanceBetweenUnit = function(u1, u2)
-    return math.getDistanceBetweenXY(cj.GetUnitX(u1), cj.GetUnitY(u1), cj.GetUnitX(u2), cj.GetUnitY(u2))
-end
-math.getMaxDistanceInRect = function(w, h, deg)
-    w = w or 0
-    h = h or 0
-    if (w <= 0 or h <= 0) then
-        return
+    if (table2 == nil) then
+        return tempTable
     end
-    local distance = 0
-    local lockDegA = (180 * cj.Atan(h / w)) / bj_PI
-    local lockDegB = 90 - lockDegA
-    if (deg == 0 or deg == 180 or deg == -180) then
-        
-        distance = w
-    elseif (deg == 90 or deg == -90) then
-        
-        distance = h
-    elseif (deg > 0 and deg <= lockDegA) then
-        
-        distance = w / 2 / math.cos(deg * bj_DEGTORAD)
-    elseif (deg > lockDegA and deg < 90) then
-        
-        distance = h / 2 / math.cos(90 - deg * bj_DEGTORAD)
-    elseif (deg > 90 and deg <= 90 + lockDegB) then
-        
-        distance = h / 2 / math.cos((deg - 90) * bj_DEGTORAD)
-    elseif (deg > 90 + lockDegB and deg < 180) then
-        
-        distance = w / 2 / math.cos((180 - deg) * bj_DEGTORAD)
-    elseif (deg < 0 and deg >= -lockDegA) then
-        
-        distance = w / 2 / math.cos(deg * bj_DEGTORAD)
-    elseif (deg < lockDegA and deg > -90) then
-        
-        distance = h / 2 / math.cos((90 + deg) * bj_DEGTORAD)
-    elseif (deg < -90 and deg >= -90 - lockDegB) then
-        
-        distance = h / 2 / math.cos((-deg - 90) * bj_DEGTORAD)
-    elseif (deg < -90 - lockDegB and deg > -180) then
-        
-        distance = w / 2 / math.cos((180 + deg) * bj_DEGTORAD)
+    for _, v in ipairs(table2) do
+        table.insert(tempTable, v)
     end
-    return distance
+    return tempTable
+end
+table.includes = function(val, arr)
+    local isin = false
+    if (val == nil or #arr <= 0) then
+        return isin
+    end
+    for _, v in ipairs(arr) do
+        if (v == val) then
+            isin = true
+            break
+        end
+    end
+    return isin
+end
+table.delete = function(val, arr, qty)
+    qty = qty or -1
+    local q = 0
+    for k, v in ipairs(arr) do
+        if (v == val) then
+            q = q + 1
+            table.remove(arr, k)
+            k = k - 1
+            if (qty ~= -1 and q >= qty) then
+                break
+            end
+        end
+    end
+end
+table.obj2arr = function(obj, keyMap)
+    if (keyMap == nil or type(keyMap) ~= "table" or #keyMap <= 0) then
+        return {}
+    end
+    local arr = {}
+    for _, a in ipairs(keyMap) do
+        if (obj[a] ~= nil) then
+            table.insert(
+                arr,
+                {
+                    key = a,
+                    value = obj[a]
+                }
+            )
+        end
+    end
+    return arr
 end
 hColor = {
     mixed = function(str, color)
@@ -4158,41 +4180,41 @@ hweather.create = function(
 end
 henvData = {
     doodad = {
-        block = {"LTba"},
-        cage = {"LOcg"},
-        bucket = {"LTbr", "LTbx", "LTbs"},
-        bucketBrust = {"LTex"},
-        box = {"LTcr"},
-        supportColumn = {"BTsc"},
-        stone = {"LTrc"},
-        stoneRed = {"DTrc"},
-        stoneIce = {"ITcr"},
-        ice = {"ITf1", "ITf2", "ITf3", "ITf4"},
-        spiderEggs = {"DTes"},
-        volcano = {"Volc"}, 
-        treeSummer = {"LTlt"},
-        treeAutumn = {"FTtw"},
-        treeWinter = {"WTtw"},
-        treeWinterShow = {"WTst"},
-        treeDark = {"NTtw"}, 
-        treeDarkUmbrella = {"NTtc"}, 
-        treePoor = {"BTtw"}, 
-        treePoorUmbrella = {"BTtc"}, 
-        treeRuins = {"ZTtw"}, 
-        treeRuinsUmbrella = {"ZTtc"}, 
-        treeFire = {"ZTtw"}, 
-        treeUnderground = {"DTsh", "GTsh"} 
+        block = { "LTba" },
+        cage = { "LOcg" },
+        bucket = { "LTbr", "LTbx", "LTbs" },
+        bucketBrust = { "LTex" },
+        box = { "LTcr" },
+        supportColumn = { "BTsc" },
+        stone = { "LTrc" },
+        stoneRed = { "DTrc" },
+        stoneIce = { "ITcr" },
+        ice = { "ITf1", "ITf2", "ITf3", "ITf4" },
+        spiderEggs = { "DTes" },
+        volcano = { "Volc" }, 
+        treeSummer = { "LTlt" },
+        treeAutumn = { "FTtw" },
+        treeWinter = { "WTtw" },
+        treeWinterShow = { "WTst" },
+        treeDark = { "NTtw" }, 
+        treeDarkUmbrella = { "NTtc" }, 
+        treePoor = { "BTtw" }, 
+        treePoorUmbrella = { "BTtc" }, 
+        treeRuins = { "ZTtw" }, 
+        treeRuinsUmbrella = { "ZTtc" }, 
+        treeFire = { "ZTtw" }, 
+        treeUnderground = { "DTsh", "GTsh" } 
     },
     ground = {
-        summer = {"Adrg"},
-        autumn = {"Ydtr"},
-        winter = {"Agrs"},
-        winterDeep = {"Agrs"},
-        dark = {"Xblm"},
-        poor = {"Adrd"},
-        ruins = {"Xhdg"},
-        fire = {"Yblm"},
-        underground = {"Yrtl"}
+        summer = { "Adrg" },
+        autumn = { "Ydtr" },
+        winter = { "Agrs" },
+        winterDeep = { "Agrs" },
+        dark = { "Xblm" },
+        poor = { "Adrd" },
+        ruins = { "Xhdg" },
+        fire = { "Yblm" },
+        underground = { "Yrtl" }
     }
 }
 henv = {}
@@ -4238,7 +4260,7 @@ henv.build = function(whichRect, typeStr, excludeX, excludeY, isDestroyRect, gro
         function(t)
             local x = rectStartX + indexX * 80
             local y = rectStartY + indexY * 80
-            local buildType = cj.GetRandomInt(1, 4)
+            local buildType = math.random(1, 4)
             if (x >= rectEndX and y >= rectEndY) then
                 htime.delTimer(t)
                 if (isDestroyRect) then
@@ -4267,8 +4289,7 @@ henv.build = function(whichRect, typeStr, excludeX, excludeY, isDestroyRect, gro
                 return
             end
             if (buildType == 1) then
-                local tempUnit =
-                    cj.CreateUnit(
+                local tempUnit = cj.CreateUnit(
                     cj.Player(PLAYER_NEUTRAL_PASSIVE),
                     units[math.random(1, #units)],
                     x,
@@ -4282,8 +4303,8 @@ henv.build = function(whichRect, typeStr, excludeX, excludeY, isDestroyRect, gro
                         doodads[math.random(1, #doodads)],
                         x,
                         y,
-                        cj.GetRandomDirectionDeg(),
-                        cj.GetRandomReal(0.5, 1.1),
+                        math.random(0, 360),
+                        math.random(0.5, 1.1),
                         0
                     ),
                     true
@@ -6276,18 +6297,17 @@ hplayer.getRandomHero = function()
     if (#pi <= 0) then
         return nil
     end
-    local ri = cj.GetRandomInt(1, #pi)
+    local ri = math.random(1, #pi)
     return hhero.getPlayerUnit(
         hplayer.players[pi[ri]],
-        cj.GetRandomInt(1, hhero.getPlayerUnitQty(hplayer.players[pi[ri]]))
+        math.random(1, hhero.getPlayerUnitQty(hplayer.players[pi[ri]]))
     )
 end
 hplayer.hideUnit = function(whichPlayer)
     if (whichPlayer == nil) then
         return
     end
-    local g =
-        hgroup.createByRect(
+    local g = hgroup.createByRect(
         cj.GetWorldBounds(),
         function(filterUnit)
             return cj.GetOwningPlayer(filterUnit) == whichPlayer
@@ -6305,8 +6325,7 @@ hplayer.clearUnit = function(whichPlayer)
     if (whichPlayer == nil) then
         return
     end
-    local g =
-        hgroup.createByRect(
+    local g = hgroup.createByRect(
         cj.GetWorldBounds(),
         function(filterUnit)
             return cj.GetOwningPlayer(filterUnit) == whichPlayer
@@ -6730,9 +6749,9 @@ hplayer.init = function()
         hplayer.set(hplayer.players[i], "beDamage", 0)
         hplayer.set(hplayer.players[i], "kill", 0)
         if
-            ((cj.GetPlayerController(hplayer.players[i]) == MAP_CONTROL_USER) and
-                (cj.GetPlayerSlotState(hplayer.players[i]) == PLAYER_SLOT_STATE_PLAYING))
-         then
+        ((cj.GetPlayerController(hplayer.players[i]) == MAP_CONTROL_USER) and
+            (cj.GetPlayerSlotState(hplayer.players[i]) == PLAYER_SLOT_STATE_PLAYING))
+        then
             
             his.set(hplayer.players[i], "isComputer", false)
             
@@ -17693,11 +17712,11 @@ addTowerSkillsx = function(u)
 end
 enemyBeDamage = function(evtData)
     local u = evtData.triggerUnit
-    if (his.alive(u) and cj.GetRandomInt(1, 10) == 5) then
+    if (his.alive(u) and math.random(1, 10) == 5) then
         htextTag.style(
-            htextTag.create2Unit(u, game.enemyTips[cj.GetRandomInt(1, #game.enemyTips)], 10.00, "", 1, 1.1, 11.00),
+            htextTag.create2Unit(u, game.enemyTips[math.random(1, #game.enemyTips)], 10.00, "", 1, 1.1, 11.00),
             "scale",
-            cj.GetRandomReal(-0.05, 0.05),
+            math.random(-0.05, 0.05),
             0
         )
         heffect.bindUnit("Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl", u, "head", 2.50)
@@ -17994,7 +18013,7 @@ enemyDeadAward = function(triggerUnit, killer)
     local y = cj.GetUnitY(triggerUnit)
     hunit.del(triggerUnit, 2)
     
-    if (cj.GetRandomInt(1, 15) == 13) then
+    if (math.random(1, 15) == 13) then
         hunit.create(
             {
                 register = false,
@@ -18003,7 +18022,7 @@ enemyDeadAward = function(triggerUnit, killer)
                 qty = 1,
                 x = x,
                 y = y,
-                during = cj.GetRandomReal(20, 45)
+                during = math.random(20, 45)
             }
         )
     end
@@ -18021,14 +18040,13 @@ enemyDeadAward = function(triggerUnit, killer)
         curWave = game.rule.dk.wave[playerIndex]
     end
     
-    if (cj.GetRandomInt(1, 30) == 13 and curWave >= 2) then
+    if (math.random(1, 30) == 13 and curWave >= 2) then
         
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["blue"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["blue"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18042,8 +18060,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["blue"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["blue"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18056,14 +18073,13 @@ enemyDeadAward = function(triggerUnit, killer)
             end
         end
     end
-    if (cj.GetRandomInt(1, 60) == 27 and curWave >= 7) then
+    if (math.random(1, 60) == 27 and curWave >= 7) then
         
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["yellow"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["yellow"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18077,8 +18093,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["yellow"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["yellow"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18091,14 +18106,13 @@ enemyDeadAward = function(triggerUnit, killer)
             end
         end
     end
-    if (cj.GetRandomInt(1, 90) == 46 and curWave >= 19) then
+    if (math.random(1, 90) == 46 and curWave >= 19) then
         
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["purple"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["purple"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18112,8 +18126,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["purple"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["purple"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -18131,13 +18144,12 @@ enemyDeadAward = function(triggerUnit, killer)
         if (enemyDeadTowerDrop[playerIndex] == nil) then
             enemyDeadTowerDrop[playerIndex] = 2
         end
-        if (enemyDeadTowerDrop[playerIndex] < 10 or cj.GetRandomInt(1, enemyDeadTowerDrop[playerIndex]) == 1) then
+        if (enemyDeadTowerDrop[playerIndex] < 10 or math.random(1, enemyDeadTowerDrop[playerIndex]) == 1) then
             
             local targetTPow = getTowerPowLevel(curWave)
             if (game.thisOptionTowerPowerItem[targetTPow] ~= nil) then
                 local rand = table.random(game.thisOptionTowerPowerItem[targetTPow])
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = rand.ITEM_ID,
                         x = x,
@@ -18183,7 +18195,7 @@ enemyDeadDK = function(evtData)
         if (game.rule.dk.playerQty[pi] >= game.rule.dk.perWaveQty) then
             game.rule.dk.playerQty[pi] = 0
             game.rule.dk.wave[pi] = game.rule.dk.wave[pi] + 1
-            game.rule.dk.mon[pi] = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.dk.mon[pi] = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             
             if (math.fmod(game.rule.dk.wave[pi], 10) == 0) then
                 awardGenForOne(game.rule.dk.wave[pi], pi)
@@ -18205,11 +18217,11 @@ enemyDeadDK = function(evtData)
 end
 bossBeDamage = function(evtData)
     local u = evtData.triggerUnit
-    if (his.alive(u) and cj.GetRandomInt(1, 5) == 3) then
+    if (his.alive(u) and math.random(1, 5) == 3) then
         htextTag.style(
-            htextTag.create2Unit(u, game.enemyTips[cj.GetRandomInt(1, #game.enemyTips)], 10.00, "", 1, 1.1, 11.00),
+            htextTag.create2Unit(u, game.enemyTips[math.random(1, #game.enemyTips)], 10.00, "", 1, 1.1, 11.00),
             "scale",
-            cj.GetRandomReal(-0.05, 0.05),
+            math.random(-0.05, 0.05),
             0
         )
         heffect.bindUnit("Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl", u, "head", 2.50)
@@ -18235,7 +18247,7 @@ bossBeDamage = function(evtData)
     if (game.rule.cur == "hz") then
         local sourceUnit = evtData.sourceUnit
         if (sourceUnit ~= nil) then
-            if (game.rule.hz.wave >= 60 and cj.GetRandomInt(1, 30) == 7) then
+            if (game.rule.hz.wave >= 60 and math.random(1, 30) == 7) then
                 towerShadowTtg(u, "回音击")
                 hskill.swim(
                     {
@@ -18245,7 +18257,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave >= 90 and cj.GetRandomInt(1, 40) == 7) then
+            if (game.rule.hz.wave >= 90 and math.random(1, 40) == 7) then
                 towerShadowTtg(u, "降格打击")
                 hattr.set(
                     sourceUnit,
@@ -18257,7 +18269,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave >= 140 and cj.GetRandomInt(1, 50) == 7) then
+            if (game.rule.hz.wave >= 140 and math.random(1, 50) == 7) then
                 towerShadowTtg(u, "恶心粘液")
                 hattr.set(
                     sourceUnit,
@@ -18267,7 +18279,7 @@ bossBeDamage = function(evtData)
                     }
                 )
             end
-            if (game.rule.hz.wave >= 180 and cj.GetRandomInt(1, 60) == 7) then
+            if (game.rule.hz.wave >= 180 and math.random(1, 60) == 7) then
                 towerShadowTtg(u, "寂静督视")
                 hskill.unarm(
                     {
@@ -18324,7 +18336,7 @@ bossDead = function(evtData)
 end
 bossGenLife = 300
 bossGen = function(curWave)
-    local boss = game.thisEnemysBoss[cj.GetRandomInt(1, game.thisEnemysBossLen)].UNIT_ID
+    local boss = game.thisEnemysBoss[math.random(1, game.thisEnemysBossLen)].UNIT_ID
     local move = 120
     if (game.rule.cur == "hz") then
         move = move + curWave
@@ -18398,7 +18410,7 @@ end
 awardBeDamage = function(evtData)
     local u = evtData.triggerUnit
     local sourceUnit = evtData.sourceUnit
-    htextTag.style(htextTag.create2Unit(u, "哎呀~", 10.00, "", 1, 1.1, 11.00), "scale", cj.GetRandomReal(-0.05, 0.05), 0)
+    htextTag.style(htextTag.create2Unit(u, "哎呀~", 10.00, "", 1, 1.1, 11.00), "scale", math.random(-0.05, 0.05, true), 0)
     if (sourceUnit ~= nil) then
         local name = hunit.getName(u)
         local damage = evtData.damage
@@ -18411,7 +18423,7 @@ awardBeDamage = function(evtData)
 end
 awardGenForOne = function(curWave, pi, awardMon)
     if (awardMon == nil) then
-        awardMon = game.thisEnemysAward[cj.GetRandomInt(1, game.thisEnemysAwardLen)]
+        awardMon = game.thisEnemysAward[math.random(1, game.thisEnemysAwardLen)]
     end
     local u =
         henemy.create(
@@ -18474,7 +18486,7 @@ awardGenForOne = function(curWave, pi, awardMon)
     end
 end
 awardGen = function(curWave)
-    local awardMon = game.thisEnemysAward[cj.GetRandomInt(1, game.thisEnemysAwardLen)]
+    local awardMon = game.thisEnemysAward[math.random(1, game.thisEnemysAwardLen)]
     for k, v in pairs(game.pathPoint) do
         if (hplayer.getStatus(hplayer.players[k]) == hplayer.player_status.gaming) then
             awardGenForOne(curWave, k, awardMon)
@@ -18488,7 +18500,7 @@ enemyGenYB = function(waiting)
             htime.delTimer(t)
             hsound.sound(cg.gg_snd_effect_0004)
             local count = game.rule.yb.perWaveQty
-            game.rule.yb.mon = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.yb.mon = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             htime.setInterval(
                 game.rule.yb.fresh,
                 function(t2, td2)
@@ -18593,7 +18605,7 @@ enemyGenHZ = function(waiting)
             htime.delTimer(t)
             hsound.sound(cg.gg_snd_effect_0004)
             local count = game.rule.hz.perWaveQty
-            game.rule.hz.mon = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.hz.mon = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             htime.setInterval(
                 game.rule.hz.fresh,
                 function(t2, td2)
@@ -18683,7 +18695,7 @@ enemyGenDK = function(waiting)
                 if (hplayer.getStatus(hplayer.players[i]) == hplayer.player_status.gaming) then
                     game.rule.dk.playerQty[i] = 0
                     game.rule.dk.wave[i] = 1
-                    game.rule.dk.mon[i] = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+                    game.rule.dk.mon[i] = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
                     game.rule.dk.monLimit[i] = 0
                 end
             end
@@ -19625,9 +19637,9 @@ htime.setInterval(
                         cj.SetUnitPosition(game.playerTowerLink[pi][i].unit, x, y)
                     end
                     if
-                        (game.playerTowerLink[pi] == nil or game.playerTowerLink[pi][i] == nil or
-                            his.alive(game.playerTowerLink[pi][i].unit) == false)
-                     then
+                    (game.playerTowerLink[pi] == nil or game.playerTowerLink[pi][i] == nil or
+                        his.alive(game.playerTowerLink[pi][i].unit) == false)
+                    then
                         createMyTowerLink(pi, i)
                     end
                 end
@@ -19753,9 +19765,9 @@ cj.TriggerAddAction(
             function()
                 for i = 1, hplayer.qty_max, 1 do
                     if
-                        (his.playing(hplayer.players[i]) == true and his.playerSite(hplayer.players[i]) == true and
-                            hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
-                     then
+                    (his.playing(hplayer.players[i]) == true and his.playerSite(hplayer.players[i]) == true and
+                        hplayer.getLumber(hplayer.players[i]) > game.playerOriginLumber[i])
+                    then
                         hplayer.defeat(hplayer.players[i], "网络不稳定")
                         htime.setTimeout(
                             5.00,
@@ -19815,8 +19827,7 @@ cj.TriggerAddAction(
                     hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“大精灵”的生命，坚持100波胜利|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
                     
-                    local bigElf =
-                        hunit.create(
+                    local bigElf = hunit.create(
                         {
                             whichPlayer = game.ALLY_PLAYER,
                             unitId = game.thisUnits["大精灵"].UNIT_ID,
@@ -19888,10 +19899,10 @@ cj.TriggerAddAction(
                                                                 bigElf,
                                                                 "-" ..
                                                                     huntDmg ..
-                                                                        " " ..
-                                                                            game.bigElfTips[
-                                                                                cj.GetRandomInt(1, #game.bigElfTips)
-                                                                            ],
+                                                                    " " ..
+                                                                    game.bigElfTips[
+                                                                    math.random(1, #game.bigElfTips)
+                                                                    ],
                                                                 10.00,
                                                                 "ff0000",
                                                                 1,
@@ -19955,8 +19966,7 @@ cj.TriggerAddAction(
                         function(bl)
                             local bigElfLife = "GG"
                             if (his.alive(bigElf)) then
-                                bigElfLife =
-                                    hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
+                                bigElfLife = hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
                                     "/" .. math.floor(hunit.getMaxLife(bigElf))
                             end
                             hleaderBoard.setTitle(bl, "百波战力榜[" .. game.rule.yb.wave .. "波][精灵 " .. bigElfLife .. "]")
@@ -19979,8 +19989,7 @@ cj.TriggerAddAction(
                     game.rule.cur = "hz"
                     hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“光辉城主”的生命，玩到死机为止！|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
-                    local bigElf =
-                        hunit.create(
+                    local bigElf = hunit.create(
                         {
                             whichPlayer = game.ALLY_PLAYER,
                             unitId = game.thisUnits["光辉城主"].UNIT_ID,
@@ -20052,10 +20061,10 @@ cj.TriggerAddAction(
                                                                 bigElf,
                                                                 "-" ..
                                                                     game.rule.hz.wave ..
-                                                                        " " ..
-                                                                            game.bigElfTips[
-                                                                                cj.GetRandomInt(1, #game.bigElfTips)
-                                                                            ],
+                                                                    " " ..
+                                                                    game.bigElfTips[
+                                                                    math.random(1, #game.bigElfTips)
+                                                                    ],
                                                                 10.00,
                                                                 "ff0000",
                                                                 1,
@@ -20119,8 +20128,7 @@ cj.TriggerAddAction(
                         function(bl)
                             local bigElfLife = "GG"
                             if (his.alive(bigElf)) then
-                                bigElfLife =
-                                    hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
+                                bigElfLife = hColor.white(math.floor(hunit.getCurLife(bigElf))) ..
                                     "/" .. math.floor(hunit.getMaxLife(bigElf))
                             end
                             hleaderBoard.setTitle(bl, "无尽战力榜[" .. game.rule.hz.wave .. "波][城主 " .. bigElfLife .. "]")
@@ -20190,38 +20198,37 @@ cj.TriggerAddAction(
                                                         )
                                                     end
                                                     if
-                                                        (hplayer.getStatus(hplayer.players[k]) ==
-                                                            hplayer.player_status.gaming)
-                                                     then
-                                                        local hunt =
-                                                            15 * game.rule.dk.wave[playerIndex] +
+                                                    (hplayer.getStatus(hplayer.players[k]) ==
+                                                        hplayer.player_status.gaming)
+                                                    then
+                                                        local hunt = 15 * game.rule.dk.wave[playerIndex] +
                                                             2 * hhero.getCurLevel(game.playerTower[playerIndex])
                                                         if (hunt >= hunit.getCurLife(game.playerTower[k])) then
                                                             hunit.kill(game.playerTower[k], 0)
                                                             hmsg.echo(
                                                                 hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
                                                                     "被" ..
-                                                                        hColor.sky(
-                                                                            cj.GetPlayerName(
-                                                                                hplayer.players[playerIndex]
-                                                                            )
-                                                                        ) ..
-                                                                            "的" ..
-                                                                                hColor.yellow(slk.Name) .. "进攻，直接战败了~"
+                                                                    hColor.sky(
+                                                                        cj.GetPlayerName(
+                                                                            hplayer.players[playerIndex]
+                                                                        )
+                                                                    ) ..
+                                                                    "的" ..
+                                                                    hColor.yellow(slk.Name) .. "进攻，直接战败了~"
                                                             )
                                                         else
                                                             hunit.subCurLife(game.playerTower[k], hunt)
                                                             hmsg.echo(
                                                                 hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
                                                                     "被" ..
-                                                                        hColor.sky(
-                                                                            cj.GetPlayerName(
-                                                                                hplayer.players[playerIndex]
-                                                                            )
-                                                                        ) ..
-                                                                            "的" ..
-                                                                                hColor.yellow(slk.Name) ..
-                                                                                    "进攻，扣了" .. hColor.red(hunt) .. "血"
+                                                                    hColor.sky(
+                                                                        cj.GetPlayerName(
+                                                                            hplayer.players[playerIndex]
+                                                                        )
+                                                                    ) ..
+                                                                    "的" ..
+                                                                    hColor.yellow(slk.Name) ..
+                                                                    "进攻，扣了" .. hColor.red(hunt) .. "血"
                                                             )
                                                             heffect.toUnit(
                                                                 "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
@@ -20281,8 +20288,7 @@ cj.TriggerAddAction(
                         end
                     end
                     enemyGenDK(10)
-                    local bldk =
-                        hleaderBoard.create(
+                    local bldk = hleaderBoard.create(
                         "dk",
                         1,
                         function(bl)
@@ -20390,25 +20396,24 @@ cj.TriggerAddAction(
                         
                         local data = {}
                         local titData = {
-                            {value = "大佬", icon = "ReplaceableTextures\\CommandButtons\\BTNRiderlessHorse.blp"},
-                            {value = "称号", icon = "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention.blp"},
-                            {value = "状态", icon = "ReplaceableTextures\\CommandButtons\\BTNWellSpring.blp"},
-                            {value = "兵塔", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanBarracks.blp"},
-                            {value = "等级", icon = "ReplaceableTextures\\CommandButtons\\BTNAltarOfKings.blp"},
-                            {value = "攻击", icon = "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp"},
+                            { value = "大佬", icon = "ReplaceableTextures\\CommandButtons\\BTNRiderlessHorse.blp" },
+                            { value = "称号", icon = "ReplaceableTextures\\CommandButtons\\BTNDivineIntervention.blp" },
+                            { value = "状态", icon = "ReplaceableTextures\\CommandButtons\\BTNWellSpring.blp" },
+                            { value = "兵塔", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanBarracks.blp" },
+                            { value = "等级", icon = "ReplaceableTextures\\CommandButtons\\BTNAltarOfKings.blp" },
+                            { value = "攻击", icon = "ReplaceableTextures\\CommandButtons\\BTNThoriumMelee.blp" },
                             {
                                 value = "攻速",
                                 icon = "ReplaceableTextures\\CommandButtons\\BTNImprovedUnholyStrength.blp"
                             },
-                            {value = "命中", icon = "ReplaceableTextures\\CommandButtons\\BTNSteelRanged.blp"},
-                            {value = "增幅", icon = "ReplaceableTextures\\CommandButtons\\BTNControlMagic.blp"}
+                            { value = "命中", icon = "ReplaceableTextures\\CommandButtons\\BTNSteelRanged.blp" },
+                            { value = "增幅", icon = "ReplaceableTextures\\CommandButtons\\BTNControlMagic.blp" }
                         }
                         if (game.rule.cur == "dk") then
-                            titData =
-                                table.merge(
+                            titData = table.merge(
                                 titData,
                                 {
-                                    {value = "护甲", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp"},
+                                    { value = "护甲", icon = "ReplaceableTextures\\CommandButtons\\BTNHumanArmorUpOne.blp" },
                                     {
                                         value = "减伤",
                                         icon = "ReplaceableTextures\\CommandButtons\\BTNStoneArchitecture.blp"
@@ -20421,16 +20426,15 @@ cj.TriggerAddAction(
                                         value = "反伤",
                                         icon = "ReplaceableTextures\\CommandButtons\\BTNDefend.blp"
                                     },
-                                    {value = "回避", icon = "ReplaceableTextures\\CommandButtons\\BTNEnchantedCrows.blp"}
+                                    { value = "回避", icon = "ReplaceableTextures\\CommandButtons\\BTNEnchantedCrows.blp" }
                                 }
                             )
                         end
                         if (game.rule.dk.ai == true) then
-                            titData =
-                                table.merge(
+                            titData = table.merge(
                                 titData,
                                 {
-                                    {value = "黄金", icon = "ReplaceableTextures\\CommandButtons\\BTNChestOfGold.blp"}
+                                    { value = "黄金", icon = "ReplaceableTextures\\CommandButtons\\BTNChestOfGold.blp" }
                                 }
                             )
                         end
@@ -20451,23 +20455,22 @@ cj.TriggerAddAction(
                                     tower = game.playerTower[pi]
                                     avatar = hunit.getAvatar(tower)
                                     name = hunit.getName(tower)
-                                    attack =
-                                        math.floor(hattr.get(tower, "attack_white") + hattr.get(tower, "attack_green"))
+                                    attack = math.floor(hattr.get(tower, "attack_white") + hattr.get(tower, "attack_green"))
                                     attack_speed = math.round(hattr.get(tower, "attack_speed")) .. "%"
                                     damage_extent = math.round(hattr.get(tower, "damage_extent")) .. "%"
                                     aim = math.round(hattr.get(tower, "aim")) .. "%"
                                     tlv = "Lv." .. hhero.getCurLevel(tower)
                                 end
                                 local tempData = {
-                                    {value = cj.GetPlayerName(p), icon = nil},
-                                    {value = hplayer.getPrestige(p), icon = nil},
-                                    {value = hplayer.getStatus(p), icon = nil},
-                                    {value = name, icon = avatar},
-                                    {value = tlv, icon = nil},
-                                    {value = attack, icon = nil},
-                                    {value = attack_speed, icon = nil},
-                                    {value = aim, icon = nil},
-                                    {value = damage_extent, icon = nil}
+                                    { value = cj.GetPlayerName(p), icon = nil },
+                                    { value = hplayer.getPrestige(p), icon = nil },
+                                    { value = hplayer.getStatus(p), icon = nil },
+                                    { value = name, icon = avatar },
+                                    { value = tlv, icon = nil },
+                                    { value = attack, icon = nil },
+                                    { value = attack_speed, icon = nil },
+                                    { value = aim, icon = nil },
+                                    { value = damage_extent, icon = nil }
                                 }
                                 if (game.rule.cur == "dk") then
                                     local defend = "-"
@@ -20482,24 +20485,22 @@ cj.TriggerAddAction(
                                         damage_rebound = math.round(hattr.get(tower, "damage_rebound")) .. "%"
                                         avoid = math.round(hattr.get(tower, "avoid")) .. "%"
                                     end
-                                    tempData =
-                                        table.merge(
+                                    tempData = table.merge(
                                         tempData,
                                         {
-                                            {value = defend, icon = nil},
-                                            {value = toughness, icon = nil},
-                                            {value = resistance, icon = nil},
-                                            {value = damage_rebound, icon = nil},
-                                            {value = avoid, icon = nil}
+                                            { value = defend, icon = nil },
+                                            { value = toughness, icon = nil },
+                                            { value = resistance, icon = nil },
+                                            { value = damage_rebound, icon = nil },
+                                            { value = avoid, icon = nil }
                                         }
                                     )
                                 end
                                 if (game.rule.dk.ai == true) then
-                                    tempData =
-                                        table.merge(
+                                    tempData = table.merge(
                                         tempData,
                                         {
-                                            {value = math.floor(hplayer.getGold(p)), icon = nil}
+                                            { value = math.floor(hplayer.getGold(p)), icon = nil }
                                         }
                                     )
                                 end

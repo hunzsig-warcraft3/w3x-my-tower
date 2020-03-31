@@ -8,7 +8,7 @@ enemyDeadAward = function(triggerUnit, killer)
     local y = cj.GetUnitY(triggerUnit)
     hunit.del(triggerUnit, 2)
     -- 坟头草
-    if (cj.GetRandomInt(1, 15) == 13) then
+    if (math.random(1, 15) == 13) then
         hunit.create(
             {
                 register = false,
@@ -17,7 +17,7 @@ enemyDeadAward = function(triggerUnit, killer)
                 qty = 1,
                 x = x,
                 y = y,
-                during = cj.GetRandomReal(20, 45)
+                during = math.random(20, 45)
             }
         )
     end
@@ -35,14 +35,13 @@ enemyDeadAward = function(triggerUnit, killer)
         curWave = game.rule.dk.wave[playerIndex]
     end
     --
-    if (cj.GetRandomInt(1, 30) == 13 and curWave >= 2) then
+    if (math.random(1, 30) == 13 and curWave >= 2) then
         -- 掉落蓝技能书
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["blue"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["blue"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -56,8 +55,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["blue"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["blue"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -70,14 +68,13 @@ enemyDeadAward = function(triggerUnit, killer)
             end
         end
     end
-    if (cj.GetRandomInt(1, 60) == 27 and curWave >= 7) then
+    if (math.random(1, 60) == 27 and curWave >= 7) then
         -- 掉落黄技能书
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["yellow"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["yellow"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -91,8 +88,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["yellow"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["yellow"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -105,14 +101,13 @@ enemyDeadAward = function(triggerUnit, killer)
             end
         end
     end
-    if (cj.GetRandomInt(1, 90) == 46 and curWave >= 19) then
+    if (math.random(1, 90) == 46 and curWave >= 19) then
         -- 掉落紫技能书
         local tarBLv = getBookPowLevel(curWave)
         if (game.rule.cur == "dk") then
             if (#game.thisOptionAbilityItem["purple"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItem["purple"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -126,8 +121,7 @@ enemyDeadAward = function(triggerUnit, killer)
         else
             if (#game.thisOptionAbilityItemNODK["purple"][tarBLv] > 0) then
                 local itId = table.random(game.thisOptionAbilityItemNODK["purple"][tarBLv]).ITEM_ID
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = itId,
                         x = x,
@@ -145,13 +139,12 @@ enemyDeadAward = function(triggerUnit, killer)
         if (enemyDeadTowerDrop[playerIndex] == nil) then
             enemyDeadTowerDrop[playerIndex] = 2
         end
-        if (enemyDeadTowerDrop[playerIndex] < 10 or cj.GetRandomInt(1, enemyDeadTowerDrop[playerIndex]) == 1) then
+        if (enemyDeadTowerDrop[playerIndex] < 10 or math.random(1, enemyDeadTowerDrop[playerIndex]) == 1) then
             -- 掉落兵塔
             local targetTPow = getTowerPowLevel(curWave)
             if (game.thisOptionTowerPowerItem[targetTPow] ~= nil) then
                 local rand = table.random(game.thisOptionTowerPowerItem[targetTPow])
-                local it =
-                    hitem.create(
+                local it = hitem.create(
                     {
                         itemId = rand.ITEM_ID,
                         x = x,
@@ -203,7 +196,7 @@ enemyDeadDK = function(evtData)
         if (game.rule.dk.playerQty[pi] >= game.rule.dk.perWaveQty) then
             game.rule.dk.playerQty[pi] = 0
             game.rule.dk.wave[pi] = game.rule.dk.wave[pi] + 1
-            game.rule.dk.mon[pi] = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.dk.mon[pi] = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             --奖励的东东
             if (math.fmod(game.rule.dk.wave[pi], 10) == 0) then
                 awardGenForOne(game.rule.dk.wave[pi], pi)

@@ -2,7 +2,7 @@
 awardBeDamage = function(evtData)
     local u = evtData.triggerUnit
     local sourceUnit = evtData.sourceUnit
-    htextTag.style(htextTag.create2Unit(u, "哎呀~", 10.00, "", 1, 1.1, 11.00), "scale", cj.GetRandomReal(-0.05, 0.05), 0)
+    htextTag.style(htextTag.create2Unit(u, "哎呀~", 10.00, "", 1, 1.1, 11.00), "scale", math.random(-0.05, 0.05, true), 0)
     if (sourceUnit ~= nil) then
         local name = hunit.getName(u)
         local damage = evtData.damage

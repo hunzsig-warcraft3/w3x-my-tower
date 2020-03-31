@@ -11,7 +11,7 @@ enemyGenYB = function(waiting)
             htime.delTimer(t)
             hsound.sound(cg.gg_snd_effect_0004)
             local count = game.rule.yb.perWaveQty
-            game.rule.yb.mon = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.yb.mon = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             htime.setInterval(
                 game.rule.yb.fresh,
                 function(t2, td2)
@@ -116,7 +116,7 @@ enemyGenHZ = function(waiting)
             htime.delTimer(t)
             hsound.sound(cg.gg_snd_effect_0004)
             local count = game.rule.hz.perWaveQty
-            game.rule.hz.mon = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+            game.rule.hz.mon = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
             htime.setInterval(
                 game.rule.hz.fresh,
                 function(t2, td2)
@@ -206,7 +206,7 @@ enemyGenDK = function(waiting)
                 if (hplayer.getStatus(hplayer.players[i]) == hplayer.player_status.gaming) then
                     game.rule.dk.playerQty[i] = 0
                     game.rule.dk.wave[i] = 1
-                    game.rule.dk.mon[i] = game.thisEnemys[cj.GetRandomInt(1, game.thisEnemysLen)].UNIT_ID
+                    game.rule.dk.mon[i] = game.thisEnemys[math.random(1, game.thisEnemysLen)].UNIT_ID
                     game.rule.dk.monLimit[i] = 0
                 end
             end

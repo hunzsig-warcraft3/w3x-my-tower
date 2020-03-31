@@ -3,7 +3,7 @@ require "game.scheduleFuncOnBossDead"
 -- 出兵(boss)
 bossGenLife = 300
 bossGen = function(curWave)
-    local boss = game.thisEnemysBoss[cj.GetRandomInt(1, game.thisEnemysBossLen)].UNIT_ID
+    local boss = game.thisEnemysBoss[math.random(1, game.thisEnemysBossLen)].UNIT_ID
     local move = 120
     if (game.rule.cur == "hz") then
         move = move + curWave
