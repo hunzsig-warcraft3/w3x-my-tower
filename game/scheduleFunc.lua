@@ -153,8 +153,7 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
         end
         local isUnSelectable = (linkId == game.thisUnits["空位"].UNIT_ID)
         local isOpenSlot = (linkId ~= game.thisUnits["空位"].UNIT_ID)
-        local u =
-            hunit.create(
+        local u = hunit.create(
             {
                 whichPlayer = hplayer.players[playerIndex],
                 unitId = linkId,
@@ -199,7 +198,7 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
             )
             hevent.onAttack(u, onTowerAttack)
             hevent.onItemUsed(u, onUnitItemsUesd)
-            hevent.onSkillHappen(u, onTowerLinkSkillUesd)
+            hevent.onSkillEffect(u, onTowerLinkSkillUesd)
             --兵塔技能
             addTowerSkillsx(u)
             game.playerTowerLink[playerIndex][linkIndex].tower_level = unitLv
@@ -222,7 +221,7 @@ end
 -- 创造兵塔
 createMyTower = function(playerIndex, towerId, towerLevel)
     if (playerIndex == nil or towerId == nil or towerId == "") then
-        hmsg.echo("兵塔石出bug了")
+        echo("兵塔石出bug了")
         return nil
     end
     if (hplayer.getStatus(hplayer.players[playerIndex]) == hplayer.player_status.gaming) then
@@ -242,8 +241,7 @@ createMyTower = function(playerIndex, towerId, towerLevel)
             prevHeroLifePercent = hunit.getCurLifePercent(game.playerTower[playerIndex])
             cj.ShowUnit(game.playerTower[playerIndex], false)
         end
-        local u =
-            hunit.create(
+        local u = hunit.create(
             {
                 whichPlayer = hplayer.players[playerIndex],
                 unitId = towerId,
@@ -351,8 +349,7 @@ createMyCourier = function(playerIndex, courierId)
             x = game.courierPoint[playerIndex][1]
             y = game.courierPoint[playerIndex][2]
         end
-        local u =
-            hunit.create(
+        local u = hunit.create(
             {
                 whichPlayer = hplayer.players[playerIndex],
                 unitId = courierId,
@@ -369,7 +366,7 @@ createMyCourier = function(playerIndex, courierId)
             }
         )
         hevent.onItemUsed(u, onUnitItemsUesd)
-        hevent.onSkillHappen(u, onCourierSkillUesd)
+        hevent.onSkillEffect(u, onCourierSkillUesd)
         -- 如果有上一个单位，把上一个信使的物品给予新的信使，并删除它
         if (game.playerCourier[playerIndex] ~= nil) then
             hitem.copy(game.playerCourier[playerIndex], u)

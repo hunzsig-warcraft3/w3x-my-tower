@@ -22,6 +22,9 @@ towerShadowBeDamage = function(evtData)
     local playerIndex = hunit.getUserData(u)
     local shadow = game.playerTower[playerIndex]
     local hasShadowCloatItem = false
+    if (sourceUnit == nil) then
+        return
+    end
     for _, sctId in ipairs(game.thisShadowCloatItems) do
         if (his.ownItem(shadow, sctId) == true) then
             hasShadowCloatItem = true

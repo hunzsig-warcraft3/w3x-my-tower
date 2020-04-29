@@ -60,9 +60,9 @@ awardGenForOne = function(curWave, pi, awardMon)
     hevent.onDead(u, awardDead)
     hevent.onBeDamage(u, awardBeDamage)
     if (awardMon.Name == "大金币") then
-        hmark.create("war3mapImported\\mark_award_gold.blp", 4.00, hplayer.players[pi])
+        htexture.mark("war3mapImported\\mark_award_gold.blp", 4.00, hplayer.players[pi])
     elseif (awardMon.Name == "大本书") then
-        hmark.create("war3mapImported\\mark_award_exp.blp", 4.00, hplayer.players[pi])
+        htexture.mark("war3mapImported\\mark_award_exp.blp", 4.00, hplayer.players[pi])
     end
 end
 awardGen = function(curWave)

@@ -63,7 +63,7 @@ bossGen = function(curWave)
             hskill.add(u, game.effectModel["影子兵塔特效"].ABILITY_ID, 0)
         end
     end
-    hmark.create("war3mapImported\\mark_boss_coming.blp", 4.00)
+    htexture.mark("war3mapImported\\mark_boss_coming.blp", 4.00)
     if (game.rule.cur == "yb") then
         bossGenLife = bossGenLife + 200
     elseif (game.rule.cur == "hz") then

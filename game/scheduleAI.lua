@@ -57,7 +57,7 @@ MAYBE_AI = {
                 if (linkSite ~= nil) then
                     --补充空位
                     local u = createMyTowerLink(playerIndex, linkSite, game.towers[itemSLK.INDEX].UNIT_ID)
-                    hmsg.echo(
+                    echo(
                         hColor.sky(cj.GetPlayerName(hplayer.players[playerIndex])) ..
                             "召唤了辅塔：[" .. hColor.yellow(game.towers[itemSLK.INDEX].Name) .. "]"
                     )
@@ -83,14 +83,14 @@ MAYBE_AI = {
                         mini = mini - 1
                         if (mini == 0) then
                             local u = createMyTower(playerIndex, game.towers[itemSLK.INDEX].UNIT_ID)
-                            hmsg.echo(
+                            echo(
                                 hColor.sky(cj.GetPlayerName(hplayer.players[playerIndex])) ..
                                     "召唤了主塔：[" .. hColor.yellow(game.towers[itemSLK.INDEX].Name) .. "]"
                             )
                             addTowerSkillsRaceTeam(playerIndex)
                         else
                             local u = createMyTowerLink(playerIndex, mini, game.towers[itemSLK.INDEX].UNIT_ID)
-                            hmsg.echo(
+                            echo(
                                 hColor.sky(cj.GetPlayerName(hplayer.players[playerIndex])) ..
                                     "召唤了辅塔：[" .. hColor.yellow(game.towers[itemSLK.INDEX].Name) .. "]"
                             )
@@ -231,7 +231,7 @@ MAYBE_AI = {
                         local typei = math.random(1, 3)
                         local ts = {}
                         if (typei == 1) then
-                            hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("剑敕令!"))
+                            echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("剑敕令!"))
                             for pi = 1, 4, 1 do
                                 if
                                 (playerIndex ~= pi and
@@ -259,7 +259,7 @@ MAYBE_AI = {
                                 )
                             end
                         elseif (typei == 2) then
-                            hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("斧敕令!"))
+                            echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("斧敕令!"))
                             for pi = 1, 4, 1 do
                                 if
                                 (playerIndex ~= pi and
@@ -273,7 +273,7 @@ MAYBE_AI = {
                                 heffect.toUnit("war3mapImported\\eff_black_chain_flash.mdl", u, 0)
                             end
                         elseif (typei == 3) then
-                            hmsg.echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("锤敕令!"))
+                            echo(hplayer.getName(hplayer.players[playerIndex]) .. "发动了" .. hColor.red("锤敕令!"))
                             local hummarDur = 10 / 0.75
                             htime.setInterval(
                                 0.75,
@@ -292,7 +292,7 @@ MAYBE_AI = {
                                                 dmg = math.random(100, 76 * htime.min)
                                             end
                                             hunit.subCurLife(game.playerTower[pi], dmg)
-                                            hmsg.echo(
+                                            echo(
                                                 hColor.sky(cj.GetPlayerName(hplayer.players[pi])) ..
                                                     "被黑色悍马雷劈掉了" .. hColor.red(dmg) .. "血"
                                             )

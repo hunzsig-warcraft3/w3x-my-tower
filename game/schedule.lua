@@ -19,7 +19,7 @@ hevent.onPlayerLeave(
             if (isWin == 1) then
                 game.runing = false
                 dzSetPrestige(winner, false, true)
-                hmark.create("war3mapImported\\mark_win.blp", 4.00, winner)
+                htexture.mark("war3mapImported\\mark_win.blp", 4.00, winner)
                 hplayer.setStatus(winner, "胜利")
                 htime.setTimeout(
                     10.00,
@@ -121,7 +121,7 @@ dzSetPrestige = function(p, iscs, isss)
             local playerIndex = hplayer.index(p)
             dzSetLumber(p, 100 + game.rule.dk.wave[playerIndex])
         else
-            hmsg.echo00(p, hColor.green("温馨提示：由于本局游戏时间过短，本局的胜负不会被记录"))
+            echo(hColor.green("温馨提示：由于本局游戏时间过短，本局的胜负不会被记录"), p)
         end
     end
     local prestige
@@ -186,7 +186,7 @@ cj.TriggerAddAction(
             end
             game.playerOriginLumber[i] = l
             hplayer.setLumber(hplayer.players[i], l)
-            hmsg.echo00(hplayer.players[i], "^_^ 根据你的地图等级和游玩次数，你得到了" .. hColor.green(l) .. "个木头")
+            echo("^_^ 根据你的地图等级和游玩次数，你得到了" .. hColor.green(l) .. "个木头", hplayer.players[i])
             dzSetPrestige(hplayer.players[i], true, false)
             hplayer.setAllowCameraDistance(hplayer.players[i], true)
             -- 彩蛋
@@ -209,7 +209,7 @@ cj.TriggerAddAction(
                         htime.setTimeout(
                             5.00,
                             function()
-                                hmsg.echo(cj.GetPlayerName(hplayer.players[i]) .. "作弊了哦~系统干掉它了~")
+                                echo(cj.GetPlayerName(hplayer.players[i]) .. "作弊了哦~系统干掉它了~")
                             end
                         )
                     end
@@ -250,7 +250,7 @@ cj.TriggerAddAction(
         end
         table.insert(btns, TITLE_HZ)
         -- 第一玩家选择模式
-        hmsg.echo("第一个玩家正在选择（游戏模式）", 10)
+        echo("第一个玩家正在选择（游戏模式）", nil, 10)
         hdialog.create(
             nil,
             {
@@ -258,10 +258,10 @@ cj.TriggerAddAction(
                 buttons = btns
             },
             function(btnIdx)
-                hmsg.echo("选择了" .. btnIdx)
+                echo("选择了" .. btnIdx)
                 if (btnIdx == TITLE_YB) then
                     game.rule.cur = "yb"
-                    hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“大精灵”的生命，坚持100波胜利|r")
+                    echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“大精灵”的生命，坚持100波胜利|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
                     -- 大精灵
                     local bigElf = hunit.create(
@@ -277,8 +277,8 @@ cj.TriggerAddAction(
                         bigElf,
                         function()
                             game.runing = false
-                            hmsg.echo("不！“大精灵”GG了，结束啦~我们的守护")
-                            hmark.create("war3mapImported\\mark_defeat.blp", 4.00)
+                            echo("不！“大精灵”GG了，结束啦~我们的守护")
+                            htexture.mark("war3mapImported\\mark_defeat.blp", 4.00)
                             htime.setTimeout(
                                 10.00,
                                 function(t)
@@ -295,105 +295,100 @@ cj.TriggerAddAction(
                     for k, v in ipairs(game.pathPoint) do
                         for i, p in ipairs(v) do
                             local r = hrect.create(p[1], p[2], 100, 100, "rect" .. k .. i)
-                            local tg = cj.CreateTrigger()
-                            bj.TriggerRegisterEnterRectSimple(tg, r)
-                            cj.TriggerAddAction(
-                                tg,
-                                function()
-                                    if (his.enemyPlayer(cj.GetTriggerUnit(), game.ALLY_PLAYER)) then
-                                        if (i == #v) then
-                                            -- 最后一个
-                                            local uVal = cj.GetUnitUserData(cj.GetTriggerUnit())
-                                            if (uVal >= hplayer.qty_current - 1) then
-                                                heffect.toUnit(
-                                                    "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl",
-                                                    cj.GetTriggerUnit(),
-                                                    1
-                                                )
-                                                if (his.alive(bigElf)) then
-                                                    local slk = hunit.getSlk(cj.GetTriggerUnit())
-                                                    local type = slk.TYPE
-                                                    local huntDmg = 0
-                                                    if (type == "boss") then
-                                                        huntDmg = 3 * game.rule.yb.wave
-                                                    elseif (type == "normal") then
-                                                        huntDmg = game.rule.yb.wave
-                                                    end
-                                                    if (huntDmg > 0) then
-                                                        hmsg.echo(
-                                                            hColor.yellow(hunit.getName(cj.GetTriggerUnit())) ..
-                                                                "造成了" .. hColor.red(huntDmg) .. "伤害"
-                                                        )
-                                                        heffect.toUnit(
-                                                            "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
-                                                            bigElf,
-                                                            1
-                                                        )
-                                                        hunit.subCurLife(bigElf, huntDmg)
-                                                        cj.PingMinimapEx(x, y, 10, 255, 0, 0, false)
-                                                        htextTag.style(
-                                                            htextTag.create2Unit(
-                                                                bigElf,
-                                                                "-" ..
-                                                                    huntDmg ..
-                                                                    " " ..
-                                                                    game.bigElfTips[
-                                                                    math.random(1, #game.bigElfTips)
-                                                                    ],
-                                                                10.00,
-                                                                "ff0000",
-                                                                1,
-                                                                1.1,
-                                                                50.00
-                                                            ),
-                                                            "scale",
-                                                            0,
-                                                            0.05
-                                                        )
-                                                    end
+                            hevent.onEnterRect(r, function(evtData)
+                                if (his.enemyPlayer(evtData.triggerUnit, game.ALLY_PLAYER)) then
+                                    if (i == #v) then
+                                        -- 最后一个
+                                        local uVal = cj.GetUnitUserData(evtData.triggerUnit)
+                                        if (uVal >= hplayer.qty_current - 1) then
+                                            heffect.toUnit(
+                                                "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl",
+                                                evtData.triggerUnit,
+                                                1
+                                            )
+                                            if (his.alive(bigElf)) then
+                                                local slk = hunit.getSlk(evtData.triggerUnit)
+                                                local type = slk.TYPE
+                                                local huntDmg = 0
+                                                if (type == "boss") then
+                                                    huntDmg = 3 * game.rule.yb.wave
+                                                elseif (type == "normal") then
+                                                    huntDmg = game.rule.yb.wave
                                                 end
-                                                hunit.del(cj.GetTriggerUnit(), 0)
-                                                game.currentMon = game.currentMon - 1
-                                            else
-                                                cj.SetUnitUserData(cj.GetTriggerUnit(), uVal + 1)
-                                                heffect.bindUnit(
-                                                    "Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",
-                                                    cj.GetTriggerUnit(),
-                                                    "origin",
-                                                    2
-                                                )
-                                                local next = getNextRect(k)
-                                                if (next == -1) then
-                                                    hunit.del(cj.GetTriggerUnit(), 0)
-                                                    game.currentMon = game.currentMon - 1
-                                                    return
-                                                else
-                                                    cj.SetUnitPosition(
-                                                        cj.GetTriggerUnit(),
-                                                        game.pathPoint[next][1][1],
-                                                        game.pathPoint[next][1][2]
+                                                if (huntDmg > 0) then
+                                                    echo(
+                                                        hColor.yellow(hunit.getName(evtData.triggerUnit))
+                                                            .. "造成了" .. hColor.red(huntDmg) .. "伤害"
                                                     )
-                                                    cj.IssuePointOrderById(
-                                                        cj.GetTriggerUnit(),
-                                                        851986,
-                                                        game.pathPoint[next][2][1],
-                                                        game.pathPoint[next][2][2]
+                                                    heffect.toUnit(
+                                                        "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
+                                                        bigElf,
+                                                        1
+                                                    )
+                                                    hunit.subCurLife(bigElf, huntDmg)
+                                                    cj.PingMinimapEx(x, y, 10, 255, 0, 0, false)
+                                                    htextTag.style(
+                                                        htextTag.create2Unit(
+                                                            bigElf,
+                                                            "-" ..
+                                                                huntDmg ..
+                                                                " " ..
+                                                                game.bigElfTips[
+                                                                math.random(1, #game.bigElfTips)
+                                                                ],
+                                                            10.00,
+                                                            "ff0000",
+                                                            1,
+                                                            1.1,
+                                                            50.00
+                                                        ),
+                                                        "scale",
+                                                        0,
+                                                        0.05
                                                     )
                                                 end
                                             end
-                                            towerAttackDebug(k)
+                                            hunit.del(evtData.triggerUnit, 0)
+                                            game.currentMon = game.currentMon - 1
                                         else
-                                            -- 前段路途
-                                            cj.IssuePointOrderById(
-                                                cj.GetTriggerUnit(),
-                                                851986,
-                                                v[i + 1][1],
-                                                v[i + 1][2]
+                                            cj.SetUnitUserData(evtData.triggerUnit, uVal + 1)
+                                            heffect.bindUnit(
+                                                "Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",
+                                                evtData.triggerUnit,
+                                                "origin",
+                                                2
                                             )
+                                            local next = getNextRect(k)
+                                            if (next == -1) then
+                                                hunit.del(evtData.triggerUnit, 0)
+                                                game.currentMon = game.currentMon - 1
+                                                return
+                                            else
+                                                cj.SetUnitPosition(
+                                                    evtData.triggerUnit,
+                                                    game.pathPoint[next][1][1],
+                                                    game.pathPoint[next][1][2]
+                                                )
+                                                cj.IssuePointOrderById(
+                                                    evtData.triggerUnit,
+                                                    851986,
+                                                    game.pathPoint[next][2][1],
+                                                    game.pathPoint[next][2][2]
+                                                )
+                                            end
                                         end
+                                        towerAttackDebug(k)
+                                    else
+                                        -- 前段路途
+                                        cj.IssuePointOrderById(
+                                            evtData.triggerUnit,
+                                            851986,
+                                            v[i + 1][1],
+                                            v[i + 1][2]
+                                        )
                                     end
                                 end
-                            )
+                            end)
                         end
                     end
                     enemyGenYB(10)
@@ -424,7 +419,7 @@ cj.TriggerAddAction(
                     )
                 elseif (btnIdx == TITLE_HZ) then
                     game.rule.cur = "hz"
-                    hmsg.echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“光辉城主”的生命，玩到死机为止！|r")
+                    echo("|cffffff00各玩家合力打怪，打不过的会流到下一位玩家继续攻击，所有玩家都打不过就会扣除“光辉城主”的生命，玩到死机为止！|r")
                     hsound.bgm(cg.gg_snd_bgm_hz, nil)
                     local bigElf = hunit.create(
                         {
@@ -439,8 +434,8 @@ cj.TriggerAddAction(
                         bigElf,
                         function()
                             game.runing = false
-                            hmsg.echo("不！“光辉城主”GG了，还没死机就结束啦~我们的守护")
-                            hmark.create("war3mapImported\\mark_defeat.blp", 4.00)
+                            echo("不！“光辉城主”GG了，还没死机就结束啦~我们的守护")
+                            htexture.mark("war3mapImported\\mark_defeat.blp", 4.00)
                             htime.setTimeout(
                                 10.00,
                                 function(t)
@@ -457,105 +452,100 @@ cj.TriggerAddAction(
                     for k, v in ipairs(game.pathPoint) do
                         for i, p in ipairs(v) do
                             local r = hrect.create(p[1], p[2], 100, 100, "rect" .. k .. i)
-                            local tg = cj.CreateTrigger()
-                            bj.TriggerRegisterEnterRectSimple(tg, r)
-                            cj.TriggerAddAction(
-                                tg,
-                                function()
-                                    if (his.enemyPlayer(cj.GetTriggerUnit(), game.ALLY_PLAYER)) then
-                                        if (i == #v) then
-                                            -- 最后一个
-                                            local uVal = cj.GetUnitUserData(cj.GetTriggerUnit())
-                                            if (uVal >= hplayer.qty_current - 1) then
-                                                heffect.toUnit(
-                                                    "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl",
-                                                    cj.GetTriggerUnit(),
-                                                    1
-                                                )
-                                                if (his.alive(bigElf)) then
-                                                    local slk = hunit.getSlk(cj.GetTriggerUnit())
-                                                    local type = slk.TYPE
-                                                    local huntDmg = 0
-                                                    if (type == "boss") then
-                                                        huntDmg = 3 * game.rule.hz.wave
-                                                    elseif (type == "normal") then
-                                                        huntDmg = game.rule.hz.wave
-                                                    end
-                                                    if (huntDmg > 0) then
-                                                        hmsg.echo(
-                                                            hColor.yellow(hunit.getName(cj.GetTriggerUnit())) ..
-                                                                "造成了" .. hColor.red(huntDmg) .. "伤害"
-                                                        )
-                                                        heffect.toUnit(
-                                                            "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
-                                                            bigElf,
-                                                            1
-                                                        )
-                                                        hunit.subCurLife(bigElf, huntDmg)
-                                                        cj.PingMinimapEx(x, y, 10, 255, 0, 0, false)
-                                                        htextTag.style(
-                                                            htextTag.create2Unit(
-                                                                bigElf,
-                                                                "-" ..
-                                                                    game.rule.hz.wave ..
-                                                                    " " ..
-                                                                    game.bigElfTips[
-                                                                    math.random(1, #game.bigElfTips)
-                                                                    ],
-                                                                10.00,
-                                                                "ff0000",
-                                                                1,
-                                                                1.1,
-                                                                50.00
-                                                            ),
-                                                            "scale",
-                                                            0,
-                                                            0.05
-                                                        )
-                                                    end
+                            hevent.onEnterRect(r, function(evtData)
+                                if (his.enemyPlayer(evtData.triggerUnit, game.ALLY_PLAYER)) then
+                                    if (i == #v) then
+                                        -- 最后一个
+                                        local uVal = cj.GetUnitUserData(evtData.triggerUnit)
+                                        if (uVal >= hplayer.qty_current - 1) then
+                                            heffect.toUnit(
+                                                "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl",
+                                                evtData.triggerUnit,
+                                                1
+                                            )
+                                            if (his.alive(bigElf)) then
+                                                local slk = hunit.getSlk(evtData.triggerUnit)
+                                                local type = slk.TYPE
+                                                local huntDmg = 0
+                                                if (type == "boss") then
+                                                    huntDmg = 3 * game.rule.hz.wave
+                                                elseif (type == "normal") then
+                                                    huntDmg = game.rule.hz.wave
                                                 end
-                                                hunit.del(cj.GetTriggerUnit(), 0)
-                                                game.currentMon = game.currentMon - 1
-                                            else
-                                                cj.SetUnitUserData(cj.GetTriggerUnit(), uVal + 1)
-                                                heffect.bindUnit(
-                                                    "Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",
-                                                    cj.GetTriggerUnit(),
-                                                    "origin",
-                                                    2
-                                                )
-                                                local next = getNextRect(k)
-                                                if (next == -1) then
-                                                    hunit.del(cj.GetTriggerUnit(), 0)
-                                                    game.currentMon = game.currentMon - 1
-                                                    return
-                                                else
-                                                    cj.SetUnitPosition(
-                                                        cj.GetTriggerUnit(),
-                                                        game.pathPoint[next][1][1],
-                                                        game.pathPoint[next][1][2]
+                                                if (huntDmg > 0) then
+                                                    echo(
+                                                        hColor.yellow(hunit.getName(evtData.triggerUnit))
+                                                            .. "造成了" .. hColor.red(huntDmg) .. "伤害"
                                                     )
-                                                    cj.IssuePointOrderById(
-                                                        cj.GetTriggerUnit(),
-                                                        851986,
-                                                        game.pathPoint[next][2][1],
-                                                        game.pathPoint[next][2][2]
+                                                    heffect.toUnit(
+                                                        "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
+                                                        bigElf,
+                                                        1
+                                                    )
+                                                    hunit.subCurLife(bigElf, huntDmg)
+                                                    cj.PingMinimapEx(x, y, 10, 255, 0, 0, false)
+                                                    htextTag.style(
+                                                        htextTag.create2Unit(
+                                                            bigElf,
+                                                            "-" ..
+                                                                game.rule.hz.wave ..
+                                                                " " ..
+                                                                game.bigElfTips[
+                                                                math.random(1, #game.bigElfTips)
+                                                                ],
+                                                            10.00,
+                                                            "ff0000",
+                                                            1,
+                                                            1.1,
+                                                            50.00
+                                                        ),
+                                                        "scale",
+                                                        0,
+                                                        0.05
                                                     )
                                                 end
                                             end
-                                            towerAttackDebug(k)
+                                            hunit.del(evtData.triggerUnit, 0)
+                                            game.currentMon = game.currentMon - 1
                                         else
-                                            -- 前段路途
-                                            cj.IssuePointOrderById(
-                                                cj.GetTriggerUnit(),
-                                                851986,
-                                                v[i + 1][1],
-                                                v[i + 1][2]
+                                            cj.SetUnitUserData(evtData.triggerUnit, uVal + 1)
+                                            heffect.bindUnit(
+                                                "Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl",
+                                                evtData.triggerUnit,
+                                                "origin",
+                                                2
                                             )
+                                            local next = getNextRect(k)
+                                            if (next == -1) then
+                                                hunit.del(evtData.triggerUnit, 0)
+                                                game.currentMon = game.currentMon - 1
+                                                return
+                                            else
+                                                cj.SetUnitPosition(
+                                                    evtData.triggerUnit,
+                                                    game.pathPoint[next][1][1],
+                                                    game.pathPoint[next][1][2]
+                                                )
+                                                cj.IssuePointOrderById(
+                                                    evtData.triggerUnit,
+                                                    851986,
+                                                    game.pathPoint[next][2][1],
+                                                    game.pathPoint[next][2][2]
+                                                )
+                                            end
                                         end
+                                        towerAttackDebug(k)
+                                    else
+                                        -- 前段路途
+                                        cj.IssuePointOrderById(
+                                            evtData.triggerUnit,
+                                            851986,
+                                            v[i + 1][1],
+                                            v[i + 1][2]
+                                        )
                                     end
                                 end
-                            )
+                            end)
                         end
                     end
                     enemyGenHZ(10)
@@ -588,114 +578,35 @@ cj.TriggerAddAction(
                     game.rule.cur = "dk"
                     if (btnIdx == TITLE_DKAI) then
                         game.rule.dk.ai = true
-                        hmsg.echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
+                        echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
                     else
-                        hmsg.echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
+                        echo("|cffffff00各玩家独立出怪升级，阶段升级时创建与兵塔相关的士兵顺时针攻击其他玩家，对抗不过的玩家会被扣血直至出局|r")
                     end
                     hsound.bgm(cg.gg_snd_bgm_dk, nil)
                     -- 构建出怪区域
                     for k, v in ipairs(game.pathPoint) do
                         for i, p in ipairs(v) do
                             local r = hrect.create(p[1], p[2], 175, 175, "rect" .. k .. i)
-                            local tg = cj.CreateTrigger()
-                            bj.TriggerRegisterEnterRectSimple(tg, r)
-                            cj.TriggerAddAction(
-                                tg,
-                                function()
-                                    local u = cj.GetTriggerUnit()
-                                    if (his.enemyPlayer(u, game.ALLY_PLAYER)) then
-                                        local playerIndex = hunit.getUserData(u)
-                                        if (i == #v) then
-                                            local slk = hunit.getSlk(u)
-                                            local type = slk.TYPE
-                                            -- 最后一格,前往下一区域
-                                            local next = getNextRect(k)
-                                            if (next == -1) then
-                                                hunit.del(u)
-                                                game.currentMon = game.currentMon - 1
-                                                return
-                                            else
-                                                if (type == "tower_shadow") then
-                                                    local wanbao = false
-                                                    if (next == playerIndex) then
-                                                        hunit.del(u, 0)
-                                                        game.currentMon = game.currentMon - 1
-                                                        wanbao = true
-                                                    else
-                                                        cj.SetUnitPosition(
-                                                            u,
-                                                            game.pathPoint[next][1][1],
-                                                            game.pathPoint[next][1][2]
-                                                        )
-                                                        cj.IssuePointOrderById(
-                                                            u,
-                                                            851986,
-                                                            game.pathPoint[next][2][1],
-                                                            game.pathPoint[next][2][2]
-                                                        )
-                                                    end
-                                                    if
-                                                    (hplayer.getStatus(hplayer.players[k]) ==
-                                                        hplayer.player_status.gaming)
-                                                    then
-                                                        local hunt = 15 * game.rule.dk.wave[playerIndex] +
-                                                            2 * hhero.getCurLevel(game.playerTower[playerIndex])
-                                                        if (hunt >= hunit.getCurLife(game.playerTower[k])) then
-                                                            hunit.kill(game.playerTower[k], 0)
-                                                            hmsg.echo(
-                                                                hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
-                                                                    "被" ..
-                                                                    hColor.sky(
-                                                                        cj.GetPlayerName(
-                                                                            hplayer.players[playerIndex]
-                                                                        )
-                                                                    ) ..
-                                                                    "的" ..
-                                                                    hColor.yellow(slk.Name) .. "进攻，直接战败了~"
-                                                            )
-                                                        else
-                                                            hunit.subCurLife(game.playerTower[k], hunt)
-                                                            hmsg.echo(
-                                                                hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
-                                                                    "被" ..
-                                                                    hColor.sky(
-                                                                        cj.GetPlayerName(
-                                                                            hplayer.players[playerIndex]
-                                                                        )
-                                                                    ) ..
-                                                                    "的" ..
-                                                                    hColor.yellow(slk.Name) ..
-                                                                    "进攻，扣了" .. hColor.red(hunt) .. "血"
-                                                            )
-                                                            heffect.toUnit(
-                                                                "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
-                                                                game.playerTower[k],
-                                                                1
-                                                            )
-                                                            htextTag.style(
-                                                                htextTag.create2Unit(
-                                                                    game.playerTower[k],
-                                                                    "-" .. hunt,
-                                                                    10.00,
-                                                                    "ff0000",
-                                                                    1,
-                                                                    1.1,
-                                                                    50.00
-                                                                ),
-                                                                "scale",
-                                                                0,
-                                                                0.05
-                                                            )
-                                                            towerAttackDebug(k)
-                                                        end
-                                                    end
-                                                    if (wanbao) then
-                                                        hsound.sound(cg.gg_snd_wb)
-                                                        hmsg.echo(
-                                                            hColor.green(cj.GetPlayerName(hplayer.players[playerIndex])) ..
-                                                                hColor.yellow("实现了一圈完美进攻！！完爆其余玩家！！真·牛逼！！！")
-                                                        )
-                                                    end
+                            hevent.onEnterRect(r, function(evtData)
+                                local u = evtData.triggerUnit
+                                if (his.enemyPlayer(u, game.ALLY_PLAYER)) then
+                                    local playerIndex = hunit.getUserData(u)
+                                    if (i == #v) then
+                                        local slk = hunit.getSlk(u)
+                                        local type = slk.TYPE
+                                        -- 最后一格,前往下一区域
+                                        local next = getNextRect(k)
+                                        if (next == -1) then
+                                            hunit.del(u)
+                                            game.currentMon = game.currentMon - 1
+                                            return
+                                        else
+                                            if (type == "tower_shadow") then
+                                                local wanbao = false
+                                                if (next == playerIndex) then
+                                                    hunit.del(u, 0)
+                                                    game.currentMon = game.currentMon - 1
+                                                    wanbao = true
                                                 else
                                                     cj.SetUnitPosition(
                                                         u,
@@ -709,19 +620,93 @@ cj.TriggerAddAction(
                                                         game.pathPoint[next][2][2]
                                                     )
                                                 end
+                                                if
+                                                (hplayer.getStatus(hplayer.players[k]) ==
+                                                    hplayer.player_status.gaming)
+                                                then
+                                                    local hunt = 15 * game.rule.dk.wave[playerIndex] +
+                                                        2 * hhero.getCurLevel(game.playerTower[playerIndex])
+                                                    if (hunt >= hunit.getCurLife(game.playerTower[k])) then
+                                                        hunit.kill(game.playerTower[k], 0)
+                                                        echo(
+                                                            hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
+                                                                "被" ..
+                                                                hColor.sky(
+                                                                    cj.GetPlayerName(
+                                                                        hplayer.players[playerIndex]
+                                                                    )
+                                                                ) ..
+                                                                "的" ..
+                                                                hColor.yellow(slk.Name) .. "进攻，直接战败了~"
+                                                        )
+                                                    else
+                                                        hunit.subCurLife(game.playerTower[k], hunt)
+                                                        echo(
+                                                            hColor.sky(cj.GetPlayerName(hplayer.players[k])) ..
+                                                                "被" ..
+                                                                hColor.sky(
+                                                                    cj.GetPlayerName(
+                                                                        hplayer.players[playerIndex]
+                                                                    )
+                                                                ) ..
+                                                                "的" ..
+                                                                hColor.yellow(slk.Name) ..
+                                                                "进攻，扣了" .. hColor.red(hunt) .. "血"
+                                                        )
+                                                        heffect.toUnit(
+                                                            "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
+                                                            game.playerTower[k],
+                                                            1
+                                                        )
+                                                        htextTag.style(
+                                                            htextTag.create2Unit(
+                                                                game.playerTower[k],
+                                                                "-" .. hunt,
+                                                                10.00,
+                                                                "ff0000",
+                                                                1,
+                                                                1.1,
+                                                                50.00
+                                                            ),
+                                                            "scale",
+                                                            0,
+                                                            0.05
+                                                        )
+                                                        towerAttackDebug(k)
+                                                    end
+                                                end
+                                                if (wanbao) then
+                                                    hsound.sound(cg.gg_snd_wb)
+                                                    echo(
+                                                        hColor.green(cj.GetPlayerName(hplayer.players[playerIndex])) ..
+                                                            hColor.yellow("实现了一圈完美进攻！！完爆其余玩家！！真·牛逼！！！")
+                                                    )
+                                                end
+                                            else
+                                                cj.SetUnitPosition(
+                                                    u,
+                                                    game.pathPoint[next][1][1],
+                                                    game.pathPoint[next][1][2]
+                                                )
+                                                cj.IssuePointOrderById(
+                                                    u,
+                                                    851986,
+                                                    game.pathPoint[next][2][1],
+                                                    game.pathPoint[next][2][2]
+                                                )
                                             end
-                                        else
-                                            -- 前段路途
-                                            cj.IssuePointOrderById(
-                                                cj.GetTriggerUnit(),
-                                                851986,
-                                                v[i + 1][1],
-                                                v[i + 1][2]
-                                            )
                                         end
+                                    else
+                                        -- 前段路途
+                                        cj.IssuePointOrderById(
+                                            u,
+                                            851986,
+                                            v[i + 1][1],
+                                            v[i + 1][2]
+                                        )
                                     end
                                 end
-                            )
+                            end)
                         end
                     end
                     enemyGenDK(10)
@@ -755,7 +740,7 @@ cj.TriggerAddAction(
                             if (top ~= nil) then
                                 local gold = game.rule.dk.wave[hplayer.index(top)] * 30
                                 hplayer.addGold(top, gold)
-                                hmsg.echo(
+                                echo(
                                     hColor.yellow("（*＾-＾*）" .. hplayer.getName(top)) ..
                                         "勇夺第一，获得" .. hColor.yellow(gold) .. "黄金奖励"
                                 )

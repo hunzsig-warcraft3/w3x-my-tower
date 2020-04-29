@@ -11,8 +11,7 @@ towerShadowGen = function(playerIndex)
     if (game.towersShadow[tid] == nil) then
         return
     end
-    local u =
-        henemy.create(
+    local u = henemy.create(
         {
             unitId = game.towersShadow[tid].UNIT_ID,
             qty = 1,
@@ -71,10 +70,10 @@ towerShadowGen = function(playerIndex)
     hevent.onDead(u, towerShadowDead)
     local slk = hslk_global.unitsKV[tid]
     local towerName = slk.Name
-    hmsg.echo(
+    echo(
         hColor.sky(cj.GetPlayerName(hplayer.players[playerIndex])) ..
             "达到了|cffffff00第" ..
-                game.rule.dk.wave[playerIndex] .. "级|r，TA的兵塔" .. hColor.red(towerName) .. "开始进攻！其他人注意防守！"
+            game.rule.dk.wave[playerIndex] .. "级|r，TA的兵塔" .. hColor.red(towerName) .. "开始进攻！其他人注意防守！"
     )
     dzSetLumber(hplayer.players[playerIndex], game.rule.dk.wave[playerIndex])
 end

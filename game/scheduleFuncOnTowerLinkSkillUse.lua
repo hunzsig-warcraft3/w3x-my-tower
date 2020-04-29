@@ -22,6 +22,6 @@ onTowerLinkSkillUesd = function(evtData)
         --刷新种族队伍
         addTowerSkillsRaceTeam(playerIndex)
         --
-        hmsg.echo00(p, hColor.yellow(hunit.getName(u)) .. "上场了！")
+        echo(hColor.yellow(hunit.getName(u)) .. "上场了！", p)
     end
 end

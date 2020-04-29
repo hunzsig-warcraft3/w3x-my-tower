@@ -8,7 +8,7 @@ towerShadowDead = function(evtData)
         local killerPlayer = cj.GetOwningPlayer(killer)
         local killerName = cj.GetPlayerName(killerPlayer)
         if (shadowPName ~= nil and shadowName ~= nil and killerName ~= nil) then
-            hmsg.echo(
+            echo(
                 hColor.sky(shadowPName) .. "的" .. hColor.yellow(shadowName) .. "被" .. hColor.green(killerName) .. "干掉了~"
             )
         end
@@ -16,7 +16,7 @@ towerShadowDead = function(evtData)
         hplayer.addGold(killerPlayer, gold, killer)
     else
         if (shadowPName ~= nil and shadowName ~= nil) then
-            hmsg.echo(hColor.sky(shadowPName) .. "的" .. hColor.yellow(shadowName) .. "被干掉了~")
+            echo(hColor.sky(shadowPName) .. "的" .. hColor.yellow(shadowName) .. "被干掉了~")
         end
     end
     hunit.del(shadow, 3)
@@ -36,11 +36,11 @@ towerShadowDead = function(evtData)
                     local killerName = cj.GetPlayerName(p)
                     local blood = level * val[1]
                     if (shadowPName ~= nil and shadowName ~= nil) then
-                        hmsg.echo(
+                        echo(
                             hColor.green(shadowPName) ..
                                 "的" ..
-                                    hColor.yellow(shadowName) ..
-                                        "对" .. hColor.sky(killerName) .. "施展了复仇扣了" .. hColor.red(blood) .. "点血"
+                                hColor.yellow(shadowName) ..
+                                "对" .. hColor.sky(killerName) .. "施展了复仇扣了" .. hColor.red(blood) .. "点血"
                         )
                     end
                     hunit.subCurLife(game.playerTower[pindex], blood)

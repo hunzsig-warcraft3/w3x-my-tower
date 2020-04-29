@@ -82,7 +82,7 @@ onCourierSkillUesd = function(evtData)
                 lvUpQty + hhero.getCurLevel(game.playerTower[playerIndex]),
                 false
             )
-            hmsg.echo00(p, "通过吞噬兵塔石,兵塔提升了" .. hColor.yellow(lvUpQty) .. "级")
+            echo("通过吞噬兵塔石,兵塔提升了" .. hColor.yellow(lvUpQty) .. "级", p)
         else
             htextTag.style(htextTag.create2Unit(u, "找不到兵塔石~", 7, "ffff00", 1, 1.5, 50), "scale", 0, 0.05)
         end
@@ -184,9 +184,9 @@ onCourierSkillUesd = function(evtData)
                 for li = 1, 4, 1 do
                     local linkUnit = game.playerTowerLink[playerIndex][li].unit
                     if
-                        (linkUnit ~= nil and his.locust(linkUnit) == false and
-                            game.playerTowerLink[playerIndex][li].tower_level < 9)
-                     then
+                    (linkUnit ~= nil and his.locust(linkUnit) == false and
+                        game.playerTowerLink[playerIndex][li].tower_level < 9)
+                    then
                         full9 = false
                         target = game.playerTowerLink[playerIndex][li].unit
                         targetLi = li
@@ -276,7 +276,7 @@ onCourierSkillUesd = function(evtData)
                     0.25
                 )
                 if (gold >= 1888) then
-                    hmsg.echo(hColor.sky(cj.GetPlayerName(p)) .. "抽到了|cff" .. color .. label .. "|r，大家祝贺TA！")
+                    echo(hColor.sky(cj.GetPlayerName(p)) .. "抽到了|cff" .. color .. label .. "|r，大家祝贺TA！")
                 end
             else
                 hsound.sound2Player(cg.gg_snd_sell_item, p)
@@ -349,7 +349,7 @@ onCourierSkillUesd = function(evtData)
                     whichUnit = u
                 }
             )
-            hmsg.echo(
+            echo(
                 hColor.sky(cj.GetPlayerName(p)) ..
                     "利用" .. hColor.yellow(itemQty) .. "件装备升华出了" .. hColor.green(randIt.Name) .. "！"
             )

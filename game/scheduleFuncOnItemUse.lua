@@ -8,11 +8,11 @@ onUnitItemsUesd = function(evtData)
     local itemSLK = hslk_global.itemsKV[itId]
     local p = cj.GetOwningPlayer(u)
     if (itemSLK == nil or itemSLK.INDEX == nil) then
-        hmsg.echo00(p, "slk获取错误")
+        echo("slk获取错误", p)
         return
     end
     if (itemSLK.I_TYPE == nil) then
-        hmsg.echo00(p, "物品I类型获取错误")
+        echo("物品I类型获取错误", p)
         return
     end
     if (itemSLK.I_TYPE == "tower") then
@@ -103,18 +103,18 @@ onUnitItemsUesd = function(evtData)
                         1 + hhero.getCurLevel(game.playerTower[playerIndex]),
                         false
                     )
-                    hmsg.echo00(p, "通过吞噬兵塔石,兵塔提升了" .. hColor.yellow(1) .. "级")
+                    echo("通过吞噬兵塔石,兵塔提升了" .. hColor.yellow(1) .. "级", p)
                     return
                 elseif (btnIdx == 0) then
                     local u = createMyTower(playerIndex, game.towers[itemSLK.INDEX].UNIT_ID)
-                    hmsg.echo(
+                    echo(
                         hColor.sky(cj.GetPlayerName(p)) ..
                             "召唤了主塔：[" .. hColor.yellow(game.towers[itemSLK.INDEX].Name) .. "]"
                     )
                     addTowerSkillsRaceTeam(playerIndex)
                 else
                     local u = createMyTowerLink(playerIndex, btnIdx, game.towers[itemSLK.INDEX].UNIT_ID)
-                    hmsg.echo(
+                    echo(
                         hColor.sky(cj.GetPlayerName(p)) ..
                             "召唤了辅塔：[" .. hColor.yellow(game.towers[itemSLK.INDEX].Name) .. "]"
                     )
@@ -125,7 +125,7 @@ onUnitItemsUesd = function(evtData)
     elseif (itemSLK.I_TYPE == "ability") then
         local abils = game.thisOptionAbility[itemSLK.INDEX]
         if (abils == nil) then
-            hmsg.echo00(p, "技能获取错误")
+            echo("技能获取错误", p)
             return
         end
         local sites = {}
@@ -183,12 +183,11 @@ onUnitItemsUesd = function(evtData)
                         hplayer.addGold(hplayer.players[playerIndex], 30, u)
                         return
                     end
-                    hmsg.echo00(
-                        p,
+                    echo(
                         "你选择了[" ..
                             hColor.yellow(btnIdx) ..
                             "]位置，来学习[" ..
-                            hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
+                            hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]", p
                     )
                     delTowerSkillByBook(
                         game.playerTower[playerIndex],
@@ -207,11 +206,9 @@ onUnitItemsUesd = function(evtData)
             )
         else
             local btnIdx = emptySite
-            hmsg.echo00(
-                p,
-                "兵塔自动挑选了[" ..
-                    hColor.yellow(btnIdx) ..
-                    "]位置，学习了[" .. hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]"
+            echo(
+                "兵塔自动挑选了[" .. hColor.yellow(btnIdx) .. "]位置，学习了[" .. hColor.yellow(abils[btnIdx].ABILITY_LEVEL .. "级" .. abils[btnIdx].Name) .. "]",
+                p
             )
             delTowerSkillByBook(game.playerTower[playerIndex], btnIdx, game.towersAbilities[playerIndex][btnIdx])
             addTowerSkillByBook(game.playerTower[playerIndex], btnIdx, abils[btnIdx])
@@ -248,7 +245,7 @@ onUnitItemsUesd = function(evtData)
                 },
                 function(btnIdx)
                     local u = createMyCourier(playerIndex, game.courier[btnIdx].UNIT_ID)
-                    hmsg.echo(
+                    echo(
                         hColor.sky(cj.GetPlayerName(p)) .. "召唤了信使：[" .. hColor.yellow(game.courier[btnIdx].Name) .. "]"
                     )
                     if (u ~= nil and cj.GetLocalPlayer() == p) then
@@ -285,7 +282,7 @@ onUnitItemsUesd = function(evtData)
                 table.insert(tz, "出云剑仙套装")
             end
             if (#tz <= 0) then
-                hmsg.echo00(hplayer.players[playerIndex], "您尚未拥有任何套装~")
+                echo("您尚未拥有任何套装~", hplayer.players[playerIndex])
                 return
             end
             hdialog.create(
@@ -349,7 +346,7 @@ onUnitItemsUesd = function(evtData)
                         for _, v in ipairs(game.playerTowerEffectModel[playerIndex]) do
                             hskill.add(game.playerTower[playerIndex], v, 0)
                         end
-                        hmsg.echo00(hplayer.players[playerIndex], "成功装扮了：" .. hColor.yellow(tips))
+                        echo("成功装扮了：" .. hColor.yellow(tips), hplayer.players[playerIndex])
                     end
                 end
             )
@@ -464,7 +461,7 @@ onUnitItemsUesd = function(evtData)
                                     dmg = math.random(100, 76 * htime.min)
                                 end
                                 hunit.subCurLife(game.playerTower[pi], dmg)
-                                hmsg.echo(
+                                echo(
                                     hColor.sky(cj.GetPlayerName(hplayer.players[pi])) ..
                                         "被黑色悍马雷劈掉了" .. hColor.red(dmg) .. "血"
                                 )

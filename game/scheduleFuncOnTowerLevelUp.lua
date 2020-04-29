@@ -39,10 +39,10 @@ addTowerLevel = function(playerIndex, lockLv)
     end
     local oldLv = game.playerTowerLevel[playerIndex] or -1
     if (lockLv == nil or unitLv > oldLv) then
-        hmsg.echo00(hplayer.players[playerIndex], "主塔天赋变为：" .. hColor.yellow(unitLv) .. "级")
+        echo("主塔天赋变为：" .. hColor.yellow(unitLv) .. "级", hplayer.players[playerIndex])
         if (unitLv == 9) then
             hsound.sound2Player(cg.gg_snd_jsws, hplayer.players[playerIndex])
-            hmsg.echo(
+            echo(
                 hColor.sky("(>▽<)" .. cj.GetPlayerName(hplayer.players[playerIndex])) ..
                     "得到了" .. hColor.yellow(unitLv) .. "级天赋主塔，大家祝贺TA！"
             )
@@ -50,7 +50,7 @@ addTowerLevel = function(playerIndex, lockLv)
         game.playerTowerLevel[playerIndex] = unitLv
     else
         unitLv = oldLv
-        hmsg.echo00(hplayer.players[playerIndex], "主塔天赋没有得到提升")
+        echo("主塔天赋没有得到提升", hplayer.players[playerIndex])
     end
     hskill.add(game.playerTower[playerIndex], game.thisUnitLevelAbilities[unitLv].ABILITY_ID, 0)
     --计算
@@ -111,10 +111,10 @@ addTowerLinkLevel = function(playerIndex, targetLi, lockLv)
     end
     local oldLv = game.playerTowerLink[playerIndex][targetLi].tower_level or -1
     if (lockLv == nil or unitLv > oldLv) then
-        hmsg.echo00(hplayer.players[playerIndex], "辅塔天赋变为：" .. hColor.yellow(unitLv) .. "级")
+        echo("辅塔天赋变为：" .. hColor.yellow(unitLv) .. "级", hplayer.players[playerIndex])
         if (unitLv == 9) then
             hsound.sound2Player(cg.gg_snd_jsws, hplayer.players[playerIndex])
-            hmsg.echo(
+            echo(
                 hColor.sky("(>▽<)" .. cj.GetPlayerName(hplayer.players[playerIndex])) ..
                     "得到了" .. hColor.yellow(unitLv) .. "级天赋辅塔，大家祝贺TA！"
             )
@@ -122,7 +122,7 @@ addTowerLinkLevel = function(playerIndex, targetLi, lockLv)
         game.playerTowerLink[playerIndex][targetLi].tower_level = unitLv
     else
         unitLv = oldLv
-        hmsg.echo00(hplayer.players[playerIndex], "辅塔天赋没有得到提升")
+        echo("辅塔天赋没有得到提升", hplayer.players[playerIndex])
     end
     hskill.add(game.playerTowerLink[playerIndex][targetLi].unit, game.thisUnitLevelAbilities[unitLv].ABILITY_ID, 0)
     --计算

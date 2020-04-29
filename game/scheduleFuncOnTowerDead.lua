@@ -2,12 +2,11 @@
 onTowerDead = function(evtData)
     local u = evtData.triggerUnit
     local index = hplayer.index(cj.GetOwningPlayer(u))
-    hmark.create("war3mapImported\\mark_defeat.blp", 4.00, hplayer.players[index])
+    htexture.mark("war3mapImported\\mark_defeat.blp", 4.00, hplayer.players[index])
     hsound.sound(cg.gg_snd_tluo)
     hplayer.setStatus(hplayer.players[index], "战败")
     hplayer.clearUnit(hplayer.players[index])
-    local czb =
-        hunit.create(
+    local czb = hunit.create(
         {
             register = false,
             whichPlayer = cj.GetOwningPlayer(u),
@@ -32,7 +31,7 @@ onTowerDead = function(evtData)
     if (isWin == 1) then
         game.runing = false
         dzSetPrestige(winner, false, true)
-        hmark.create("war3mapImported\\mark_win.blp", 4.00, winner)
+        htexture.mark("war3mapImported\\mark_win.blp", 4.00, winner)
         hplayer.setStatus(winner, "胜利")
         htime.setTimeout(
             10.00,

@@ -19,7 +19,7 @@ bossDead = function(evtData)
         local killerName = cj.GetPlayerName(p)
         local bossName = hunit.getName(evtData.triggerUnit)
         if (killerName ~= nil) then
-            hmsg.echo(hColor.sky(killerName) .. "干掉了" .. hColor.yellow(bossName))
+            echo(hColor.sky(killerName) .. "干掉了" .. hColor.yellow(bossName))
         end
         -- 掉落兵塔
         local x = cj.GetUnitX(evtData.triggerUnit)
