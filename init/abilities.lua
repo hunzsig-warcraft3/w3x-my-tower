@@ -126,6 +126,7 @@ for _, v in ipairs(blue) do
     obj.DataC1 = 0
     obj.Art = "war3mapImported\\icon_pas_Skillz_Blue.blp"
     local ab = {
+        Name = Name,
         ABILITY_ID = obj:get_id(),
         ABILITY_BTN = v,
     }
@@ -149,6 +150,7 @@ for _, v in ipairs(yellow) do
     obj.DataC1 = 0
     obj.Art = "ReplaceableTextures\\PassiveButtons\\PASBTNStatUp.blp"
     local ab = {
+        Name = Name,
         ABILITY_ID = obj:get_id(),
         ABILITY_BTN = v,
     }
@@ -172,6 +174,7 @@ for _, v in ipairs(purple) do
     obj.DataC1 = 0
     obj.Art = "war3mapImported\\icon_pas_Skillz_Purple.blp"
     local ab = {
+        Name = Name,
         ABILITY_ID = obj:get_id(),
         ABILITY_BTN = v,
     }
@@ -296,6 +299,7 @@ for _, v in ipairs(abilities) do
             iobj.perishable = 1
             local hitem = {
                 INDEX = v.Name .."#".. level,
+                Name = v.Name .."#".. level,
                 DIALOG_TITLE = "选位置学习:"..v.Name.."["..level.."级]",
                 Art = v.Art,
                 goldcost = goldcost,
@@ -311,7 +315,7 @@ for _, v in ipairs(abilities) do
                 ODK = v.ODK,
             }
             ?>
-        call SaveStr(hash_myslk, StringHash("abilitiesItems"), <?=ab_item_index?>, "<?=string.addslashes(json.stringify(hitem))?>")
+            call SaveStr(hash_myslk, StringHash("abilitiesItems"), <?=ab_item_index?>, "<?=string.addslashes(json.stringify(hitem))?>")
             <?
         end
     end

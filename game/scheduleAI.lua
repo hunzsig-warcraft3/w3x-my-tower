@@ -3,7 +3,7 @@ MAYBE_AI = {
     item = function(playerIndex, it, type)
         if (game.rule.dk.ai == true and his.playing(hplayer.players[playerIndex]) == false) then
             local itId = hitem.getId(it)
-            local itemSLK = hslk_global.itemsKV[itId]
+            local itemSLK = hslk_global.id2Value.item[itId]
             hitem.del(it, 0)
             if (type == "book") then
                 --学书

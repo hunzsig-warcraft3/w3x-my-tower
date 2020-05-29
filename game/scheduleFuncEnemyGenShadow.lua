@@ -68,7 +68,7 @@ towerShadowGen = function(playerIndex)
     hunit.setUserData(u, playerIndex)
     hevent.onBeDamage(u, towerShadowBeDamage)
     hevent.onDead(u, towerShadowDead)
-    local slk = hslk_global.unitsKV[tid]
+    local slk = hslk_global.id2Value.unit[tid]
     local towerName = slk.Name
     echo(
         hColor.sky(cj.GetPlayerName(hplayer.players[playerIndex])) ..

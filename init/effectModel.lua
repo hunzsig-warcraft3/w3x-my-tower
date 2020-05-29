@@ -144,6 +144,7 @@ for k,v in pairs(abEffects) do
     obj.Targetattachcount = 1
     obj.Targetattach = v.Targetattach or "origin"
     local ab = {
+        Name = v.Name,
         INDEX = v.Name,
         ABILITY_ID = obj:get_id()
     }

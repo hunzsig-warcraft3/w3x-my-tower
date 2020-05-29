@@ -5,7 +5,7 @@ onUnitItemsUesd = function(evtData)
     local u = evtData.triggerUnit
     local it = evtData.triggerItem
     local itId = hitem.getId(it)
-    local itemSLK = hslk_global.itemsKV[itId]
+    local itemSLK = hslk_global.id2Value.item[itId]
     local p = cj.GetOwningPlayer(u)
     if (itemSLK == nil or itemSLK.INDEX == nil) then
         echo("slk获取错误", p)

@@ -80,7 +80,7 @@ end
 
 addTowerSkillsRaceSingleAttr = function(u)
     local currentId = hunit.getId(u)
-    local slk = hslk_global.unitsKV[currentId]
+    local slk = hslk_global.id2Value.unit[currentId]
     if (slk == nil) then
         return
     end
@@ -376,7 +376,7 @@ addTowerSkillsRaceTeam = function(playerIndex)
     }
     for k, v in pairs(towers) do
         local cid = hunit.getId(v)
-        local r = hslk_global.unitsKV[cid].RACE
+        local r = hslk_global.id2Value.unit[cid].RACE
         if (r ~= nil) then
             if (qtys[r] == nil) then
                 qtys[r] = 0

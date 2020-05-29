@@ -1,7 +1,7 @@
 onTowerLinkSkillUesd = function(evtData)
     local u = evtData.triggerUnit
     local skillid = evtData.triggerSkill
-    local abilitiesSLK = hslk_global.abilitiesKV[skillid]
+    local abilitiesSLK = hslk_global.id2Value.ability[skillid]
     if (abilitiesSLK == nil) then
         return
     end

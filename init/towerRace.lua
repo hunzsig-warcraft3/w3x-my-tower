@@ -28,6 +28,7 @@ for i, v in ipairs(towerRaces) do
         obj.DataC1 = 0
         obj.Art = v.Art
         local ab = {
+            Name = v.Name,
             INDEX = v.Name .. j,
             ABILITY_ID = obj:get_id(),
         }

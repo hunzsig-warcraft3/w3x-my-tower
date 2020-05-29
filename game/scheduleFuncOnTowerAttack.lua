@@ -19,7 +19,7 @@ end
 onTowerAttack = function(evtData)
     local u = evtData.attacker
     local targetUnit = evtData.targetUnit
-    for ABILITY_ID, v in pairs(hslk_global.abilitiesKV) do
+    for ABILITY_ID, v in pairs(hslk_global.id2Value.ability) do
         if (hskill.has(u, ABILITY_ID)) then
             local name = v.Name
             local level = v.ABILITY_LEVEL or 1

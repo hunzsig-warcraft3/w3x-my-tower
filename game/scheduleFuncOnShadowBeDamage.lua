@@ -35,7 +35,7 @@ towerShadowBeDamage = function(evtData)
         towerShadowTtg(u, "影子风衣")
         hskill.invisible(u, 2)
     end
-    for ABILITY_ID, v in pairs(hslk_global.abilitiesKV) do
+    for ABILITY_ID, v in pairs(hslk_global.id2Value.ability) do
         if (hskill.has(shadow, ABILITY_ID)) then
             local Name = v.Name
             local level = v.ABILITY_LEVEL or 1

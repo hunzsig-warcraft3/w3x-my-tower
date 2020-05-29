@@ -36,7 +36,7 @@ updateMyTower = function(evtData)
     local uid = string.id2char(cj.GetUnitTypeId(u))
     local lv = cj.GetHeroLevel(u)
     local diffLv = cj.I2R(lv - hhero.getPrevLevel(u))
-    local slk = hslk_global.unitsKV[uid]
+    local slk = hslk_global.id2Value.unit[uid]
     local tpv = slk.TOWER_POWER
     local attackWhite = slk.ATTACK_WHITE
     local race = slk.RACE
@@ -178,8 +178,8 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
         if (towerId ~= nil) then
             game.playerTowerLink[playerIndex][linkIndex].tower_id = towerId
             --属性
-            local tpv = hslk_global.unitsKV[towerId].TOWER_POWER
-            local Primary = hslk_global.unitsKV[towerId].Primary
+            local tpv = hslk_global.id2Value.unit[towerId].TOWER_POWER
+            local Primary = hslk_global.id2Value.unit[towerId].Primary
             local attack_damage_type = "physical"
             if (Primary == "INT") then
                 attack_damage_type = "magic"
@@ -191,7 +191,7 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
                     life = "=1000",
                     life_back = "=1000",
                     attack_damage_type = "=" .. attack_damage_type,
-                    attack_white = "+" .. hslk_global.unitsKV[towerId].ATTACK_WHITE,
+                    attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE,
                     move = "=0",
                     damage_rebound_oppose = "=9999"
                 }
@@ -202,7 +202,7 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
             --兵塔技能
             addTowerSkillsx(u)
             game.playerTowerLink[playerIndex][linkIndex].tower_level = unitLv
-            game.playerTowerLink[playerIndex][linkIndex].mark = hslk_global.unitsKV[towerId].MARK
+            game.playerTowerLink[playerIndex][linkIndex].mark = hslk_global.id2Value.unit[towerId].MARK
             --天赋等级
             if (isFirst) then
                 addTowerLinkLevel(playerIndex, linkIndex, 0)
@@ -253,7 +253,7 @@ createMyTower = function(playerIndex, towerId, towerLevel)
         hhero.setIsHero(u, true)
         hunit.setCurLifePercent(u, prevHeroLifePercent)
         --属性
-        local tpv = hslk_global.unitsKV[towerId].TOWER_POWER
+        local tpv = hslk_global.id2Value.unit[towerId].TOWER_POWER
         local life = 400
         if (tpv == "E") then
             life = 1000
@@ -278,7 +278,7 @@ createMyTower = function(playerIndex, towerId, towerLevel)
             {
                 move = "=0",
                 life = "=" .. life,
-                attack_white = "+" .. hslk_global.unitsKV[towerId].ATTACK_WHITE
+                attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE
             }
         )
         hevent.onLevelUp(u, updateMyTower)
@@ -376,7 +376,7 @@ createMyCourier = function(playerIndex, courierId)
         game.playerCourier[playerIndex] = u
         hcamera.toUnit(hplayer.players[playerIndex], 0.50, u)
         --如果是冰戟剑灵，添加特效
-        if (hslk_global.unitsKV[courierId].Name == "冰戟剑灵") then
+        if (hslk_global.id2Value.unit[courierId].Name == "冰戟剑灵") then
             heffect.bindUnit("war3mapImported\\eff_flying_sword_ice.mdl", u, "origin", -1)
         end
         --如果是AI模式

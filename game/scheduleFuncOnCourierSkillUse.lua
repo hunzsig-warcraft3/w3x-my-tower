@@ -8,7 +8,7 @@ onCourierSkillUesd = function(evtData)
         return
     end
     local skillid = evtData.triggerSkill
-    local abilitiesSLK = hslk_global.abilitiesKV[skillid]
+    local abilitiesSLK = hslk_global.id2Value.ability[skillid]
     local p = cj.GetOwningPlayer(u)
     local playerIndex = hplayer.index(p)
     if (abilitiesSLK == nil or abilitiesSLK.Name == nil) then
@@ -69,7 +69,7 @@ onCourierSkillUesd = function(evtData)
         for ti = 0, 5, 1 do
             local it = cj.UnitItemInSlot(u, ti)
             if (it ~= nil) then
-                local itemSLK = hslk_global.itemsKV[hitem.getId(it)]
+                local itemSLK = hslk_global.id2Value.item[hitem.getId(it)]
                 if (itemSLK.I_TYPE == "tower") then
                     lvUpQty = lvUpQty + hitem.getCharges(it)
                     hitem.del(it, 0)
@@ -165,7 +165,7 @@ onCourierSkillUesd = function(evtData)
         for ti = 0, 5, 1 do
             local it = cj.UnitItemInSlot(u, ti)
             if (it ~= nil) then
-                local itemSLK = hslk_global.itemsKV[hitem.getId(it)]
+                local itemSLK = hslk_global.id2Value.item[hitem.getId(it)]
                 if (itemSLK.I_TYPE == "ability") then
                     lvUpQty = lvUpQty + hitem.getCharges(it)
                     hitem.del(it, 0)

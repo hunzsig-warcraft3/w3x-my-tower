@@ -23,7 +23,7 @@ towerShadowDead = function(evtData)
     --死亡技能
     local playerIndex = hunit.getUserData(shadow)
     local tower = game.playerTower[playerIndex]
-    for ABILITY_ID, v in pairs(hslk_global.abilitiesKV) do
+    for ABILITY_ID, v in pairs(hslk_global.id2Value.ability) do
         if (hskill.has(tower, ABILITY_ID)) then
             local Name = v.Name
             local level = v.ABILITY_LEVEL or 1

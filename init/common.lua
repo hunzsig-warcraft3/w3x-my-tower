@@ -102,6 +102,7 @@ for l=0,9,1 do
     obj.DataC1 = 0
     obj.Art = "war3mapImported\\icon_pas_Lv" .. l .. ".blp"
     local ab = {
+        Name = Name,
         ABILITY_ID = obj:get_id(),
         ABILITY_BTN = v,
     }
