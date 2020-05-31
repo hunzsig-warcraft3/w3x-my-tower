@@ -2,12 +2,14 @@
 
 -- tower 兵塔/兵塔物品/兵塔技能/shadow
 game.towersLen = cj.LoadInteger(cg.hash_myslk, cj.StringHash("towers"), -1)
+local heroIds = {}
 for i = 1, game.towersLen, 1 do
     --tower
     local v = cj.LoadStr(cg.hash_myslk, cj.StringHash("towers"), i)
     local jv = json.parse(v)
     game.towers[jv.INDEX] = jv
     hRuntime.register.unit(jv)
+    table.insert(heroIds, jv.UNIT_ID)
     --item
     v = cj.LoadStr(cg.hash_myslk, cj.StringHash("towersItems"), i)
     jv = json.parse(v)
@@ -24,6 +26,7 @@ for i = 1, game.towersLen, 1 do
     game.towersShadow[jv.TOWER_ID] = jv
     hRuntime.register.unit(jv)
 end
+hhero.setHeroIds(heroIds)
 --tower abli
 local len = cj.LoadInteger(cg.hash_myslk, cj.StringHash("tower_spx_ab"), -1)
 for i = 1, len, 1 do

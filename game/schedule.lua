@@ -219,6 +219,7 @@ cj.TriggerAddAction(
         --设置三围基础
         hattr.setThreeBuff(
             {
+                primary = 0,
                 str = {
                     life = 7,
                     attack_white = 0.06,

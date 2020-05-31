@@ -60,68 +60,68 @@ updateMyTower = function(evtData)
     end
     attackWhite = diffLv * attackWhite * percent
     hattr.set(
-        u,
-        0,
-        {
-            attack_white = "+" .. attackWhite
-        }
+            u,
+            0,
+            {
+                attack_white = "+" .. attackWhite
+            }
     )
     if (race == "人类") then
         local val = 0.03
         hattr.set(
-            u,
-            0,
-            {
-                str_green = "+" .. (val * slk.STR * diffLv),
-                agi_green = "+" .. (val * slk.AGI * diffLv),
-                int_green = "+" .. (val * slk.INT * diffLv)
-            }
+                u,
+                0,
+                {
+                    str_green = "+" .. (val * slk.STR * diffLv),
+                    agi_green = "+" .. (val * slk.AGI * diffLv),
+                    int_green = "+" .. (val * slk.INT * diffLv)
+                }
         )
     elseif (race == "人杰") then
         local val = 0.04
         hattr.set(
-            u,
-            0,
-            {
-                str_green = "+" .. (val * slk.STR * diffLv),
-                agi_green = "+" .. (val * slk.AGI * diffLv),
-                int_green = "+" .. (val * slk.INT * diffLv)
-            }
+                u,
+                0,
+                {
+                    str_green = "+" .. (val * slk.STR * diffLv),
+                    agi_green = "+" .. (val * slk.AGI * diffLv),
+                    int_green = "+" .. (val * slk.INT * diffLv)
+                }
         )
     elseif (race == "人王") then
         local val = 0.05
         hattr.set(
-            u,
-            0,
-            {
-                str_green = "+" .. (val * slk.STR * diffLv),
-                agi_green = "+" .. (val * slk.AGI * diffLv),
-                int_green = "+" .. (val * slk.INT * diffLv)
-            }
+                u,
+                0,
+                {
+                    str_green = "+" .. (val * slk.STR * diffLv),
+                    agi_green = "+" .. (val * slk.AGI * diffLv),
+                    int_green = "+" .. (val * slk.INT * diffLv)
+                }
         )
     elseif (race == "兽人") then
         hattr.set(
-            u,
-            0,
-            {
-                attack_white = "+" .. (0.075 * slk.ATTACK_WHITE * diffLv)
-            }
+                u,
+                0,
+                {
+                    attack_white = "+" .. (0.075 * slk.ATTACK_WHITE * diffLv)
+                }
         )
     elseif (race == "地精") then
         hattr.set(
-            u,
-            0,
-            {
-                int_green = "+" .. (0.12 * slk.INT * diffLv)
-            }
+                u,
+                0,
+                {
+                    int_green = "+" .. (0.12 * slk.INT * diffLv)
+                }
         )
     elseif (race == "熊猫") then
         hattr.set(
-            u,
-            0,
-            {
-                str_green = "+" .. (0.08 * slk.STR * diffLv)
-            }
+                u,
+                0,
+                {
+                    str_green = "+" .. (0.08 * slk.STR * diffLv)
+                }
         )
     end
     hsound.sound2Unit(cg.gg_snd_level_up, 100, u)
@@ -154,17 +154,17 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
         local isUnSelectable = (linkId == game.thisUnits["空位"].UNIT_ID)
         local isOpenSlot = (linkId ~= game.thisUnits["空位"].UNIT_ID)
         local u = hunit.create(
-            {
-                whichPlayer = hplayer.players[playerIndex],
-                unitId = linkId,
-                qty = 1,
-                x = game.towerPoint[playerIndex][1] + game.towerLinkOffset[linkIndex][1],
-                y = game.towerPoint[playerIndex][2] + game.towerLinkOffset[linkIndex][2],
-                opacity = 0.4,
-                modelScale = 1.0,
-                isUnSelectable = isUnSelectable,
-                isOpenSlot = isOpenSlot
-            }
+                {
+                    whichPlayer = hplayer.players[playerIndex],
+                    unitId = linkId,
+                    qty = 1,
+                    x = game.towerPoint[playerIndex][1] + game.towerLinkOffset[linkIndex][1],
+                    y = game.towerPoint[playerIndex][2] + game.towerLinkOffset[linkIndex][2],
+                    opacity = 0.4,
+                    modelScale = 1.0,
+                    isUnSelectable = isUnSelectable,
+                    isOpenSlot = isOpenSlot
+                }
         )
         hunit.setUserData(u, linkIndex)
         -- 如果有上一个单位，把上一个的物品给予新的，并删除它
@@ -185,16 +185,16 @@ createMyTowerLink = function(playerIndex, linkIndex, towerId, unitLv)
                 attack_damage_type = "magic"
             end
             hattr.set(
-                u,
-                0,
-                {
-                    life = "=1000",
-                    life_back = "=1000",
-                    attack_damage_type = "=" .. attack_damage_type,
-                    attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE,
-                    move = "=0",
-                    damage_rebound_oppose = "=9999"
-                }
+                    u,
+                    0,
+                    {
+                        life = "=1000",
+                        life_back = "=1000",
+                        attack_damage_type = "=" .. attack_damage_type,
+                        attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE,
+                        move = "=0",
+                        damage_rebound_oppose = "=9999"
+                    }
             )
             hevent.onAttack(u, onTowerAttack)
             hevent.onItemUsed(u, onUnitItemsUesd)
@@ -242,15 +242,14 @@ createMyTower = function(playerIndex, towerId, towerLevel)
             cj.ShowUnit(game.playerTower[playerIndex], false)
         end
         local u = hunit.create(
-            {
-                whichPlayer = hplayer.players[playerIndex],
-                unitId = towerId,
-                qty = 1,
-                x = game.towerPoint[playerIndex][1],
-                y = game.towerPoint[playerIndex][2]
-            }
+                {
+                    whichPlayer = hplayer.players[playerIndex],
+                    unitId = towerId,
+                    qty = 1,
+                    x = game.towerPoint[playerIndex][1],
+                    y = game.towerPoint[playerIndex][2]
+                }
         )
-        hhero.setIsHero(u, true)
         hunit.setCurLifePercent(u, prevHeroLifePercent)
         --属性
         local tpv = hslk_global.id2Value.unit[towerId].TOWER_POWER
@@ -273,13 +272,13 @@ createMyTower = function(playerIndex, towerId, towerLevel)
             life = 300000
         end
         hattr.set(
-            u,
-            0,
-            {
-                move = "=0",
-                life = "=" .. life,
-                attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE
-            }
+                u,
+                0,
+                {
+                    move = "=0",
+                    life = "=" .. life,
+                    attack_white = "+" .. hslk_global.id2Value.unit[towerId].ATTACK_WHITE
+                }
         )
         hevent.onLevelUp(u, updateMyTower)
         hevent.onAttack(u, onTowerAttack)
@@ -350,20 +349,20 @@ createMyCourier = function(playerIndex, courierId)
             y = game.courierPoint[playerIndex][2]
         end
         local u = hunit.create(
-            {
-                whichPlayer = hplayer.players[playerIndex],
-                unitId = courierId,
-                qty = 1,
-                x = x,
-                y = y
-            }
+                {
+                    whichPlayer = hplayer.players[playerIndex],
+                    unitId = courierId,
+                    qty = 1,
+                    x = x,
+                    y = y
+                }
         )
         hattr.set(
-            u,
-            0,
-            {
-                weight = "=1000"
-            }
+                u,
+                0,
+                {
+                    weight = "=1000"
+                }
         )
         hevent.onItemUsed(u, onUnitItemsUesd)
         hevent.onSkillEffect(u, onCourierSkillUesd)
