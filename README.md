@@ -1,10 +1,6 @@
-# w3x-my-tower
-地图 - 我塔非凡
+# 我塔非凡
 
-## 使用h-lua版本：tag -> w3x-my-tower
-```
-https://github.com/hunzsig-warcraft3/h-lua/releases/tag/w3x-my-tower
-```
+> 废弃项目
 
 模式
 ```
